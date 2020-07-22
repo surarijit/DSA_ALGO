@@ -9,11 +9,9 @@
 #define display(a) {for(int i=0;i<a.size();i++) cout<<a[i]<<" "; cout<<endl;}
 using namespace std;
 typedef long long ll;
-int main()
-{
-    return 0;
-}
-vector<int> Solution::subUnsort(vector<int> &a) {int i,n=a.size(),l=0,r=0;
+
+vector<int> soln(vector<int> &a) {
+int i,n=a.size(),l=0,r=0;
     for(i=0;1+i<n;i++)
     {
         if(a[i+1]<a[i]){
@@ -35,18 +33,23 @@ vector<int> Solution::subUnsort(vector<int> &a) {int i,n=a.size(),l=0,r=0;
         max1 = max(max1,a[i]);
     }
     for(i=0;i<l;i++) {
-        if(a[i]>=max1){
+        if(a[i]>min1){
             l=i;break;
         }
     }
 
     for(i=n-1;i>r;i--)
     {
-        if(a[i]<=min1){
+        if(a[i]<max1){
             r=i;
             break;
         }
     }
     vector<int> b = {l,r};  
     return b;
+}
+int main()
+{
+    
+    return 0;
 }
