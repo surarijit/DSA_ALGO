@@ -48,6 +48,7 @@ string solve(int x, int y, int n, int r, vector<int> &a, vector<int> &b)
             visited[i][j] = flag;
         }
     }  
+    
     }
     return work(0,0,x,y)? "YES\n" : "NO\n";
 }
