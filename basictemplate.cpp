@@ -1,4 +1,5 @@
 //Tell your code to believe in God
+//@surcode
 #include<bits/stdc++.h>
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
@@ -7,9 +8,11 @@
 #define pb push_back
 #define sort(a) sort(all(a))
 #define display(a) {for(int i=0;i<a.size();i++) cout<<a[i]<<" "; cout<<endl;}
+#define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
 int main()
 {
+    IOS
     return 0;
 }

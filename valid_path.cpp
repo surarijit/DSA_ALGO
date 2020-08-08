@@ -54,8 +54,7 @@ string solve(int x, int y, int n, int r, vector<int> &a, vector<int> &b)
 }
 int main()
 {
-    int x = 2, y = 3, N = 1, R = 1;
-    x=41,y=67,N=5,R=0;
+    int x, y, N, R;
     x = 61,y=91,N=6,R=2;
     vector<int> A = { 53, 42, 27, 34, 58, 29 }, B = {16, 54, 33, 40, 30, 23 }; N= A.size();
     cout<<solve(x,y,N,R,A,B);
