@@ -52,19 +52,19 @@ vector<int> make_array_from_list(ListNode *head){
     }
     return a;
 }
+
+TreeNode *makeBST(TreeNode *root, int l, int r, vector<int> &a){
+    if(l>r) return nullptr;
+    int mid = (l+r)>>1;
+    root = new TreeNode(a[mid]);
+    root->left = makeBST(root->left,l,mid-1,a);
+    root->right = makeBST(root->right,mid+1,r,a);
+    return root;
+}
 TreeNode *BSTfromlist(ListNode *head){
     vector<int> a = make_array_from_list(head);
-    int n = a.size(), mid = n/2;
-    TreeNode *root = new TreeNode(a[mid]), *righttree = root, *lefttree= root;
-    for(int i = mid+1;i<n;i++){
-        righttree->right = new TreeNode(a[i]);
-        righttree = righttree->right; 
-    }
-    for(int i=mid-1;i>=0;i--){
-        lefttree->left = new TreeNode(a[i]);
-        lefttree = lefttree->left;
-    }
-    return root;
+    TreeNode *root;
+    return makeBST(root,0,a.size()-1,a);
 }
 void inorder(TreeNode *root){
     if(!root) return;
@@ -72,7 +72,6 @@ void inorder(TreeNode *root){
     cout<<root->data<<" ";
     inorder(root->right);
 }
-
 int balanced_tree(TreeNode *root, bool &flag){
     if(!root || !flag) return 0;
     int x = balanced_tree(root->left,flag);
