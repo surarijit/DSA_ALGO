@@ -20,31 +20,33 @@ int main()
         cin>>n;
         string s;
         cin>>s;
-        int max_adjacent = 0;
-        for(int i=0;i<n;){
-            int cnt = 0;
-            while(i<n && s[i]=='0') i+=1, cnt+=1;
-            max_adjacent = max(max_adjacent,cnt);
-            cnt = 0;
-            while(i<n && s[i]=='1') i+=1, cnt+=1;
-            max_adjacent = max(max_adjacent,cnt);
-        }
-        cout<<max_adjacent<<endl;
-        for(int i=0;i<n;){
-            int cnt =0;
-            while(i<n && s[i]=='0') {
-                i+=1;
-                cnt+=1;
-                cout<<cnt<<" ";
+        unordered_map<int,char> ma;
+        //cout<<ma.size()<<endl;continue;
+        vector<int> ans;
+        int j=0,i;
+        while(j<n){
+            if(s[j++]=='0'){
+                for(i=1;i<=ma.size();i++){
+                    if(ma[i]=='1'){
+                        ma[i] = '0';
+                        break;
+                    }
+                }
+                if(i==ma.size()+1) ma[i] = '0';
             }
-            cnt = 0;
-            while(i<n && s[i]=='1') {
-                i+=1;
-                cnt+=1;
-                cout<<cnt<<" ";
+            else{
+                for( i=1;i<=ma.size();i++){
+                    if(ma[i]=='0'){
+                        ma[i] = '1';
+                        break;
+                    }
+                }
+                if(i==ma.size()+1) ma[i] = '0';
             }
+            ans.pb(i);
         }
-        cout<<endl;
+        cout<<ma.size()<<endl;
+        display(ans);
     }
     return 0;
 }
