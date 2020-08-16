@@ -23,7 +23,26 @@ THEY HATE US BECAUSE THEY AIN'T US
 using namespace std;
 typedef long long ll;
 void solve(){
-	
+	string s;
+    vector<int> a;
+    cin>>s;
+    int i=0, n=s.size(),cnt;
+    while(i<n){
+         cnt = 0;
+        while(i<n && s[i]=='1') {
+            cnt++;
+            i++;
+        }
+        if(i<n && s[i]=='0') i++;
+        if(cnt) a.pb(cnt);
+    
+    }
+    sort(a);int ans = 0;
+    reverse(a);
+    for(int i=0;i<a.size();i+=2){
+        ans += a[i];
+    }
+    cout<<ans<<endl;
 }
 int main()
 {

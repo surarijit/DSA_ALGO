@@ -22,7 +22,7 @@ int main()
     cout<<x<<" "<<y<<endl;
     visited[1][y] = 1; int i=1,j;
     cout<<1<<" "<<y<<endl;
-    while(1){
+    while(i<=n){
     	for(int j=1;j<=m;j++){
     		if(visited[i][j]==0){
     			visited[i][j]=1;
@@ -30,13 +30,14 @@ int main()
     		}
     	}
     	i+=1;
-    	if(i<=n){
-    		if(visited[i][m]==0){
-    		visited[i][m] = 1;
-    		cout<<i<<" "<<m<<endl;}
+    	if(i<=n)
+    	for(int j=m;j;j--){
+    		if(visited[i][j]==0){
+    			visited[i][j]=1;
+    			cout<<i<<" "<<j<<endl;
+    		}
     	}
-    	else break;
-
+    	i+=1;
     }
     return 0;
 }

@@ -23,7 +23,12 @@ THEY HATE US BECAUSE THEY AIN'T US
 using namespace std;
 typedef long long ll;
 void solve(){
-	
+	ll l,r;
+    cin>>l>>r;
+    ll x = l;
+    ll y = x<<1;
+    if(y<=r) cout<<x<<" "<<y<<endl;
+    else cout<<"-1 -1\n";
 }
 int main()
 {
