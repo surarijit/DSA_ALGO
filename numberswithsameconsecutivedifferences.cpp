@@ -10,7 +10,6 @@ THEY HATE US BECAUSE THEY AIN'T US
 #include<bits/stdc++.h>
 #define SIZE 100008
 #define mod (ll)(1e9+7)
-#define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
 #define abs(a) (a>0?a:-a)
@@ -23,8 +22,23 @@ THEY HATE US BECAUSE THEY AIN'T US
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
+vector<int> ans;
+void work(int s, int n, int &k){
+    if(!n) ans.pb(s);
+    int y = s%10+k;
+    if(y<10) work(s*10+y,n-1,k);
+    y = s%10-k;
+    if(y>=0) work(s*10+y,n-1,k);
+}
+vector<int> numsSameConsecDiff(int N, int K) {
+    ans.clear();
+      work(0,N,K);
+      return ans;
+    }
 void solve(){
-	
+	int n,k;
+    cin>>n>>k;
+    display(numsSameConsecDiff(n,k));
 }
 int main()
 {

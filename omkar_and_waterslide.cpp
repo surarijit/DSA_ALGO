@@ -10,7 +10,6 @@ THEY HATE US BECAUSE THEY AIN'T US
 #include<bits/stdc++.h>
 #define SIZE 100008
 #define mod (ll)(1e9+7)
-#define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
 #define abs(a) (a>0?a:-a)
@@ -18,13 +17,21 @@ THEY HATE US BECAUSE THEY AIN'T US
 #define pb push_back
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
-#define input(a) {for(int i=0;i<a.size();i++) cin>>a[i];}
+#define input(a) {for(int i=0;i<n;i++) cin>>a[i];}
 #define display(a) {for(int i=0;i<a.size();i++) cout<<a[i]<<" "; cout<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
 void solve(){
-	
+	ll n;
+	scanf("%lld",&n);
+	 ll sum=0;
+	vector<ll> a(n);
+	input(a);
+	for(int i=0;i+1<n;i++){
+		sum+= max(0,a[i]-a[i+1]);
+	}
+	printf("%lld\n",sum);
 }
 int main()
 {
