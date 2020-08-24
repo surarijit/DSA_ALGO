@@ -25,7 +25,24 @@ THEY HATE US BECAUSE THEY AIN'T US
 using namespace std;
 typedef long long ll;
 void solve(){
-	
+	int n,k,k1;
+    cin>>n>>k; k1 = k;
+    vector<int> w(n);
+    input(w);
+    int cnt = 0;
+    for(int i=0;i<n;){
+        cnt++;
+        k = k1;
+        while(i<n && k && w[i]<=k){
+            k-=w[i];
+            i++;
+        }
+        if(k==k1) {
+            printf("-1\n");
+            return;
+        }
+    }
+    printf("%d\n",cnt);
 }
 int main()
 {

@@ -24,14 +24,33 @@ THEY HATE US BECAUSE THEY AIN'T US
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
+int smallestsubstring(string s){
+    unordered_map<char,int> m;
+    for(int i=0;i<s.size();i++) m[s[i]] += 1;
+    int d = m.size(),start = 0, x = s.size();
+    m.clear();
+    for(int i=0;i<s.size();i++){
+        m[s[i]] +=1;
+        if(m.size()==d){
+             while(start<i && m[s[start]]-1){
+               m[s[start]] --;
+               x = min(x,i-start);
+               start+=1;
+             }
+            }
+        }
+    return x;
+}
 void solve(){
-	
+	string s;
+    cin>>s;
+    printf("%d\n", smallestsubstring(s));
 }
 int main()
 {
     IOS
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
     	solve();
     }

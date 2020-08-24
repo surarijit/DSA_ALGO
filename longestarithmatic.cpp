@@ -24,8 +24,22 @@ THEY HATE US BECAUSE THEY AIN'T US
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
+int test=1;
 void solve(){
-	
+    int n;
+    cin>>n;
+    vector<ll> a(n),b;
+    input(a);
+    for(int i=0;i+1<a.size();i++){
+        b.pb(a[i+1]-a[i]);
+    }	
+    ll max_cnt = 1,cnt=0,x;
+    for(int i=0;i<b.size();i++){
+        if(i && b[i]==x) cnt+=1;
+        else x = b[i], cnt = 1;
+        max_cnt = max(max_cnt,cnt);
+    }
+    printf("Case #%d: %lld\n", test++,1+max_cnt);
 }
 int main()
 {
