@@ -8,7 +8,7 @@ THEY HATE US BECAUSE THEY AIN'T US
  WORK SO HARD THAT YOUR IDOL BECOMES YOUR COMPETITOR 
  */
 #include<bits/stdc++.h>
-#define SIZE 100008
+#define SIZE 3e5 + 5
 #define mod (ll)(1e9+7)
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -24,51 +24,48 @@ THEY HATE US BECAUSE THEY AIN'T US
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
-int index(vector<int> a){
-    int maxi=a[0],max_index=0;
-    for(int i=0;i<a.size();i++){
-        if(a[i]> maxi) {
-            maxi= a[i];
-            max_index = i;
-        }
-    }
-    return max_index;
-}
-int solve(){
-	int H,W,m,u,v;
-    cin>>H>>W>>m;
-    vector<vector<int>> a(H,vector<int> (W,0)); vector<int> row(H),colm(W);
-    for(int i=0;i<m;i++){
-        cin>>u>>v;
-        a[u-1][v-1] = 1;
-    }
-    //for(int i=0;i<H;i++) display(a[i]);
-    for(int i=0;i<H;i++){
-        for(int j=0;j<W;j++){
-            if(a[i][j]){
-                colm[j] += 1;
-                row[i] += 1;
-            }
-        }
-    }
-    int ans = 0;
-    for(int i=0;i<H;i++){
-        for(int j=0;j<W;j++){
-            int value;
-            if(a[i][j]) value = row[i] + colm[j] - 1;
-            else value = row[i]+colm[j];
-            ans = max(ans,value);
-        }
-    }
-    return ans;
-}
+ll maxelemt(ll a[], ll);
+ll solve();
 int main()
 {
     IOS
     int t=1;
     //cin>>t;
     while(t--){
-    	printf("%d\n",solve());
+        printf("%lld\n",solve());
     }
     return 0;
+}
+#define int ll
+int maxelemt(int a[], int n){
+    int m = 0;
+    for(int i=0;i<n;i++) m = max(m,a[i]);
+    return m;
+}
+int solve(){
+	int H,W,M,u,v;
+    cin>>H>>W>>M;
+    map<pi,int> ma;
+    int col[W+1], row[H+1];
+    memset(col,0,sizeof(col)); memset(row,0,sizeof(row));
+    while(M--){
+        cin>>u>>v;
+        ma[{u,v}] += 1;
+        col[v] += 1;row[u] += 1;
+    }
+    int max_row = maxelemt(row,H+1), max_col = maxelemt(col,W+1);
+    vector<int> a,b;
+    int ans = 0;
+    for(int i=01;i<=H;i++) 
+        if(max_row==row[i]) a.pb(i);
+    for(int i=01;i<=W;i++)
+        if(max_col == col[i]) b.pb(i);
+    for(int i=0;i<a.size();i++){
+        for(int j=0;j<b.size();j++){
+            int x = row[a[i]] + col[b[j]];
+            if(ma[{a[i],b[j]}]) x-=1;
+            ans = max(x,ans);
+        }
+    }
+    return ans;
 }
