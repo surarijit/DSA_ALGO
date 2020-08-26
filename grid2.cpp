@@ -13,33 +13,40 @@
 #define abs(a) (a>0?a:-a)
 #define all(a) a.begin(),a.end()
 #define pb push_back
-#define sqr(x) (x*x)
-#define pi pair<int,int>
+#define pi pair<ll,ll>
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
 #define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1];}
 #define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<" "; cout<<endl;}
+#define check(i,j) (i>=0 && j>=0 && i<h && j<w)
+#define val(i,j) (check(i,j)?dp[i][j]:0)
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
-#define dist(x,y) (sqr((a[x] - a[y]))+c)
-typedef unsigned long long ll;
+typedef long long ll;
 void solve(){
-	int n; ll c;
-    cin>>n>>c;
-    vector<ll> a(n),dp(n,INF);
-    input(a);
-    dp[n-1] = 0;
-    for(int i=n-2;i>=0;i--){
-        dp[i] = dist(n-1,i);
-        for(int j=i+1;j<n;j++){
-            //if(i==0 && dp[i]!=20 && dist(i,j)+dp[j]==20) cout<<j<<" ";
-           if((a[n-1]-a[j])*(a[j]-a[i])*2 > c)
-            dp[i] = min(dp[i],dist(i,j)+dp[j]);
-
-        }
+    ll h,w,n;
+    cin>>h>>w>>n;
+    vector<ll> dp(w,0);
+    map<pi,bool> ma;
+    while(n--){
+        ll u,v;
+        cin>>u>>v; u-=1; v-=1;
+        ma[{u,v}] = 1;
     }
-    //cout<<endl;display(dp);
-    cout<<dp[0]<<endl;
+    dp[0] = 1;
+    for(int j=0;j<h;j++){
+        for(int i=0;i<w;i++){
+            if(ma[{j,i}]) {
+                dp[i] = 0;
+                continue;
+            }
+           if(i||j){
+            if(i) dp[i] += dp[i-1];
+           }
+        }
+        //display(dp);
+    }
+    printf("%lld\n", dp[w-1]);
 }
 int main()
 {
