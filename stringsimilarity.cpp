@@ -22,7 +22,12 @@
 using namespace std;
 typedef long long ll;
 void solve(){
-	
+	int n; string s,ans="";
+    cin>>n>>s;
+    for(int i=0;i<n;i++)
+        if(i&1) ans +='0';
+    else ans+='1';
+    cout<<ans<<endl;
 }
 int main()
 {
