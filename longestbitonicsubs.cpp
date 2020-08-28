@@ -24,14 +24,27 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
+vector<int> lis(vector<int> &a){
+    int n= a.size();
+    vector<int> dp(n,1);
+    for(int i=0;i<n;i++){
+        for(int j=0;j<i;j++){
+            if(a[j]<a[i]) dp[i] = max(dp[i],dp[j]+1);
+        }
+    }
+    return dp;
+}
 void solve(){
-    
+    int n;cin>>n;
+    vector<int> a(n);
+    input(a);
+    display(lis(a));
 }
 int main()
 {
     IOS
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
     	solve();
     }
