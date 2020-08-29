@@ -1,12 +1,12 @@
 /*
-	ARIJIT SUR 
-	@duke_knight
-	@surcode
+    ARIJIT SUR 
+    @duke_knight
+    @surcode
     @comeback
-	IIT ISM 
+    IIT ISM 
  */
 #include<bits/stdc++.h>
-#define SIZE 300
+#define SIZE 110
 #define mod (ll)(1e9+7)
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -25,17 +25,17 @@
 using namespace std;
 typedef long long ll;
 int dp[SIZE][SIZE][SIZE];
-int lcs(string &x,string &y, string &z, int n,int m,int k){
-    if(n<=0 || m<=0 ||k<=0) return 0;
-    if(dp[n-1][m-1][k-1]!=-1) return dp[n-1][m-1][k-1];
-    if(x[n-1]==y[m-1]==z[k-1]) return dp[n-1][m-1][k-1] = 1+lcs(x,y,z,n-1,m-1,k-1);
-    return dp[n-1][m-1][k-1] = max(lcs(x,y,z,n-1,m,k),max(lcs(x,y,z,n,m-1,k),lcs(x,y,z,n,m,k-1)));
+string x,y,z;
+int lcs(int n, int m, int k){
+    if(n==0 || m==0 || k==0) return 0;
+    if(dp[n][m][k]!=-1) return dp[n][m][k];
+    if(x[n-1]==y[m-1] && y[m-1] == z[k-1]) return dp[n][m][k] = 1+lcs(n-1,m-1,k-1);
+    return dp[n][m][k] = max(lcs(n-1,m,k), max(lcs(n,m-1,k),lcs(n,m,k-1)));
 }
 void solve(){
     int n,m,k; 
-    cin>>n>>m>>k;
-    string x,y,z; cin>>x>>y>>z;
-    cout<<lcs(x,y,z,n,m,k)<<endl;
+    cin>>n>>m>>k>>x>>y>>z;
+    cout<<lcs(n,m,k)<<endl;
 }
 int main()
 {
@@ -44,7 +44,7 @@ int main()
     cin>>t;
     while(t--){
         memset(dp,-1,sizeof(dp));
-    	solve();
+        solve();
     }
     return 0;
 }
