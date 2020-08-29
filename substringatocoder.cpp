@@ -24,8 +24,28 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
-void solve(){
+int changes(string a, string b){
+    int ans = 0;
+    for(int i=0;i<b.size();i++) ans += abs((a[i]-b[i]));
+        return ans;
 }
+void solve(){
+   string s,t;
+        cin>>s>>t;
+        int l=s.length();
+        int len=t.length();
+        int ans=len;
+        for(int i=0;i<=l-len;i++)
+        {
+            int k=0;
+            for(int j=0;j<len;j++)
+            {
+                if(t[j]!=s[i+j]) k++;
+            }
+            ans=min(k,ans);
+        }
+        cout<<ans;
+    }
 int main()
 {
     IOS

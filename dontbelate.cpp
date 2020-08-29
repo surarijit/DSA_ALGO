@@ -25,6 +25,11 @@
 using namespace std;
 typedef long long ll;
 void solve(){
+    double d,t,s;
+    cin>>d>>t>>s;
+    double t1 = d/s;
+    if(t1<=t) printf("Yes\n");
+    else printf("No\n");
 }
 int main()
 {

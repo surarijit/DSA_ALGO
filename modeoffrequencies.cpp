@@ -25,12 +25,33 @@
 using namespace std;
 typedef long long ll;
 void solve(){
+    int n;
+    cin>>n;
+    vector<int> a(n); input(a);
+    map<int,int> ma,m;
+    int ans = INT_MIN,index=-1;
+    for(int i=0;i<n;i++) {
+        ma[a[i]]+=1;
+    }
+    int maxi=INT_MIN;
+    for(auto it=ma.begin();it!=ma.end();it++){
+        m[it->second]+=1;
+        maxi = max(maxi,m[it->second]);
+        if(m[it->second]==maxi) index = it->second;
+    }
+    for(auto it=m.begin();it!=m.end();it++){
+            if(it->second ==maxi){
+                index = min(index,it->first);
+            }
+    }
+    cout<<index<<endl;
+
 }
 int main()
 {
     IOS
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
     	solve();
     }

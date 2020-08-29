@@ -25,6 +25,7 @@
 using namespace std;
 typedef long long ll;
 void solve(){
+    cout<<abs('a'-'b');
 }
 int main()
 {
