@@ -6,7 +6,7 @@
 	IIT ISM 
  */
 #include<bits/stdc++.h>
-#define SIZE 100008
+#define SIZE 300
 #define mod (ll)(1e9+7)
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -24,26 +24,18 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
-vector<int> lis(vector<int> a){
-    int n= a.size();
-    vector<int> dp(n,1);
-    for(int i=0;i<n;i++){
-        for(int j=0;j<i;j++){
-            if(a[j]<a[i]) dp[i] = max(dp[i],dp[j]+1);
-        }
-    }
-    return dp;
+int dp[SIZE][SIZE][SIZE];
+int lcs(string &x,string &y, string &z, int n,int m,int k){
+    if(n<=0 || m<=0 ||k<=0) return 0;
+    if(dp[n-1][m-1][k-1]!=-1) return dp[n-1][m-1][k-1];
+    if(x[n-1]==y[m-1]==z[k-1]) return dp[n-1][m-1][k-1] = 1+lcs(x,y,z,n-1,m-1,k-1);
+    return dp[n-1][m-1][k-1] = max(lcs(x,y,z,n-1,m,k),max(lcs(x,y,z,n,m-1,k),lcs(x,y,z,n,m,k-1)));
 }
 void solve(){
-    int n;cin>>n;
-    vector<int> a(n);
-    input(a);
-    vector<int> front = lis(a);
-    reverse(a);
-    vector<int> back = lis(a);
-    reverse(back);
-    for(int i=0;i<n;i++) back[i] += front[i];
-    cout<<maxelem(back)-1<<endl;
+    int n,m,k; 
+    cin>>n>>m>>k;
+    string x,y,z; cin>>x>>y>>z;
+    cout<<lcs(x,y,z,n,m,k)<<endl;
 }
 int main()
 {
@@ -51,6 +43,7 @@ int main()
     int t=1;
     cin>>t;
     while(t--){
+        memset(dp,-1,sizeof(dp));
     	solve();
     }
     return 0;

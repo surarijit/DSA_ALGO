@@ -25,25 +25,31 @@
 using namespace std;
 typedef long long ll;
 vector<int> lis(vector<int> a){
-    int n= a.size();
-    vector<int> dp(n,1);
+    int n = a.size();vector<int> sum(n,0);
     for(int i=0;i<n;i++){
+        bool flag = 0;int maxindex;
         for(int j=0;j<i;j++){
-            if(a[j]<a[i]) dp[i] = max(dp[i],dp[j]+1);
+            if(a[i]>a[j]){
+                if(!flag) flag = 1,maxindex = j;
+                else
+                if(sum[maxindex] < sum[j]) maxindex = j;
+            }
         }
+        sum[i] += a[i];
+        if(flag) sum[i] += sum[maxindex];
     }
-    return dp;
+    return sum;
 }
 void solve(){
-    int n;cin>>n;
-    vector<int> a(n);
-    input(a);
-    vector<int> front = lis(a);
+    int n;
+    cin>>n;
+    vector<int> a(n); input(a);
+    vector<int> forward = lis(a);
     reverse(a);
-    vector<int> back = lis(a);
-    reverse(back);
-    for(int i=0;i<n;i++) back[i] += front[i];
-    cout<<maxelem(back)-1<<endl;
+    vector<int> backward = lis(a);
+    reverse(backward); reverse(a);
+    for(int i=0;i<n;i++) backward[i] += forward[i]-a[i];
+    cout<<maxelem(backward)<<endl;
 }
 int main()
 {
