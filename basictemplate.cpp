@@ -11,7 +11,7 @@
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
-#define abs(a) (a>0?a:-a)
+#define abs(a) ((a)>0?(a):-(a))
 #define all(a) a.begin(),a.end()
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
@@ -19,7 +19,7 @@
 #define pi pair<int,int>
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
-#define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1];}
+#define input(a) {int n11 = a.size();for(int i1=0;i1<n11;i1++) cin>>a[i1];}
 #define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<" "; cout<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;

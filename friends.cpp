@@ -25,6 +25,7 @@
 using namespace std;
 #define vi vector<int>
 typedef long long ll;
+#define ff q.front()
 
 void dfs(int x, int &cnt, vi g[], vector<bool> &vis)
 {
@@ -36,6 +37,35 @@ void dfs(int x, int &cnt, vi g[], vector<bool> &vis)
         if(!vis[g[x][i]])
         dfs(g[x][i],cnt,g,vis);
     }
+}
+void friends(){
+    int n,m;
+    cin>>n>>m;
+    vector<int> adj[n+1];
+    vector<bool> visited(n+1,0);
+    queue<int> q;
+    while(m--){
+        int u,v;
+        cin>>u>>v;
+        adj[u].pb(v); adj[v].pb(u);
+    }
+    int ans =-1;
+    for(int i=1;i<=n;i++){
+        if(!visited[i]){
+            int cnt=0;
+            q.push(i);visited[i]=1;
+            while(!q.empty()){
+                cnt+=1;
+                visited[ff]=1;
+                for(int j=0;j<adj[ff].size();j++){
+                    if(!visited[adj[ff][j]]) q.push(adj[ff][j]),visited[adj[ff][j]]=1;
+                }
+                q.pop();
+            }
+            ans = max(ans,cnt);
+        }
+    }
+    cout<<ans<<endl;
 }
 void solve(){
     int n,m;
@@ -68,7 +98,7 @@ int main()
     int t=1;
     //cin>>t;
     while(t--){
-    	solve();
+    	friends();
     }
     return 0;
 }

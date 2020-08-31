@@ -24,28 +24,38 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
-int changes(string a, string b){
-    int ans = 0;
-    for(int i=0;i<b.size();i++) if(a[i]!=b[i])ans += 1;
-        return ans;
-}
 void solve(){
-   string s,t;
-        cin>>s>>t;
-        int l=s.length();
-        int len=t.length();
-        int ans=len;
-        for(int i=0;i<=l-len;i++)
-        {
-            ans = min(ans,changes(t,s.substr(i,len)));
+    int n,m;
+    cin>>n>>m;
+    vector<int> initialratings(n,0),maxratings(n,0),qualify(n,1);
+    input(initialratings); 
+    vector<vector<int>> ratings(n,vector<int> (m,0));
+    for(int i=0;i<n;i++){
+        ratings[i][0]= initialratings[i];
+        for(int j=0;j<m;j++){
+            int x;
+            cin>>x;
+            if(j) ratings[i][j] = ratings[i][j-1] + x;
+            else ratings[i][j] += x;
         }
-        printf("%d\n",ans );
     }
+   // for(int i=0;i<n;i++) display(ratings[i]);
+    for(int i=0;i<n;i++) maxratings[i] = maxelem(ratings[i]);
+    //display(maxratings);
+    for(int j=0;j<m;j++){
+        set<int> s; int cnt=1;
+        map<int,int> ma;
+        for(int i=0;i<n;i++) s.insert(ratings[i][j]);
+        for(auto it=s.begin();it!=s.end();it++) ma[*it] = cnt++;
+        for(int i=0;i<n;i++) rankings[i][j] = ma[ratings[i][j]];    
+    }
+
+}
 int main()
 {
     IOS
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
     	solve();
     }
