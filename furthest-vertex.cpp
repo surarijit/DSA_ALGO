@@ -1,7 +1,7 @@
 
-// Problem : Dhoom 4
-// Contest : HackerEarth - Algorithms - Graphs - Breadth First Search
-// URL : https://www.hackerearth.com/practice/algorithms/graphs/breadth-first-search/practice-problems/algorithm/dhoom-4/
+// Problem : Furthest vertex
+// Contest : HackerEarth - Algorithms - Graphs - Shortest Path Algorithms
+// URL : https://www.hackerearth.com/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/algorithm/furthest-vertex/
 // Memory Limit : 256 MB
 // Time Limit : 1000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
@@ -15,7 +15,7 @@
  */
 #include<bits/stdc++.h>
 #define SIZE 100008
-#define mod (ll)(100000)
+#define mod (ll)(1e9+7)
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
@@ -23,6 +23,7 @@
 #define all(a) a.begin(),a.end()
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
+#define sc(a) scanf("%d",&a);
 #define pb push_back
 #define pi pair<int,int>
 #define sort(a) sort(all(a))
@@ -31,27 +32,38 @@
 #define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<" "; cout<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
-#define mul(a,b) ((a%mod * b%mod)%mod)
-vector<bool> visited(SIZE,0);
+#define ff q.front()
 typedef long long ll;
-int solve(){
-	int x,y,n;
-	cin>>x>>y>>n; vector<int> a(n); input(a); sort(a);
-	priority_queue<pi,vector<pi>,greater<pi>> pq;
-	pq.push({0,x});
-	while(!pq.empty()){
-		pi u = pq.top(); pq.pop();
-		//cout<<u.second<<" ";
-		//if(u.second>y) return -1;
-		if(u.second == y) return u.first;
-		if(visited[u.second]) continue;
-		visited[u.second] = 1;
-		for(int i=0;i<n;i++) {
-			int h = mul(a[i],u.second);
-		if(!visited[h])pq.push({u.first+1,h});
+void solve(){
+	int n,q;
+	sc(n); sc(q);
+	vector<int> adj[n+1];
+	while(q--){
+		int f; sc(f);
+		if(f==1){
+			int u,v; sc(u); sc(v);
+			adj[u].pb(v); adj[v].pb(u);
+			
+		}
+		else{
+			int a; sc(a);
+			queue<int> q;vector<bool> visited(n+1,0);
+			q.push(a);int level =0;
+			while(!q.empty()){
+				int c =q.size(); level+=1;
+				while(c--){
+					visited[ff] =1;
+					for(int i=0;i<adj[ff].size();i++) 
+					{
+						if(!visited[adj[ff][i]]) q.push(adj[ff][i]);
+						visited[adj[ff][i]] =1;
+					}
+					q.pop();
+				}
+			}
+			printf("%d\n",level-1);
 		}
 	}
-	return -1;
 }
 int main()
 {
@@ -59,7 +71,7 @@ int main()
     int t=1;
     //cin>>t;
     while(t--){
-    	cout<<solve()<<endl;
+    	solve();
     }
     return 0;
 }

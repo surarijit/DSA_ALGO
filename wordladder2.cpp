@@ -11,14 +11,15 @@
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
-#define abs(a) ((a)>0? (a) : -(a))
+#define abs(a) ((a)>0?(a):-(a))
 #define all(a) a.begin(),a.end()
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
 #define pb push_back
+#define me(u,v,w) {adj[u].pb({w,v}; adj[v].pb({w,u}));}
+#define priorq priority_queue
 #define pi pair<int,int>
 #define sort(a) sort(all(a))
-#define sc(n) scanf("%d\n",&n);
 #define reverse(a) reverse(all(a))
 #define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1];}
 #define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<" "; cout<<endl;}
@@ -26,16 +27,6 @@
 using namespace std;
 typedef long long ll;
 void solve(){
-    priority_queue<int> q;
-	int n;
-    do{
-    	sc(n);
-    	q.push(n);
-    }
-    while(n!=0);
-	while(!q.empty()){
-		printf("%d ",q.top()); q.pop();
-	}
 }
 int main()
 {
