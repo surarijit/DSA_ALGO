@@ -18,37 +18,30 @@
 #define pb push_back
 #define pi pair<int,int>
 #define sort(a) sort(all(a))
-#define sc(n) scanf("%lld\n",&n);
+#define sc(n) scanf("%d\n",&n);
 #define reverse(a) reverse(all(a))
 #define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1];}
 #define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<" "; cout<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
-typedef unsigned long long int ll;
-ll sum(int n){
-	ll s =0;
-	while(n){
-		s+=(n%10);
-		n=n/10;
-	}
-	return s;
+typedef long long ll;
+ll value(ll a, ll b, ll x, ll y, ll n){
+	ll a1 = max(max(0,a-n),x);
+	n -= (a-a1); a= a1;
+	b = max(b-n,y);
+	return a*b;
 }
 void solve(){
-	ll n,s,a=1;
-	cin>>n>>s; ll n1=n;
-	while(sum(n)>s){
-		n += a-(n%a);
-		a = a*10;
-		cout<<n<<" "<<sum(n)<<endl;
-	}
-	
-	cout<<n-n1<<endl;
+	ll a,b,x,y,n;
+	cin>>a>>b>>x>>y>>n;
+	cout<<min(value(b,a,y,x,n),value(a,b,x,y,n))<<endl;
+   
 }
 int main()
 {
     IOS
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
     	solve();
     }

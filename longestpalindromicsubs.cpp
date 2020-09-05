@@ -6,43 +6,43 @@
 	IIT ISM 
  */
 #include<bits/stdc++.h>
-#define SIZE 100008
 #define mod (ll)(1e9+7)
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
-#define abs(a) ((a)>0? (a) : -(a))
+#define abs(a) ((a)>0?(a):-(a))
 #define all(a) a.begin(),a.end()
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
 #define pb push_back
+#define me(u,v,w) {adj[u].pb({w,v}; adj[v].pb({w,u}));}
+#define priorq priority_queue
 #define pi pair<int,int>
 #define sort(a) sort(all(a))
-#define sc(n) scanf("%lld\n",&n);
 #define reverse(a) reverse(all(a))
 #define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1];}
 #define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<" "; cout<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
-typedef unsigned long long int ll;
-ll sum(int n){
-	ll s =0;
-	while(n){
-		s+=(n%10);
-		n=n/10;
+typedef long long ll;
+#define SIZE 1000
+int dp[SIZE][SIZE];
+int pal(string a, string &b, int x, int y){
+	if(!x || !y) return 0;
+	if(dp[x][y]==-1){
+		if(a[x-1]==b[y-1]) dp[x][y] = pal(a,b,x-1,y-1)+1;
+		else dp[x][y] = max(pal(a,b,x-1,y),pal(a,b,x,y-1));
 	}
-	return s;
+	return dp[x][y];
+}
+int work(string s){
+	memset(dp,-1,sizeof(dp));
+	string s1 =s;
+	reverse(s1);
+	return pal(s,s1,s.size(),s1.size());
 }
 void solve(){
-	ll n,s,a=1;
-	cin>>n>>s; ll n1=n;
-	while(sum(n)>s){
-		n += a-(n%a);
-		a = a*10;
-		cout<<n<<" "<<sum(n)<<endl;
-	}
-	
-	cout<<n-n1<<endl;
+ string s;cin>>s;
 }
 int main()
 {
