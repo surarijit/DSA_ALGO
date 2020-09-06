@@ -1,9 +1,9 @@
 
-// Problem : Chefina and Swap
-// Contest : CodeChef - September Challenge 2020 Division 2
-// URL : https://www.codechef.com/SEPT20B/problems/CHFNSWAP
+// Problem : B. Just Eat It!
+// Contest : Codeforces - Codeforces Round #613 (Div. 2)
+// URL : https://codeforces.com/problemset/problem/1285/B
 // Memory Limit : 256 MB
-// Time Limit : 2000 ms
+// Time Limit : 1000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -16,7 +16,7 @@
 #include<bits/stdc++.h>
 #define SIZE 100008
 #define mod (ll)(1e9+7)
-#define vi vector<int>
+#define vi vector<ll>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
@@ -26,34 +26,36 @@
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
 #define pb push_back
-#define pi pair<ll,ll>
+#define pi pair<int,int>
 #define pqq priority_queue
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
-#define input(a) {int n11 = a.size();for(int i1=0;i1<n11;i1++) cin>>a[i1];}
+#define input(a) {ll n11 = a.size();for(ll i1=0;i1<n11;i1++) cin>>a[i1];}
 #define display(a) {int n11 = a.size();for(int i1=0;i1<n11;i1++) cout<<a[i1]<<" "; cout<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
-void solve(){
-	ll n;cin>>n; 
-	if(n==3) {
-		cout<<2<<endl; return;
-	}
-	map<pi,bool> ma;
-	for(ll i=1;i<=n;i++){
-		for(ll j=i+1;j<=n;j++){
-			for(ll m=i;m<j;m++){
-				if(m*(m+1)/2 + j-i == n*(n+1)/4)
-				{
-					//cout<<i<<" "<<j<<endl;
-					ma[{i,j}] = 1;
-				}
-			}
+bool solve(){
+	ll n,sum1=0,maxsum  = 0,s2 = 0; cin>>n; bool flag = 1;
+	vi a(n); input(a);
+	for(int i=0;1 && i<n;i++){
+		if(a[i]<0){
+			flag=0;
 		}
+		sum1+= a[i];
 	}
-	cout<<ma.size()<<endl;
-
+	for(ll i=0;i<n-1;i++){
+		s2 += a[i];
+		maxsum = max(s2,maxsum);
+		s2 = max(0,s2);
+	}
+	s2=0;
+	for(ll i=1;i<n;i++){
+		s2 += a[i];
+		maxsum = max(s2,maxsum);
+		s2 = max(0,s2);
+	}
+	return sum1>maxsum;
 }
 int main()
 {
@@ -61,7 +63,7 @@ int main()
     int t=1;
     cin>>t;
     while(t--){
-    	solve();
+    	cout<<(solve()?"YES\n":"NO\n");
     }
     return 0;
 }

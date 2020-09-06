@@ -1,11 +1,3 @@
-
-// Problem : Chefina and Swap
-// Contest : CodeChef - September Challenge 2020 Division 2
-// URL : https://www.codechef.com/SEPT20B/problems/CHFNSWAP
-// Memory Limit : 256 MB
-// Time Limit : 2000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -26,7 +18,7 @@
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
 #define pb push_back
-#define pi pair<ll,ll>
+#define pi pair<int,int>
 #define pqq priority_queue
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
@@ -35,31 +27,44 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
-void solve(){
-	ll n;cin>>n; 
-	if(n==3) {
-		cout<<2<<endl; return;
-	}
-	map<pi,bool> ma;
-	for(ll i=1;i<=n;i++){
-		for(ll j=i+1;j<=n;j++){
-			for(ll m=i;m<j;m++){
-				if(m*(m+1)/2 + j-i == n*(n+1)/4)
-				{
-					//cout<<i<<" "<<j<<endl;
-					ma[{i,j}] = 1;
-				}
-			}
+int hist(vector<int> a,int &m){
+	stack<int> s; int i,area,maxarea = 0;
+	for( i=0;i<m;i++){
+		if(s.empty()||a[s.top()] < a[i]) s.push(i);
+		else{
+			int tp = s.top(); s.pop();
+			area = a[tp]*(s.empty()?i: i-s.top()-1);
+			maxarea = max(area,maxarea);
 		}
 	}
-	cout<<ma.size()<<endl;
+	while(!s.empty()){
+		int tp = s.top();s.pop();
+		area = a[tp]*(s.empty()?i:i-s.top()-1);
+		maxarea = max(area,maxarea);
+	}
+	return maxarea;
+}
+int maximalRectangle(vector<vector<int> > &a) {
+    int n=a.size(),m=a[0].size(),maxarea=0;
+    vi dp(n,0);
+	   for(int i=0;i<n;i++){
+	       for(int j=0;j<m;j++) 
+	        if(a[i][j])dp[j]+=1;
+	             else dp[j] = 0;
+      	 maxarea = max(maxarea,hist(dp,m));
+       }
+   
+   return maxarea;
+}
 
+void solve(){
+	
 }
 int main()
 {
     IOS
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
     	solve();
     }

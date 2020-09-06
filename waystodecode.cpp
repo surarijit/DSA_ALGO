@@ -1,11 +1,3 @@
-
-// Problem : Chefina and Swap
-// Contest : CodeChef - September Challenge 2020 Division 2
-// URL : https://www.codechef.com/SEPT20B/problems/CHFNSWAP
-// Memory Limit : 256 MB
-// Time Limit : 2000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -26,7 +18,7 @@
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
 #define pb push_back
-#define pi pair<ll,ll>
+#define pi pair<int,int>
 #define pqq priority_queue
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
@@ -35,31 +27,30 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
-void solve(){
-	ll n;cin>>n; 
-	if(n==3) {
-		cout<<2<<endl; return;
-	}
-	map<pi,bool> ma;
-	for(ll i=1;i<=n;i++){
-		for(ll j=i+1;j<=n;j++){
-			for(ll m=i;m<j;m++){
-				if(m*(m+1)/2 + j-i == n*(n+1)/4)
-				{
-					//cout<<i<<" "<<j<<endl;
-					ma[{i,j}] = 1;
-				}
-			}
-		}
-	}
-	cout<<ma.size()<<endl;
+int dp[SIZE];
+int work(string s, int i){
+	int cnt=0;
+	if(i<0) return 1;
+	if(dp[i]!=-1) return dp[i];
+	if(s[i]!='0') cnt += work(s,i-1)%mod;
+	if(s[i-1]=='1') cnt += work(s,i-2)%mod;
+	if(s[i-1]=='2' && s[i]>='0' && s[i]<='6') cnt += work(s,i-2)%mod;
+	return dp[i] = cnt;
+}
+int numDecodings(string s) {
+	memset(dp,-1,sizeof(dp));
+	return work(s,s.size()-1);
+}
 
+void solve(){
+	string s;cin>>s;
+	cout<<numDecodings(s)<<endl;
 }
 int main()
 {
     IOS
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
     	solve();
     }

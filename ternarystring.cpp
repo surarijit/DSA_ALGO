@@ -1,7 +1,7 @@
 
-// Problem : Chefina and Swap
-// Contest : CodeChef - September Challenge 2020 Division 2
-// URL : https://www.codechef.com/SEPT20B/problems/CHFNSWAP
+// Problem : B. Ternary String
+// Contest : Codeforces - Educational Codeforces Round 87 (Rated for Div. 2)
+// URL : https://codeforces.com/problemset/problem/1354/B
 // Memory Limit : 256 MB
 // Time Limit : 2000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
@@ -26,7 +26,7 @@
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
 #define pb push_back
-#define pi pair<ll,ll>
+#define pi pair<int,int>
 #define pqq priority_queue
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
@@ -36,24 +36,21 @@
 using namespace std;
 typedef long long ll;
 void solve(){
-	ll n;cin>>n; 
-	if(n==3) {
-		cout<<2<<endl; return;
-	}
-	map<pi,bool> ma;
-	for(ll i=1;i<=n;i++){
-		for(ll j=i+1;j<=n;j++){
-			for(ll m=i;m<j;m++){
-				if(m*(m+1)/2 + j-i == n*(n+1)/4)
-				{
-					//cout<<i<<" "<<j<<endl;
-					ma[{i,j}] = 1;
-				}
+	string s;cin>>s; 
+	int n=s.size(),len=n,start=0;
+	map<char,int> ma;
+	for(int i=0;i<n;i++){
+		ma[s[i]] += 1;
+		if(ma.size()==3){
+			while(ma[s[start]]>1){
+				ma[s[start++]]--;
 			}
+			len = min(len,i-start+1);
 		}
 	}
-	cout<<ma.size()<<endl;
-
+	if(ma.size()==3)
+	cout<<len<<endl;
+	else cout<<0<<endl;
 }
 int main()
 {

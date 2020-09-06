@@ -1,11 +1,3 @@
-
-// Problem : Chefina and Swap
-// Contest : CodeChef - September Challenge 2020 Division 2
-// URL : https://www.codechef.com/SEPT20B/problems/CHFNSWAP
-// Memory Limit : 256 MB
-// Time Limit : 2000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -26,7 +18,7 @@
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
 #define pb push_back
-#define pi pair<ll,ll>
+#define pi pair<int,int>
 #define pqq priority_queue
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
@@ -35,31 +27,28 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
+int adjacent(vector<vector<int> > &a) {
+    int n=a[0].size(),dp[n]={0}; 
+    dp[0] = max(a[0][0],a[1][0]); 
+    if(n>1)dp[1] = max(dp[0],max(a[0][1],a[1][1]));
+    for(int i=02;i<n;i++){
+        dp[i] = max(dp[i-1],dp[i-2]+max(a[0][i],a[1][i]));
+    }
+    return dp[n-1];
+    
+}
+  
 void solve(){
-	ll n;cin>>n; 
-	if(n==3) {
-		cout<<2<<endl; return;
-	}
-	map<pi,bool> ma;
-	for(ll i=1;i<=n;i++){
-		for(ll j=i+1;j<=n;j++){
-			for(ll m=i;m<j;m++){
-				if(m*(m+1)/2 + j-i == n*(n+1)/4)
-				{
-					//cout<<i<<" "<<j<<endl;
-					ma[{i,j}] = 1;
-				}
-			}
-		}
-	}
-	cout<<ma.size()<<endl;
-
+	int n; cin>>n;
+	vector<vector<int>> a(2,vector<int> (n));
+	for(int i=0;i<2;i++){ input(a[i]);}
+	cout<<adjacent(a);
 }
 int main()
 {
     IOS
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
     	solve();
     }

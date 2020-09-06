@@ -1,7 +1,7 @@
 
-// Problem : Chefina and Swap
-// Contest : CodeChef - September Challenge 2020 Division 2
-// URL : https://www.codechef.com/SEPT20B/problems/CHFNSWAP
+// Problem : B. Young Explorers
+// Contest : Codeforces - Codeforces Round #643 (Div. 2)
+// URL : https://codeforces.com/problemset/problem/1355/B
 // Memory Limit : 256 MB
 // Time Limit : 2000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
@@ -26,7 +26,7 @@
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
 #define pb push_back
-#define pi pair<ll,ll>
+#define pi pair<int,int>
 #define pqq priority_queue
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
@@ -36,24 +36,18 @@
 using namespace std;
 typedef long long ll;
 void solve(){
-	ll n;cin>>n; 
-	if(n==3) {
-		cout<<2<<endl; return;
+	int n; cin>>n;
+	vi a(n); input(a);
+	int groups = 0,x=0;
+	map<int,int> ma;
+	for(int i=0;i<n;i++) ma[a[i]]+=1;
+	for(auto it=ma.begin();it!=ma.end();it++){
+		groups += it->second/it->first;
+		x += it->second%it->first;
+		groups += x/it->first;
+		x = x%it->first;
 	}
-	map<pi,bool> ma;
-	for(ll i=1;i<=n;i++){
-		for(ll j=i+1;j<=n;j++){
-			for(ll m=i;m<j;m++){
-				if(m*(m+1)/2 + j-i == n*(n+1)/4)
-				{
-					//cout<<i<<" "<<j<<endl;
-					ma[{i,j}] = 1;
-				}
-			}
-		}
-	}
-	cout<<ma.size()<<endl;
-
+	cout<<groups<<endl;
 }
 int main()
 {

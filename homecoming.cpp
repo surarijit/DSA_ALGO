@@ -1,9 +1,9 @@
 
-// Problem : Chefina and Swap
-// Contest : CodeChef - September Challenge 2020 Division 2
-// URL : https://www.codechef.com/SEPT20B/problems/CHFNSWAP
+// Problem : B. Homecoming
+// Contest : Codeforces - Codeforces Round #623 (Div. 2, based on VK Cup 2019-2020 - Elimination Round, Engine)
+// URL : https://codeforces.com/problemset/problem/1315/B
 // Memory Limit : 256 MB
-// Time Limit : 2000 ms
+// Time Limit : 1000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -16,7 +16,7 @@
 #include<bits/stdc++.h>
 #define SIZE 100008
 #define mod (ll)(1e9+7)
-#define vi vector<int>
+#define vi vector<ll>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
@@ -26,7 +26,7 @@
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
 #define pb push_back
-#define pi pair<ll,ll>
+#define pi pair<int,int>
 #define pqq priority_queue
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
@@ -36,24 +36,21 @@
 using namespace std;
 typedef long long ll;
 void solve(){
-	ll n;cin>>n; 
-	if(n==3) {
-		cout<<2<<endl; return;
+	ll a,b,p; string s;
+	cin>>a>>b>>p>>s;
+	ll n=s.size();
+	vi dp(n,0); dp[n-1] = 0;
+	if(n>1) dp[n-2] = (s[n-2]=='B'?b:a);
+	for(ll i=n-3;i>=0;i--){
+		if(s[i]==s[i+1]) dp[i] = dp[i+1];
+		else dp[i] = dp[i+1] + (s[i]=='B'?b:a);
 	}
-	map<pi,bool> ma;
-	for(ll i=1;i<=n;i++){
-		for(ll j=i+1;j<=n;j++){
-			for(ll m=i;m<j;m++){
-				if(m*(m+1)/2 + j-i == n*(n+1)/4)
-				{
-					//cout<<i<<" "<<j<<endl;
-					ma[{i,j}] = 1;
-				}
-			}
+	for(ll i=0;i<n;i++){
+		if(dp[i]<=p){
+			cout<<i+1<<endl;
+			return;
 		}
 	}
-	cout<<ma.size()<<endl;
-
 }
 int main()
 {
