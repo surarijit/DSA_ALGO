@@ -1,4 +1,3 @@
-
 // Problem : B. Mr. Kitayuta's Colorful Graph
 // Contest : Codeforces - Codeforces Round #286 (Div. 2)
 // URL : https://codeforces.com/problemset/problem/505/B
@@ -35,29 +34,34 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
+int cnt = 0;
+vector<pi> adj[SIZE];
+void dfs(int u, vi &visited, int color, int y){
+	if(visited[u]) return;
+	visited[u] = 1;
+	if(u==y){
+		cnt+=1; return;
+	}	
+	for(int i=0;i<adj[u].size();i++){
+		int v = adj[u][i].first, c = adj[u][i].second;
+		if((color==0 ||c==color) && !visited[v]){
+			dfs(v,visited,c,y); visited[v] = 0;
+		}
+	}
+	//visited[u] = 0;
+}
 void solve(){
 	int n,m; cin>>n>>m;
-	vector<pi> adj[n+1];
 	while(m--){
 		int u,v,c; cin>>u>>v>>c;
 		adj[u].pb({v,c}); adj[v].pb({u,c});
 	}
-	int test; cin>>test; queue<int> q;set<int> s;
+	int test; cin>>test; queue<pi> q;
 	while(test--){
-		int x,y; cin>>x>>y; vi visited(n+1,0);
-		q.push(x); q.push(y);
-		while(!q.empty()){
-			int u= q.front(); q.pop();
-			visited[u] = 1;
-			vector<pi> a = adj[u];
-			for(int i=0;i<a.size();i++) {
-				if(!visited[a[i].first]){
-					s.insert(a[i].second); visited[a[i].first] = 1;
-					q.push(a[i].first);
-				}
-			}
-		}
-		cout<<s.size()<<endl; s.clear();
+		int x,y;cnt=0; cin>>x>>y;  
+		vi visited(n+1,0);
+		dfs(x,visited,0,y);	
+		cout<<cnt<<endl; continue;
 	}
 }
 int main()
