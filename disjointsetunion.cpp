@@ -36,15 +36,15 @@ void initialise(int &n){
 		s[i] = 1;
 	}
 }
-void make_union(int x,int y, int &n){
-	int a = find_parent(x), b= find_parent(y);
-	if(parent[a]!=parent[b]){
-		int temp = parent[b];
-		for(int i=1;i<=n;i++) {
-			if(parent[i] == temp)parent[i] = parent[a];
-		}
-			s[a] += s[b];
-	}
+void make_union(int a,int b, int &n){
+	 a = find_parent(a);
+    b = find_parent(b);
+    if (a != b) {
+        if (s[a] < s[b])
+            swap(a, b);
+        parent[b] = a;
+        s[a] += s[b];
+    }
 }
 void display(int n){
 	map<int,bool> ma;multiset<int> s1;

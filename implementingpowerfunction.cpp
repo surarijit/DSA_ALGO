@@ -27,7 +27,20 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
+ll work(int n, int x, int d){
+	if(n<=1) return 1;
+	if(n&1) 
+		return ((work(n-1,x,d)%d)*(x%d))%d;
+	ll a = work(n/2,x,d)%d;
+	return (a*a)%d;
+}
+int func(int n, int x, int d){
+	if(x<0 && n&1) return d-work(n,-x,d);
+	return work(n,x,d);
+}
 void solve(){
+	int x,n,d;cin>>x>>n>>d;
+	cout<<func(n,x,d)<<endl<<pow(x,n);
 }
 int main()
 {

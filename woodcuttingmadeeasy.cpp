@@ -28,6 +28,9 @@
 using namespace std;
 typedef long long ll;
 void solve(){
+	int n; cin>>n; vi a(n); input(a); int x; cin>>x;
+	sort(a);
+	cout<<lower_bound(all(a),x)-a.begin()<<endl<<upper_bound(all(a),x)-a.begin()-1;
 }
 int main()
 {

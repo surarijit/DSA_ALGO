@@ -27,7 +27,37 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
+int greatest(vi &a, int start, int end){
+	if(start>end) return -1;
+	int mid = (start+end)/2;
+	if(a[mid] >a[mid-1] && a[mid]>a[mid+1]) return mid;
+	if(mid> start && a[mid] > a[mid-1]) return greatest(a,mid,end);
+	return greatest(a,start,mid);
+}
+int bsearch(vi &a, int start, int end,int x){
+	if(start>end) return -1;
+	int mid = (start+end)/2;
+	if(a[mid]==x) return mid;
+	if(a[mid]>x) return bsearch(a,start,mid-1,x);
+	return bsearch(a,mid+1,end,x);
+}
+int bsearch2(vi &a, int start, int end, int x){
+	if(start>end) return -1;
+	int mid = (start+end)/2;
+	if(a[mid]==x) return mid;
+	if(a[mid]<x) return bsearch2(a,start,mid-1,x);
+	return bsearch2(a,mid+1,end,x);
+}
+int work(vi &a, int x){
+	int g = greatest(a,0,a.size()-1); //cout<<a[g]<<endl;
+	int b = bsearch(a,0,g,x); 
+	if(b==-1) b = bsearch2(a,g,a.size()-1,x);
+	return b;
+}
 void solve(){
+	int x,n; cin>>n; vi a(n); input(a);cin>>x;
+	cout<<work(a,x);
+	
 }
 int main()
 {
