@@ -1,11 +1,3 @@
-
-// Problem : A. String Similarity
-// Contest : Codeforces - Educational Codeforces Round 94 (Rated for Div. 2)
-// URL : https://codeforces.com/problemset/problem/1400/A
-// Memory Limit : 256 MB
-// Time Limit : 2000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -35,7 +27,23 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
+ vector<string> ans;
+    void work(int i, string s, int a, int b, int n){
+        if(i==n){
+            if(a==b) ans.push_back(s);
+            return ;
+        }
+        if(b>a) return;
+        work(i+1,s+'(',a+1,b,n); 
+        work(i+1,s+')',a,b+1,n);
+    }
+    vector<string> generateParenthesis(int n) {
+        ans.clear(); work(0,"",0,0,n);
+        return ans;
+    }
 void solve(){
+	int n;cin>>n;
+	display(generateParenthesis(n));
 }
 int main()
 {
@@ -46,4 +54,4 @@ int main()
     	solve();
     }
     return 0;
-}	
+}

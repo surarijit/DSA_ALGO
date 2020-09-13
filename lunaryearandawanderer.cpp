@@ -1,9 +1,9 @@
 
-// Problem : A. String Similarity
-// Contest : Codeforces - Educational Codeforces Round 94 (Rated for Div. 2)
-// URL : https://codeforces.com/problemset/problem/1400/A
+// Problem : D. Lunar New Year and a Wander
+// Contest : Codeforces - Codeforces Round #536 (Div. 2)
+// URL : https://codeforces.com/problemset/problem/1106/D
 // Memory Limit : 256 MB
-// Time Limit : 2000 ms
+// Time Limit : 3000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -33,17 +33,46 @@
 #define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1];}
 #define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<" "; cout<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+#define ll long long int
+#define ull unsigned ll
 using namespace std;
-typedef long long ll;
+void dfs(int u, vi adj[], bool visited[]){
+	sort(adj[u]); cout<<u<<" ";
+	for(int i=0;i<adj[u].size();i++){
+		if(!visited[adj[u][i]]){
+			visited[adj[u][i]]=1;
+			dfs(adj[u][i], adj,visited);
+		}
+	}
+}
 void solve(){
+	int n,m; cin>>n>>m; vi adj[n+1],ans;
+	while(m--){
+		int u,v;
+		cin>>u>>v; adj[u].pb(v); adj[v].pb(u);
+	}
+	
+	bool visited[n+1] = {0}; 
+	//dfs(1,adj,visited);return;
+	pqq <int,vi,greater<int>> q; q.push(1);
+	while(!q.empty()){
+		int u = q.top(); q.pop();
+		if(visited[u]) continue;
+		visited[u] = 1; cout<<u<<" ";
+		for(int i=0;i<adj[u].size();i++){
+			q.push(adj[u][i]);
+		}
+	}
+	
 }
 int main()
 {
     IOS
+    //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
     //cin>>t;
     while(t--){
     	solve();
     }
     return 0;
-}	
+}

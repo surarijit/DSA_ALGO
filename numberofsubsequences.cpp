@@ -1,11 +1,3 @@
-
-// Problem : A. String Similarity
-// Contest : Codeforces - Educational Codeforces Round 94 (Rated for Div. 2)
-// URL : https://codeforces.com/problemset/problem/1400/A
-// Memory Limit : 256 MB
-// Time Limit : 2000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -14,7 +6,7 @@
 	IIT ISM 
  */
 #include<bits/stdc++.h>
-#define SIZE (ll)(1e6)
+
 #define mod (ll)(1e9+7)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
@@ -35,7 +27,26 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
+
+#define val(i,j) (dp[i][j]==-1?work(a,b,i,j,dp):dp[i][j])
+long work(string &a, string &b, long i, long j, vector<vector<long>> &dp){
+	if(i==0) return 1;
+	if(j==0) return 0;	
+	if(dp[i][j]!=-1) return dp[i][j];
+	long cnt=0;
+	if(a[i-1]==b[j-1]) cnt += val(i-1,j-1);
+	cnt += val(i,j-1);
+	return dp[i][j]=cnt;
+}
+
+long get(string a, string b){
+	vector<vector<long>> dp(a.size()+1,vector<long> (b.size()+1,-1));
+	return work(a,b,a.size(),b.size(),dp);
+}
+
 void solve(){
+	string a,b; cin>>a>>b;
+	cout<<get(a,b);
 }
 int main()
 {
@@ -46,4 +57,4 @@ int main()
     	solve();
     }
     return 0;
-}	
+}

@@ -1,11 +1,3 @@
-
-// Problem : A. String Similarity
-// Contest : Codeforces - Educational Codeforces Round 94 (Rated for Div. 2)
-// URL : https://codeforces.com/problemset/problem/1400/A
-// Memory Limit : 256 MB
-// Time Limit : 2000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -36,14 +28,16 @@
 using namespace std;
 typedef long long ll;
 void solve(){
+	ll c=0,a,b; cin>>a>>b;
+	c = min(a,min(b,(a+b)/3)); cout<<c<<endl;
 }
 int main()
 {
     IOS
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
     	solve();
     }
     return 0;
-}	
+}

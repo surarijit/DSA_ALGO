@@ -1,11 +1,3 @@
-
-// Problem : A. String Similarity
-// Contest : Codeforces - Educational Codeforces Round 94 (Rated for Div. 2)
-// URL : https://codeforces.com/problemset/problem/1400/A
-// Memory Limit : 256 MB
-// Time Limit : 2000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -35,15 +27,46 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
-void solve(){
+
+bool help(int zero, int one, int blank){
+	if(one<zero) swap(zero,one);
+	blank -= (one-zero);
+	if(blank <0 || blank &1) return 0;
+	return 1;
+}
+bool solve(){
+	int n,k;string s; cin>>n>>k>>s;
+	int one=0,zero=0,blank=0,i;
+	for( i=0;i<k;i++){
+		if(s[i]=='1') one+=1;
+		else
+		if(s[i]=='0') zero+=1;
+		else blank +=1;
+	}
+	if(!help(zero,one,blank)) return 0;
+	
+	int start = 0;
+	for(;i<n;i++){
+		if(s[i]=='1') one+=1;
+		else
+		if(s[i]=='0') zero+=1;
+		else blank +=1;
+		
+		if(s[start]=='1') one-=1;
+		else if(s[start]=='0') zero -=1;
+		else blank -=1;
+		if(!help(zero,one,blank)) return 0;
+		start +=1;
+	}
+	return 1;
 }
 int main()
 {
     IOS
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
-    	solve();
+    	cout<<(solve()?"YES":"NO")<<endl;
     }
     return 0;
-}	
+}

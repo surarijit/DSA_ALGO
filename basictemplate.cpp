@@ -25,13 +25,15 @@
 #define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1];}
 #define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<" "; cout<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+#define ll long long int
+#define ull unsigned ll
 using namespace std;
-typedef long long ll;
 void solve(){
 }
 int main()
 {
     IOS
+    //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
     //cin>>t;
     while(t--){

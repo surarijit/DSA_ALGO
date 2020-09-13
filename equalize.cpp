@@ -1,9 +1,9 @@
 
-// Problem : A. String Similarity
-// Contest : Codeforces - Educational Codeforces Round 94 (Rated for Div. 2)
-// URL : https://codeforces.com/problemset/problem/1400/A
+// Problem : C. Equalize
+// Contest : Codeforces - Manthan, Codefest 18 (rated, Div. 1 + Div. 2)
+// URL : https://codeforces.com/problemset/problem/1037/C
 // Memory Limit : 256 MB
-// Time Limit : 2000 ms
+// Time Limit : 1000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -36,6 +36,13 @@
 using namespace std;
 typedef long long ll;
 void solve(){
+	int n,cnt=0; string a,b;cin>>n>>a>>b;
+	for(int i=0;i<n;i++){
+		if(a[i]==b[i]) continue;
+		if(a[i+1] != b[i+1] && a[i+1] == b[i])i++;
+		cnt++;
+	}
+	cout<<cnt<<endl;
 }
 int main()
 {
@@ -46,4 +53,4 @@ int main()
     	solve();
     }
     return 0;
-}	
+}

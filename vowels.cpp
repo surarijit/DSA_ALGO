@@ -1,11 +1,3 @@
-
-// Problem : A. String Similarity
-// Contest : Codeforces - Educational Codeforces Round 94 (Rated for Div. 2)
-// URL : https://codeforces.com/problemset/problem/1400/A
-// Memory Limit : 256 MB
-// Time Limit : 2000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -35,7 +27,41 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
+
+#define check(ch) ((ch=='a' || ch=='e' || ch=='i'||ch=='o'||ch=='u')?1:0)
+vector<int> hasVowels(vector<string> str, vector<string> query){
+	int n=str.size();
+	vector<int> dp(n,0),ans;
+	for(int i=0;i<n;i++){
+		if(check(str[i][0]) && check(str[i][str[i].size()-1])) dp[i] +=1;
+	if(i) dp[i] += dp[i-1];
+	}
+	for(int i1=0;i1<query.size();i1++){
+		int l=0,r=0;
+		string s = query[i1];
+		int i=0;
+		while(s[i]!='-'){
+			l = l*10 + (s[i]-'0');
+			i+=1;
+		}
+		i+=1;
+		while(i<s.size()){
+			r = r*10 + (s[i]-'0'); i+=1;
+		}
+		l-=1; r-=1;
+		ans.push_back(dp[r]-(l?dp[l-1]:0));
+	}
+	return ans;
+}
+
 void solve(){
+	int n; cin>>n;
+	vector<string> s(n);
+	for(int i=0;i<n;i++) cin>>s[i];
+	int q; cin>>q; vector<string> quer(q);
+	for(int i=0;i<q;i++) cin>>quer[i];
+	display(hasvowel(s,quer));
+	
 }
 int main()
 {
@@ -46,4 +72,4 @@ int main()
     	solve();
     }
     return 0;
-}	
+}

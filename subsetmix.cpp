@@ -1,9 +1,9 @@
 
-// Problem : A. String Similarity
-// Contest : Codeforces - Educational Codeforces Round 94 (Rated for Div. 2)
-// URL : https://codeforces.com/problemset/problem/1400/A
-// Memory Limit : 256 MB
-// Time Limit : 2000 ms
+// Problem : A. Subset Mex
+// Contest : Codeforces - Codeforces Round #670 (Div. 2)
+// URL : https://codeforces.com/contest/1406/problem/A
+// Memory Limit : 512 MB
+// Time Limit : 1000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -30,20 +30,36 @@
 #define pqq priority_queue
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
-#define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1];}
-#define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<" "; cout<<endl;}
+#define input(a) {for(auto &i1 : a)cin>>i1;}
+#define display(a) {for(auto &i1:a)cout<<i1<<" ";cout<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
+#define ll long long int
+#define ull unsigned ll
 using namespace std;
-typedef long long ll;
 void solve(){
+	int n; cin>>n; vi a(n); input(a); sort(a);  
+	int kodd =0,keven=0; bool flag1= 1, flag2=1;
+	for(int i=0;i<n && (flag1||flag2);i++){
+		if(i&1 && flag1){
+			if(kodd==a[i]) kodd++;
+			else flag1=0;
+		}
+		if(i%2==0 && flag2){
+			if(keven==a[i]) keven++;
+			else flag2=0;
+		}
+
+	//cout<<kodd<<" "<<keven<<endl;
+	}
+	cout<<kodd+keven<<endl;
 }
 int main()
 {
     IOS
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
     	solve();
     }
     return 0;
-}	
+}

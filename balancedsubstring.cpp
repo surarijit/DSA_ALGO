@@ -1,9 +1,9 @@
 
-// Problem : A. String Similarity
-// Contest : Codeforces - Educational Codeforces Round 94 (Rated for Div. 2)
-// URL : https://codeforces.com/problemset/problem/1400/A
+// Problem : B. Balanced Substring
+// Contest : Codeforces - Educational Codeforces Round 30
+// URL : https://codeforces.com/problemset/problem/873/B
 // Memory Limit : 256 MB
-// Time Limit : 2000 ms
+// Time Limit : 1000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -36,6 +36,15 @@
 using namespace std;
 typedef long long ll;
 void solve(){
+	int n,sum=0,len =0 ; string s; cin>>n>>s;
+	map<int, int> ma;
+	for(int i=0;i<s.size();i++){
+		sum += (s[i]=='1' ? 1:-1);
+		if(ma[sum]) len = max(len, i-ma[sum]+1);
+		else ma[sum] = i+1;
+		if(sum==0) len = max(len,i+1);
+	}
+	cout<<len<<endl;
 }
 int main()
 {
@@ -46,4 +55,4 @@ int main()
     	solve();
     }
     return 0;
-}	
+}
