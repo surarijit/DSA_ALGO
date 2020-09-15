@@ -28,14 +28,46 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-bool work(int i, int j, bool flag, string &s){
-	if(i>=j) return 1;
-	if(s[i]==s[j]) return work(i+1,j-1,flag,s);
-	if(flag) return work(i+1,j,0,s)||work(i,j-1,0,s);
-	return 0;
-}
-bool solve(string s){
-	return work(0,s.size()-1,1,s);
+ bool help(int a, int b, int num){
+        int cnt=0,d;
+        while(a){
+            d = a%2;
+            cnt += (d==1);
+            a =a/2;
+        }
+        while(b){
+            d = b%2;
+            cnt += (d==1);
+            b = b/2;
+        }
+        if(cnt==num) return 1;
+        return 0;
+    }
+    string tostr(int n){
+        if(n==0) return "0";
+        string s="";
+        while(n){
+            int d = n%10;
+            s = (char)(d+'0')+s;
+            n=n/10;
+        }
+        return s;
+    }
+    vector<string> readBinaryWatch(int num) {
+        vector<string> ans;
+        for(int i=0;i<12;i++){
+            for(int j=0;j<60;j++){
+                if(help(i,j,num)){
+                    string s = tostr(i)+(j<10?":0":":") +tostr(j);
+                    ans.push_back(s);
+                }
+            }
+        }
+        return ans;
+    }
+void solve(){
+	int n; cin>>n;
+	display(readBinaryWatch(n));
 }
 int main()
 {
@@ -44,8 +76,7 @@ int main()
     int t=1;
     //cin>>t;
     while(t--){
-    	string s;cin>>s;
-    	cout<<solve(s);
+    	solve();
     }
     return 0;
 }

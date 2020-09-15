@@ -1,3 +1,11 @@
+
+// Problem : C. Mortal Kombat Tower
+// Contest : Codeforces - Educational Codeforces Round 95 (Rated for Div. 2)
+// URL : https://codeforces.com/contest/1418/problem/C
+// Memory Limit : 256 MB
+// Time Limit : 1000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -6,12 +14,10 @@
 	IIT ISM 
  */
 #include<bits/stdc++.h>
-#define SIZE (ll)(1e6)
+#define SIZE (ll)(5*1e5+100)
 #define mod (ll)(1e9+7)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
-#define max(a,b) (a>b?a:b)
-#define min(a,b) (a<b?a:b)
 #define abs(a) ((a)>0?(a):-(a))
 #define sc(a) scanf("%d\n",&a);
 #define all(a) a.begin(),a.end()
@@ -28,24 +34,40 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-bool work(int i, int j, bool flag, string &s){
-	if(i>=j) return 1;
-	if(s[i]==s[j]) return work(i+1,j-1,flag,s);
-	if(flag) return work(i+1,j,0,s)||work(i,j-1,0,s);
-	return 0;
+#define val(i,a,flag) (dp[i][flag]==-1?work(i,a,flag):dp[i][flag])
+ll dp[SIZE][2];
+ll work(int i, vi &a, int flag){
+	if(i>=a.size()) return 0;
+	
+	ll ans;
+	if(flag){
+		int cost = 0;
+		if(a[i])cost = 1;
+		 ans = val(i+1,a,!flag)+cost;
+		 if(i+1<a.size()){
+		if(a[i+1]) cost = 2;
+		ans = min(ans, val(i+2,a,!flag)+cost);}
+	}
+	else{
+		ans = min(val(i+1,a,!flag), val(i+2,a,!flag));
+	}
+	return dp[i][flag] = ans;
 }
-bool solve(string s){
-	return work(0,s.size()-1,1,s);
+void solve(){
+	ll n; cin>>n; vi a(n); input(a);
+	for(int i=0;i<=n;i++)
+	for(int j=0;j<=1;j++)
+	dp[i][j]=-1;
+	cout<<work(0,a,1)<<endl;return;
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
-    	string s;cin>>s;
-    	cout<<solve(s);
+    	solve();
     }
     return 0;
 }

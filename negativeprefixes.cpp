@@ -1,3 +1,11 @@
+
+// Problem : B. Negative Prefixes
+// Contest : Codeforces - Educational Codeforces Round 95 (Rated for Div. 2)
+// URL : https://codeforces.com/contest/1418/problem/B
+// Memory Limit : 256 MB
+// Time Limit : 2000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -8,7 +16,7 @@
 #include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
-#define vi vector<int>
+#define vi vector<ll>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
@@ -28,24 +36,26 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-bool work(int i, int j, bool flag, string &s){
-	if(i>=j) return 1;
-	if(s[i]==s[j]) return work(i+1,j-1,flag,s);
-	if(flag) return work(i+1,j,0,s)||work(i,j-1,0,s);
-	return 0;
-}
-bool solve(string s){
-	return work(0,s.size()-1,1,s);
+void solve(){
+	int n; cin>>n; vi a(n),l(n),b,c(n); input(a);  input(l);
+	for(int i=0;i<n;i++){
+		if(!l[i]) b.pb(a[i]);
+	}
+	sort(b); reverse(b);int index = 0;
+	for(int i=0;i<n;i++){
+		if(l[i])c[i] = a[i];
+		else c[i] = b[index++];
+	}
+	display(c);
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
-    	string s;cin>>s;
-    	cout<<solve(s);
+    	solve();
     }
     return 0;
 }

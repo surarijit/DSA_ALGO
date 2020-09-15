@@ -1,3 +1,11 @@
+
+// Problem : A. Buying Torches
+// Contest : Codeforces - Educational Codeforces Round 95 (Rated for Div. 2)
+// URL : https://codeforces.com/contest/1418/problem/A
+// Memory Limit : 256 MB
+// Time Limit : 1000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -28,24 +36,20 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-bool work(int i, int j, bool flag, string &s){
-	if(i>=j) return 1;
-	if(s[i]==s[j]) return work(i+1,j-1,flag,s);
-	if(flag) return work(i+1,j,0,s)||work(i,j-1,0,s);
-	return 0;
-}
-bool solve(string s){
-	return work(0,s.size()-1,1,s);
+void solve(){
+	ll x,y,k; cin>>x>>y>>k;
+	ll f = k*y/(x-1),n=f;
+	if((k*y)%(x-1)) n+=1;
+	cout<<n+k<<endl;
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
-    int t=1;
-    //cin>>t;
-    while(t--){
-    	string s;cin>>s;
-    	cout<<solve(s);
-    }
-    return 0;
+   int t;cin>>t;
+while(t--){
+    ll x,y,k;cin>>x>>y>>k;
+    ll cnt=((k*y+k-1)-1)/(x-1)+1;
+    cout<<cnt+k<<endl;
+}return 0;
 }

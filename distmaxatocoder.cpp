@@ -1,3 +1,11 @@
+
+// Problem : E - Dist Max
+// Contest : AtCoder - AtCoder Beginner Contest 178
+// URL : https://atcoder.jp/contests/abc178/tasks/abc178_e
+// Memory Limit : 1024 MB
+// Time Limit : 2000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -8,7 +16,7 @@
 #include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
-#define vi vector<int>
+#define vi vector<ll>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
@@ -28,14 +36,15 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-bool work(int i, int j, bool flag, string &s){
-	if(i>=j) return 1;
-	if(s[i]==s[j]) return work(i+1,j-1,flag,s);
-	if(flag) return work(i+1,j,0,s)||work(i,j-1,0,s);
-	return 0;
-}
-bool solve(string s){
-	return work(0,s.size()-1,1,s);
+#define manhat(a,b) (abs((a[0]-b[0])) + abs((a[1]-b[1])))
+void solve(){
+	int n; cin>>n; vector< vi> a(n,vi(2,0)); ull ans = 0;
+	for(int i=0;i<n;i++) input(a[i]);
+	vi plus,minus;
+	for(int i=0;i<n;i++) plus.pb(a[i][0]+a[i][1]);
+	for(int i=0;i<n;i++) minus.pb(a[i][0]-a[i][1]);
+	ll x = maxelem(plus)-minelem(plus) , y = maxelem(minus)-minelem(minus);
+	cout<<max(x,y)<<endl;
 }
 int main()
 {
@@ -44,8 +53,7 @@ int main()
     int t=1;
     //cin>>t;
     while(t--){
-    	string s;cin>>s;
-    	cout<<solve(s);
+    	solve();
     }
     return 0;
 }

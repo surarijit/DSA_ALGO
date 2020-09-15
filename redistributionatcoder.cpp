@@ -1,3 +1,11 @@
+
+// Problem : D - Redistribution
+// Contest : AtCoder - AtCoder Beginner Contest 178
+// URL : https://atcoder.jp/contests/abc178/tasks/abc178_d
+// Memory Limit : 1024 MB
+// Time Limit : 2000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -6,7 +14,7 @@
 	IIT ISM 
  */
 #include<bits/stdc++.h>
-#define SIZE (ll)(1e6)
+#define SIZE (ll)(1e4)
 #define mod (ll)(1e9+7)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
@@ -27,25 +35,28 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define ll long long int
 #define ull unsigned ll
-using namespace std;
-bool work(int i, int j, bool flag, string &s){
-	if(i>=j) return 1;
-	if(s[i]==s[j]) return work(i+1,j-1,flag,s);
-	if(flag) return work(i+1,j,0,s)||work(i,j-1,0,s);
-	return 0;
+using namespace std;	
+ull dp[SIZE];
+ull work(int sum){
+	if(sum-3>=0) return (work(sum-3))%mod;
+	else return 0;
 }
-bool solve(string s){
-	return work(0,s.size()-1,1,s);
+void solve(int s){
+	
+	cout<<work(s)<<endl;
 }
 int main()
 {
     IOS
-    //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
-    int t=1;
-    //cin>>t;
-    while(t--){
-    	string s;cin>>s;
-    	cout<<solve(s);
+        int s;
+    cin >> s; solve(s);
+    ll dp[2020];
+    dp[0] = 1;
+    ll x = 0;
+    for (int i = 1; i <= s; i++) {
+        if (i - 3 >= 0) x += dp[i - 3];
+            x %= mod;
+            dp[i] = x;
     }
-    return 0;
+    cout << dp[s] << endl;
 }

@@ -1,3 +1,11 @@
+
+// Problem : B - Product Max
+// Contest : AtCoder - AtCoder Beginner Contest 178
+// URL : https://atcoder.jp/contests/abc178/tasks/abc178_b
+// Memory Limit : 1024 MB
+// Time Limit : 2000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -28,14 +36,9 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-bool work(int i, int j, bool flag, string &s){
-	if(i>=j) return 1;
-	if(s[i]==s[j]) return work(i+1,j-1,flag,s);
-	if(flag) return work(i+1,j,0,s)||work(i,j-1,0,s);
-	return 0;
-}
-bool solve(string s){
-	return work(0,s.size()-1,1,s);
+void solve(){
+	ll a,b,c,d; cin>>a>>b>>c>>d;
+	cout<<max(a*c, max(a*d, max(b*c,b*d)))<<endl;
 }
 int main()
 {
@@ -44,8 +47,7 @@ int main()
     int t=1;
     //cin>>t;
     while(t--){
-    	string s;cin>>s;
-    	cout<<solve(s);
+    	solve();
     }
     return 0;
 }

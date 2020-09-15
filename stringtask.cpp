@@ -1,3 +1,11 @@
+
+// Problem : A. String Task
+// Contest : Codeforces - Codeforces Beta Round #89 (Div. 2)
+// URL : https://codeforces.com/problemset/problem/118/A
+// Memory Limit : 256 MB
+// Time Limit : 2000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -28,14 +36,21 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-bool work(int i, int j, bool flag, string &s){
-	if(i>=j) return 1;
-	if(s[i]==s[j]) return work(i+1,j-1,flag,s);
-	if(flag) return work(i+1,j,0,s)||work(i,j-1,0,s);
-	return 0;
+#define vowels(x) (check(x) || check(x-'A'+'a'))
+#define check(x) ((x=='a'||x=='i'||x=='e'||x=='o'||x=='u')?1:0)
+char to_lowr(char ch){
+	if(ch>='A' && ch <='Z') ch = ch- 'A' + 'a';
+	return ch;
 }
-bool solve(string s){
-	return work(0,s.size()-1,1,s);
+void solve(){
+	string s; cin>>s; string a="";
+	for(int i=0;i<s.size();i++) s[i]=to_lowr(s[i]);
+	for(int i=0;i<s.size();i++){
+		if(vowels(s[i])) continue;
+		cout<<"."<<s[i]; continue;
+		a += '.'+ to_lowr(s[i]);
+	}
+	cout<<a;
 }
 int main()
 {
@@ -44,8 +59,7 @@ int main()
     int t=1;
     //cin>>t;
     while(t--){
-    	string s;cin>>s;
-    	cout<<solve(s);
+    	solve();
     }
     return 0;
-}
+}	

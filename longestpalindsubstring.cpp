@@ -6,7 +6,7 @@
 	IIT ISM 
  */
 #include<bits/stdc++.h>
-#define SIZE (ll)(1e6)
+#define SIZE (ll)(1e3)
 #define mod (ll)(1e9+7)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
@@ -28,14 +28,35 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-bool work(int i, int j, bool flag, string &s){
-	if(i>=j) return 1;
-	if(s[i]==s[j]) return work(i+1,j-1,flag,s);
-	if(flag) return work(i+1,j,0,s)||work(i,j-1,0,s);
-	return 0;
-}
-bool solve(string s){
-	return work(0,s.size()-1,1,s);
+string printSubStr(string str, int low, int high) 
+{ 
+return str.substr(low,high-low+1);
+string s="";
+    for (int i = low; i <= high; ++i) 
+        s+= str[i];
+        return s; 
+} 
+  
+string solve(string s){
+	int n = s.size(),start=0,len=0; bool dp[n+1][n+1];
+	memset(dp,0,sizeof(dp));
+	for(int i=0;i<n;i++) dp[i][i] =1;
+	for(int i=0;i+1<n;i++) dp[i][i+1] = s[i]==s[i+1];
+	for(int k=3;k<=n;k++){
+		for(int i=0;i+k-1<n;i++){
+			int j=i+k-1;
+			if(s[i]==s[j] && dp[i+1][j-1]) dp[i][j] = 1;
+		}
+	}
+	for(int i=0;i<n;i++){
+		for(int j=i;j<n;j++){
+			if(dp[i][j] && j-i+1>len){
+				len = j-i+1;
+				start = i;
+			}
+		}
+	}
+  	return s.substr(start,len);
 }
 int main()
 {
@@ -44,7 +65,7 @@ int main()
     int t=1;
     //cin>>t;
     while(t--){
-    	string s;cin>>s;
+    	string s; cin>>s;
     	cout<<solve(s);
     }
     return 0;

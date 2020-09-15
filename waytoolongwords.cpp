@@ -1,3 +1,11 @@
+
+// Problem : A. Way Too Long Words
+// Contest : Codeforces - Codeforces Beta Round #65 (Div. 2)
+// URL : https://codeforces.com/problemset/problem/71/A
+// Memory Limit : 256 MB
+// Time Limit : 1000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -28,24 +36,30 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-bool work(int i, int j, bool flag, string &s){
-	if(i>=j) return 1;
-	if(s[i]==s[j]) return work(i+1,j-1,flag,s);
-	if(flag) return work(i+1,j,0,s)||work(i,j-1,0,s);
-	return 0;
+string tostr(int n){
+	string s="";
+	while(n){
+		s = (char)(n%10+'0')+s;
+		n=n/10;
+	}
+	return s;
 }
-bool solve(string s){
-	return work(0,s.size()-1,1,s);
+void solve(){
+	string s;cin>>s;
+	if(s.size()<=10) {
+		cout<<s<<endl;
+		return;
+	}
+	cout<<s[0]+tostr(s.size()-2)+s[s.size()-1]<<endl;
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
-    	string s;cin>>s;
-    	cout<<solve(s);
+    	solve();
     }
     return 0;
 }

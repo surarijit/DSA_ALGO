@@ -28,14 +28,18 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-bool work(int i, int j, bool flag, string &s){
-	if(i>=j) return 1;
-	if(s[i]==s[j]) return work(i+1,j-1,flag,s);
-	if(flag) return work(i+1,j,0,s)||work(i,j-1,0,s);
-	return 0;
+void printwords(string s){
+	string word,a="";
+	stringstream iss(s);
+	while(iss>>word){
+		if(a.size()) a = word + " "+ a;
+		else a = word;
+	}
+	cout<<a;
 }
-bool solve(string s){
-	return work(0,s.size()-1,1,s);
+void solve(){
+	string s = "the sky is blue";
+	printwords(s);
 }
 int main()
 {
@@ -44,8 +48,7 @@ int main()
     int t=1;
     //cin>>t;
     while(t--){
-    	string s;cin>>s;
-    	cout<<solve(s);
+    	solve();
     }
     return 0;
 }
