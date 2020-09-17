@@ -1,11 +1,3 @@
-
-// Problem : C. Dijkstra?
-// Contest : Codeforces - Codeforces Alpha Round #20 (Codeforces format)
-// URL : https://codeforces.com/problemset/problem/20/C
-// Memory Limit : 64 MB
-// Time Limit : 1000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -27,7 +19,6 @@
 #define minelem(a) *min_element(all(a))
 #define pb push_back
 #define pi pair<int,int>
-#define me(x,y,w) adj[x].pb({w,y});
 #define pqq priority_queue
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
@@ -37,38 +28,13 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-
-void solve(){
-	int n,m; cin>>n>>m; vector<pi> adj[n+1]; vi visited(n+1,0),parent(n+1),dist(n+1,INF); 
-	for(int i=1;i<=n;i++) parent[i]=i;
-	while(m--){
-		int u,v,w; cin>>u>>v>>w;
-		me(u,v,w); me(v,u,w);
+vi solve(vi &a, int k){
+	vi b = a;
+	for(int i=0;i<a.size();i++){
+	//a[i] -> a[(i+k)%a.size()x]
+	b[(i+k)%a.size()] = a[i];
 	}
-	vi ans;
-	pqq <vi, vector<vi>, greater<vi>> q;
-	q.push({0,1,1});
-	while(!q.empty()){
-		vi a = q.top(); q.pop();
-		int u = a[1]; 
-		if(visited[u]) continue;
-		visited[u]=1;
-		parent[u] = a[2];
-		if(u==n) break;
-		for(int i=0;i<adj[u].size();i++){
-			pi y = adj[u][i]; int v = y.second;
-			if(!visited[v]) q.push({a[0]+y.first,v,u});	
-		}
-	}
-	int i=n;
-	while(parent[i]!=i){
-		ans.pb(i);
-		i = parent[i];
-	}
-	if(ans.empty()){
-		cout<<-1; return;
-	}
-	ans.pb(1); reverse(ans); display(ans);
+	return b;
 }
 int main()
 {
@@ -77,7 +43,8 @@ int main()
     int t=1;
     //cin>>t;
     while(t--){
-    	solve();
+    	int n,k;cin>>n; vi a(n); input(a); cin>>k;
+    	display(solve(a,k));;
     }
     return 0;
 }

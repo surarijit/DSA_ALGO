@@ -1,11 +1,3 @@
-
-// Problem : C. Dijkstra?
-// Contest : Codeforces - Codeforces Alpha Round #20 (Codeforces format)
-// URL : https://codeforces.com/problemset/problem/20/C
-// Memory Limit : 64 MB
-// Time Limit : 1000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -27,7 +19,6 @@
 #define minelem(a) *min_element(all(a))
 #define pb push_back
 #define pi pair<int,int>
-#define me(x,y,w) adj[x].pb({w,y});
 #define pqq priority_queue
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
@@ -37,38 +28,30 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-
+#define check(i,j) ((i>=0 && j>=0 && i<n && j<m && !visited[i][j]) ?1:0)
+    #define ff q.front().first
+    #define fs q.front().second
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
+        int n = image.size(), m = image[0].size();
+        int xc = image[sr][sc]; bool visited[n+1][m+1] ={{0}};
+        queue<pi> q; q.push({sr,sc});
+        while(!q.empty()){
+            if(visited[ff][fs]) continue;
+            visited[ff][fs] = 1;
+            image[ff][fs] = color;
+            for(int i=-1;i<=1;i++){
+                for(int j=-1;j<=1;j++){
+                    int x = ff+i, y = fs+j;
+                    if(check(x,y)  && image[x][y] == color){
+                        q.push({x,y}); visited[x][y]=1;
+                    }
+                }
+            }
+            q.pop();
+        }
+        return image;
+    }
 void solve(){
-	int n,m; cin>>n>>m; vector<pi> adj[n+1]; vi visited(n+1,0),parent(n+1),dist(n+1,INF); 
-	for(int i=1;i<=n;i++) parent[i]=i;
-	while(m--){
-		int u,v,w; cin>>u>>v>>w;
-		me(u,v,w); me(v,u,w);
-	}
-	vi ans;
-	pqq <vi, vector<vi>, greater<vi>> q;
-	q.push({0,1,1});
-	while(!q.empty()){
-		vi a = q.top(); q.pop();
-		int u = a[1]; 
-		if(visited[u]) continue;
-		visited[u]=1;
-		parent[u] = a[2];
-		if(u==n) break;
-		for(int i=0;i<adj[u].size();i++){
-			pi y = adj[u][i]; int v = y.second;
-			if(!visited[v]) q.push({a[0]+y.first,v,u});	
-		}
-	}
-	int i=n;
-	while(parent[i]!=i){
-		ans.pb(i);
-		i = parent[i];
-	}
-	if(ans.empty()){
-		cout<<-1; return;
-	}
-	ans.pb(1); reverse(ans); display(ans);
 }
 int main()
 {
