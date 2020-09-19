@@ -1,3 +1,11 @@
+
+// Problem : D2. Sage's Birthday (hard version)
+// Contest : Codeforces - Codeforces Round #671 (Div. 2)
+// URL : https://codeforces.com/contest/1419/problem/D2
+// Memory Limit : 256 MB
+// Time Limit : 1000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -6,7 +14,7 @@
 	IIT ISM 
  */
 #include<bits/stdc++.h>
-#define SIZE (ll)(1e3)
+#define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
@@ -28,27 +36,17 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-struct Trie{
-	Trie* children[SIZE];
-	bool isend;
-};
-Trie* getNode(){
-	Trie* ptr = new Trie();
-	ptr->isend = false;
-	for(int i=0;i<SIZE;i++) ptr->children[i] = NULL;
-	return ptr;
-}
-void insert(Trie *root, string s){
-	Trie *ptr = root;
-	for(int i=0;i<s.size();i++){
-		int index = s[i]-'a';
-		if(!ptr->children[index]) ptr->children[index] = getNode();
-		ptr = ptr->children[index];
-	}
-	ptr->isend = true;s
-}
 void solve(){
-	
+	int n;cin>>n;vi a(n); input(a); sort(a); reverse(a); ll ans=0;
+	for(int i=01;i<n;){
+		if(i+1<n)
+		swap(a[i],a[i+1]);
+		i+=2;
+	}
+	for(int i=01;1+i<n;i++){
+		if(a[i]<a[i-1] && a[i]<a[i+1]) ans+=1;
+	}
+	cout<<(n-1)/2<<endl; display(a);
 }
 int main()
 {

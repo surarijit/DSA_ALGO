@@ -28,27 +28,32 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-#define dist(x,y) (sq(x) + sq(y))
+ #define dist(x,y) (sq(x) + sq(y))
 #define sq(x) (x*x)
-int work(string s, int &x,int &y){
-	 int flag = 0,d=0;
+    int work(string s, int &x,int &y){
+          int flag = 0,d=0; map<pair<int,int>, bool> visited;
+          visited[{x,y}]=1;
         for(int i=0;i<s.size();i++){
-            if(s[i]=='L') flag = (flag+1)%4;
-            else if(s[i]=='R') flag = (flag-1)%4;
+            
+            if(s[i]=='L') flag -=1;
+            else if(s[i]=='R') flag +=1;    
             else{
-                if(flag==0) x+=1;
-                else if(flag==1) y-=1;
-                else if(flag==2) x+=1;
-                else y+=1;
+            	visited[{x,y}] = 1;
+                if(flag==0) y+=1;
+                else if(flag==1) x+=1;
+                else if(flag==2) y-=1;
+                else x-=1;
             }
-			d = max(d,dist(x,y));
+            if(flag==4) flag =0;
+            if(flag==-1) flag = 3;
+            //cout<<x<<" "<<y<<endl;
         }
-	return d;
-}
-bool isRobotBounded(string instructions) {
-       int x=0,y=0,round1 = work(instructions,x,y), round2 = work(instructions,x,y);
-       cout<<round1<<" "<<round2<<endl;
-       return round2<=round1;
+        if(visited[{x,y}]) return 1;
+	    return flag!=0;
+    }
+    bool isRobotBounded(string instructions) {
+   int x=0,y=0,round1 = work(instructions,x,y);
+        return round1;
         
     }
 void solve(){

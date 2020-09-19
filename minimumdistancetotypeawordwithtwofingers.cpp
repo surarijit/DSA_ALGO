@@ -6,7 +6,6 @@
 	IIT ISM 
  */
 #include<bits/stdc++.h>
-#define SIZE (ll)(1e3)
 #define mod (ll)(1e9+7)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
@@ -18,7 +17,6 @@
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
 #define pb push_back
-#define pi pair<int,int>
 #define pqq priority_queue
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
@@ -28,27 +26,33 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-struct Trie{
-	Trie* children[SIZE];
-	bool isend;
-};
-Trie* getNode(){
-	Trie* ptr = new Trie();
-	ptr->isend = false;
-	for(int i=0;i<SIZE;i++) ptr->children[i] = NULL;
-	return ptr;
-}
-void insert(Trie *root, string s){
-	Trie *ptr = root;
-	for(int i=0;i<s.size();i++){
-		int index = s[i]-'a';
-		if(!ptr->children[index]) ptr->children[index] = getNode();
-		ptr = ptr->children[index];
-	}
-	ptr->isend = true;s
-}
+
+#define SIZE (int)(7)
+#define pi pair<int,int>
+#define help(a,x,y) (x==-1?0:abs(a.first-x)+ abs(a.second-y))
+  unordered_map<char, pi> ma; 
+  int dp[SIZE*50][SIZE][SIZE][SIZE][SIZE];
+    int work(int i, string &word, int x1,int y1, int x2, int y2){
+        if(i==word.size()) return 0;
+		if(dp[i][x1+1][y1+1][x2+1][y2+1]!=-1) return dp[i][x1+1][y1+1][x2+1][y2+1];
+        pi a = ma[word[i]];
+        int cost1 = help(a,x1,y1), cost2 = help(a,x2,y2);
+        return dp[i][x1+1][y1+1][x2+1][y2+1] = min(cost1+work(i+1,word,a.first,a.second,x2,y2),
+                  cost2+ work(i+1,word,x1,y1,a.first,a.second));
+    }
+    int minimumDistance(string word) {
+        ma.clear();char ch = 'A';
+	memset(dp,-1,sizeof(dp));
+        for(int i=0;i<5;i++){
+            for(int j=0;j<6 && ch<='Z';j++){
+                ma[ch] = {i,j}; ch+=1;
+            }
+        }
+        return work(0,word,-1,-1,-1,-1);
+    }
 void solve(){
-	
+	string s;cin>>s;
+	cout<<minimumDistance(s);
 }
 int main()
 {

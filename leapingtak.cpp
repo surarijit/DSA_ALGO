@@ -6,7 +6,7 @@
 	IIT ISM 
  */
 #include<bits/stdc++.h>
-#define SIZE (ll)(1e3)
+#define SIZE (ll)(998244353)
 #define mod (ll)(1e9+7)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
@@ -28,27 +28,23 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-struct Trie{
-	Trie* children[SIZE];
-	bool isend;
-};
-Trie* getNode(){
-	Trie* ptr = new Trie();
-	ptr->isend = false;
-	for(int i=0;i<SIZE;i++) ptr->children[i] = NULL;
-	return ptr;
-}
-void insert(Trie *root, string s){
-	Trie *ptr = root;
-	for(int i=0;i<s.size();i++){
-		int index = s[i]-'a';
-		if(!ptr->children[index]) ptr->children[index] = getNode();
-		ptr = ptr->children[index];
+ll work(int x,vi &a, int n){
+	if(x==n) return 1;
+	if(x>n) return 0;
+	ll ans = 0;
+	for(int i=0;i<a.size(); i++){
+		ans += work(x+a[i],a);	
 	}
-	ptr->isend = true;s
+	return ans;
 }
 void solve(){
-	
+	int n,k;cin>>n>>k; set<int> s;
+	while(k--){
+		int l,r; cin>>l>>r;
+		for(int i=l;i<=r;i++) s.insert(i);
+	}	
+	vi a(all(s));
+	cout<<work(1,a,n)<<endl;
 }
 int main()
 {
