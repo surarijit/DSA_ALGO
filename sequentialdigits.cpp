@@ -6,8 +6,8 @@
 	IIT ISM 
  */
 #include<bits/stdc++.h>
-#define mod (ll)(998244353)
 #define SIZE (ll)(1e6)
+#define mod (ll)(1e9+7)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -28,25 +28,21 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-ll dp[SIZE];
-ll work(int x,vi &a, int n){
-	if(x==n) return 1;
-	if(x>n) return 0;
-	if(dp[x]!=-1) return dp[x];
-	ll ans = 0;
-	for(int i=0;i<a.size() && x+a[i]<=n; i++){
-		ans = (ans+ work(x+a[i],a,n))%mod;	
-	}
-	return dp[x] = ans;
-}
+vector<int> sequentialDigits(int low, int high) {
+        string s = "123456789";vector<int> v;
+        for(int i=0;i<s.size();i++){
+        	for(int j=1;i+j<=s.size();j++){
+        		int ans = stoi(s.substr(i,j));
+        		if(ans>=low && ans<=high) v.push_back(ans);
+        		if(ans>high)break;
+        	}
+        }
+        sort(v);
+        return v;
+    }
 void solve(){
-	int n,k;cin>>n>>k;vi s;
-	while(k--){
-		int l,r; cin>>l>>r;
-		for(int i=l;i<=r;i++) s.pb(i);
-	}	
-	vi a(all(s)); sort(a);
-	cout<<work(1,a,n)<<endl;
+	int l,h; cin>>l>>h;
+	display(sequentialDigits(l,h));
 }
 int main()
 {
@@ -55,7 +51,6 @@ int main()
     int t=1;
     //cin>>t;
     while(t--){
-    	memset(dp,-1,sizeof(dp));
     	solve();
     }
     return 0;

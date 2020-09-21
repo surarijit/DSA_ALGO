@@ -1,3 +1,11 @@
+
+// Problem : Bowling Strategy
+// Contest : CodeChef - September Cook-Off 2020 Division 2
+// URL : https://www.codechef.com/COOK122B/problems/BOWLERS
+// Memory Limit : 256 MB
+// Time Limit : 1000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -6,8 +14,8 @@
 	IIT ISM 
  */
 #include<bits/stdc++.h>
-#define mod (ll)(998244353)
 #define SIZE (ll)(1e6)
+#define mod (ll)(1e9+7)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -28,34 +36,28 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-ll dp[SIZE];
-ll work(int x,vi &a, int n){
-	if(x==n) return 1;
-	if(x>n) return 0;
-	if(dp[x]!=-1) return dp[x];
-	ll ans = 0;
-	for(int i=0;i<a.size() && x+a[i]<=n; i++){
-		ans = (ans+ work(x+a[i],a,n))%mod;	
-	}
-	return dp[x] = ans;
-}
 void solve(){
-	int n,k;cin>>n>>k;vi s;
-	while(k--){
-		int l,r; cin>>l>>r;
-		for(int i=l;i<=r;i++) s.pb(i);
-	}	
-	vi a(all(s)); sort(a);
-	cout<<work(1,a,n)<<endl;
+	ll n,k,l; cin>>n>>k>>l;
+	ll y = n/k; 
+	if(n%k) y+=1;
+	if(k==1){
+		if(n==1) cout<<1<<endl;
+	 else cout<<-1<<endl;
+	 return;
+	}
+	if(y>l) {
+		cout<<-1<<endl;return;
+	}
+	for(int i=0;i<n;i++) cout<<i%k+1<<" ";
+	cout<<endl;
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
-    	memset(dp,-1,sizeof(dp));
     	solve();
     }
     return 0;
