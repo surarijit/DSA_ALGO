@@ -1,3 +1,11 @@
+
+// Problem : B. Alyona and a Narrow Fridge
+// Contest : Codeforces - Codeforces Global Round 2
+// URL : https://codeforces.com/problemset/problem/1119/B
+// Memory Limit : 256 MB
+// Time Limit : 1000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -8,7 +16,7 @@
 #include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
-#define vi vector<int>
+#define vi vector<ll>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
@@ -28,23 +36,16 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-    int maxSumRangeQuery(vector<int>& nums, vector<vector<int>>& requests) {
-        int n = nums.size(),ans=0; vector<int> a(n,0);
-	for(auto x:requests){
-		a[x[0]] += 1;
-		if(x[1]+1<n)a[x[1]+1] -=1;
-	}
-    for(int i=01;i<n;i++) a[i] += a[i-1];
-	sort(nums); sort(a);
-	for(int i=0;i<n;i++) ans = (ans + (nums[i]*a[i])%mod)%mod;
-	return ans;
 void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	int test;cin>>test;
-	while(test--){
-		
+	int n,h;cin>>n>>h; vi a(n); input(a);reverse(a);
+	for(int i=0;i<n;i++)
+	{
+		vi b(a.begin()+i,a.end());int sum=0;
+		sort(b);reverse(b);//display(b);
+		for(int j=0;j<b.size()&& sum<=h;j+=2)  sum += b[j];
+		if(sum>h) continue;
+		cout<<b.size()<<endl;return;
 	}
-	
 }
 int main()
 {

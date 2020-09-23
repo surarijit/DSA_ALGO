@@ -28,23 +28,15 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-    int maxSumRangeQuery(vector<int>& nums, vector<vector<int>>& requests) {
-        int n = nums.size(),ans=0; vector<int> a(n,0);
-	for(auto x:requests){
-		a[x[0]] += 1;
-		if(x[1]+1<n)a[x[1]+1] -=1;
-	}
-    for(int i=01;i<n;i++) a[i] += a[i-1];
-	sort(nums); sort(a);
-	for(int i=0;i<n;i++) ans = (ans + (nums[i]*a[i])%mod)%mod;
-	return ans;
+int tilingRectangle(int n, int m) {
+        if(n==1 && m==1) return 1;
+        if(n>m) swap(n,m);
+        cout<<n<<endl;
+        return tilingRectangle(n,m-n)+1;
+    }
 void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	int test;cin>>test;
-	while(test--){
-		
-	}
-	
+	int n,m;cin>>n>>m;
+	cout<<tilingRectangle(n,m)<<endl;
 }
 int main()
 {

@@ -28,23 +28,37 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-    int maxSumRangeQuery(vector<int>& nums, vector<vector<int>>& requests) {
-        int n = nums.size(),ans=0; vector<int> a(n,0);
-	for(auto x:requests){
-		a[x[0]] += 1;
-		if(x[1]+1<n)a[x[1]+1] -=1;
-	}
-    for(int i=01;i<n;i++) a[i] += a[i-1];
-	sort(nums); sort(a);
-	for(int i=0;i<n;i++) ans = (ans + (nums[i]*a[i])%mod)%mod;
-	return ans;
+#define dist(a,b) (abs(a[0]-b[0])+abs(a[1]-b[1]))
+int parent[SIZE],s[SIZE];
+void initial(int n){
+	for(int i=0;i<=n;i++) parent[i]=i,s[i]=1;
+}
+int find_parent(int v){
+	return v==parent[v]?v:parent[v]=find_parent(parent[v]);
+}
+void make_union(int a, int b){
+    parent[b] = a;
+}
+int minCostConnectPoints(vector<vector<int>>& points) {
+		priority_queue<vi,vector<vi>,greater<vi>> v;
+        int cost=0,n=points.size(),cnt=0; initial(n+1);
+        for(int i=0;i<n;i++){
+        	for(int j=i+1;j<n;j++) v.push({dist(points[i],points[j]),i,j});
+        }
+        
+        while(!v.empty()){
+           vi a = v.top(); v.pop();
+            if(cnt==n-1) break;
+        	int x = find_parent(a[1]), y= find_parent(a[2]);
+        	if(x!=y) {
+        		parent[y] = x;
+        		cost+= a[0];
+                cnt+=1;
+        	}
+        }
+        return cost;
+    }
 void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	int test;cin>>test;
-	while(test--){
-		
-	}
-	
 }
 int main()
 {

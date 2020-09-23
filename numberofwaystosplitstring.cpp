@@ -7,7 +7,7 @@
  */
 #include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
-#define mod (ll)(1e9+7)
+#define mod (ull)(1e9+7)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -28,23 +28,33 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-    int maxSumRangeQuery(vector<int>& nums, vector<vector<int>>& requests) {
-        int n = nums.size(),ans=0; vector<int> a(n,0);
-	for(auto x:requests){
-		a[x[0]] += 1;
-		if(x[1]+1<n)a[x[1]+1] -=1;
-	}
-    for(int i=01;i<n;i++) a[i] += a[i-1];
-	sort(nums); sort(a);
-	for(int i=0;i<n;i++) ans = (ans + (nums[i]*a[i])%mod)%mod;
-	return ans;
+#define va(x) (x%mod)
+int numWays(string s) {
+      int n=s.size(), ones=0;
+      for(char ch:s) ones += (ch=='1');
+	   if(ones==0) return va(va(n-1)*va(n-2)/2);
+      if(ones%3) return 0;
+      int di = ones/3,d2 = di,i=0,z1=01,z2=01;
+      	while(di){
+      		if(s[i]=='1') di--;
+      		i+=1;
+      	}
+		while(s[i]=='0'){
+			i+=1; z1+=1;
+		}
+		while(d2){
+			if(s[i]=='1') d2--;
+			i+=1;
+		}
+		while(s[i]=='0'){
+			i+=1; z2+=1;
+		}
+		return va(va(z1)*va(z2));
+
+}
 void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	int test;cin>>test;
-	while(test--){
-		
-	}
-	
+	string s; cin>>s;
+	cout<<numWays(s);
 }
 int main()
 {

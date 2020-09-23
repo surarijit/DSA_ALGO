@@ -25,25 +25,33 @@
 #define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1];}
 #define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<" "; cout<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-#define ll long long int
 #define ull unsigned ll
 using namespace std;
-    int maxSumRangeQuery(vector<int>& nums, vector<vector<int>>& requests) {
-        int n = nums.size(),ans=0; vector<int> a(n,0);
-	for(auto x:requests){
-		a[x[0]] += 1;
-		if(x[1]+1<n)a[x[1]+1] -=1;
-	}
-    for(int i=01;i<n;i++) a[i] += a[i-1];
-	sort(nums); sort(a);
-	for(int i=0;i<n;i++) ans = (ans + (nums[i]*a[i])%mod)%mod;
-	return ans;
+
+#define ll long long int
+ int minSubarray(vector<int>& nums, int p) {
+        ll n = nums.size(),prefix[n]; int ans =n;
+        for(int i=0;i<n;i++){
+        	prefix[i] = nums[i];
+        	if(i) prefix[i] += prefix[i-1];
+        }
+		ll sum = prefix[n-1];
+		if(sum%p==0) return 0;
+		for(int i=0;i<n;i++){
+			for(int j=i;j<n;j++){
+				if(i==0 && j==n-1) continue;
+				if((sum - (prefix[j] - (i?prefix[i-1]:0)))%p==0) 
+				{
+					ans = min(ans,j-i+1);
+					break;
+				}
+			}
+		}
+	return ans == n ?-1 : ans;
+    }
 void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	int test;cin>>test;
-	while(test--){
-		
-	}
+	int n; cin>>n; vi a(n);input(a); int p; cin>>p;
+	cout<<minSubarray(a,p);
 	
 }
 int main()
