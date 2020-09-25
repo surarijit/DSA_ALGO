@@ -1,3 +1,11 @@
+
+// Problem : C1. Pokémon Army (easy version)
+// Contest : Codeforces - Codeforces Round #672 (Div. 2)
+// URL : https://codeforces.com/contest/1420/problem/C1
+// Memory Limit : 256 MB
+// Time Limit : 2000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -6,11 +14,11 @@
 	IIT ISM 
  */
 #include<bits/stdc++.h>
-#define SIZE (ll)(1e6)
+#define SIZE (ll)(1e5*5)
 #define mod (ll)(1e9+7)
-#define vi vector<int>
+#define va(x) ((x)%mod)
+#define vi vector<ll>
 #define INF 0x3f3f3f3f
-#define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
 #define abs(a) ((a)>0?(a):-(a))
 #define sc(a) scanf("%d\n",&a);
@@ -28,18 +36,23 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+ll dp[SIZE][3];
+ll work(int i, vi &a, int flag){
+	if(i==a.size()) return 0;
+	if(dp[i][flag+1]!=-1) return dp[i][flag+1];
+	return dp[i][flag+1] = max(work(i+1,a,-flag)+flag*a[i], work(i+1,a,flag));
+}
 void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	map<int,int> ma;
-	for(int i:a) ma[i]+=1;
-	for(auto it:ma) cout<<it.first<<" ";
+	int n,q; cin>>n>>q; vi a(n); input(a);
+	memset(dp,-1,sizeof(dp));
+	cout<<work(0,a,1)<<endl;
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
     	solve();
     }

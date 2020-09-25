@@ -1,13 +1,24 @@
+
+// Problem : B - Sum is Multiple
+// Contest : AtCoder - ACL Contest 1
+// URL : https://atcoder.jp/contests/acl1/tasks/acl1_b
+// Memory Limit : 1024 MB
+// Time Limit : 2000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
 	@surcode
     @comeback
 	IIT ISM 
- */
-#include<bits/stdc++.h>
+ */ 
+#include<algorithm>
+#include<vector>
+#include<iostream>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -29,10 +40,8 @@
 #define ull unsigned ll
 using namespace std;
 void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	map<int,int> ma;
-	for(int i:a) ma[i]+=1;
-	for(auto it:ma) cout<<it.first<<" ";
+	ull k = 1100144;
+	cout<<(k*(k+1)/2)%20200920;
 }
 int main()
 {

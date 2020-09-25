@@ -8,6 +8,7 @@
 #include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -28,11 +29,19 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+int maxCoins(vector<int>& a) {
+     sort(a); reverse(a);
+     int n=a.size(),i1=0,i2=1,i3=n-1,sum=0;
+     while(i2<i3){
+     	sum+=a[i2];
+     	i1+=2;i2+=2;i3-=1;
+     }
+     return sum;
+}
 void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	map<int,int> ma;
-	for(int i:a) ma[i]+=1;
-	for(auto it:ma) cout<<it.first<<" ";
+	int n;cin>>n;
+	vi a(n); input(a);
+	cout<<maxCoins(a);
 }
 int main()
 {

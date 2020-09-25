@@ -5,7 +5,9 @@
     @comeback
 	IIT ISM 
  */
-#include<bits/stdc++.h>
+#include<algorithm>
+#include<vector>
+#include<iostream>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
 #define vi vector<int>

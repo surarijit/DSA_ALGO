@@ -8,6 +8,7 @@
 #include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -28,11 +29,28 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+int work(vi a){
+	int ans=0;
+	for(int i=0;i<a.size();i++){	
+		if(a[i]<0)ans = i-1;
+	}
+	return ans+1;
+}
+int getMaxLen(vector<int>& nums) {
+        int n=nums.size(),neg=0;
+        for(int i=0;i<n;i++){
+        	if(nums[i]<0) neg++;
+        }
+        if(neg&1){
+        	int ans = work(nums); reverse(nums);
+        	ans = max(ans,work(nums));
+        	return ans;
+        }
+        return n;
+}
 void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	map<int,int> ma;
-	for(int i:a) ma[i]+=1;
-	for(auto it:ma) cout<<it.first<<" ";
+	int n;cin>>n; vi a(n); input(a);
+	cout<<getMaxLen(a)<<endl;
 }
 int main()
 {

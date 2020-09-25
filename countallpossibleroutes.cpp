@@ -6,9 +6,6 @@
 	IIT ISM 
  */
 #include<bits/stdc++.h>
-#define SIZE (ll)(1e6)
-#define mod (ll)(1e9+7)
-#define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
@@ -28,11 +25,28 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+
+#define SIZE 210
+#define mod (int)(1e9+7)
+#define va(x) ((x)%mod)
+#define vi vector<int>
+#define work countRoutes
+int dp[SIZE-100][SIZE]={{0}};
+int countRoutes(vector<int>& a, int start, int finish, int fuel) {
+	if(!dp[start][fuel]){
+	 dp[start][fuel] = 1+(start==finish);
+	for(int i=0;i<a.size();i++){
+		if(i!=start && fuel - abs(a[i]-a[start])>=0)
+		 dp[start][fuel] =va( dp[start][fuel] + work(a,i,finish, fuel -abs(a[i]-a[start])));
+	}
+	 }
+	 return dp[start][fuel]-1;
+}
+
 void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	map<int,int> ma;
-	for(int i:a) ma[i]+=1;
-	for(auto it:ma) cout<<it.first<<" ";
+	int n;cin>>n; vi a(n); input(a); int start,finish,fuel;
+	cin>>start>>finish>>fuel;
+	cout<<countRoutes(a,start,finish,fuel);
 }
 int main()
 {

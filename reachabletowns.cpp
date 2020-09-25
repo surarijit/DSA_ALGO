@@ -8,6 +8,7 @@
 #include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -22,17 +23,23 @@
 #define pqq priority_queue
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
-#define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1];}
-#define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<" "; cout<<endl;}
+#define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1].first>>a[i1].second;}
+#define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
 void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	map<int,int> ma;
-	for(int i:a) ma[i]+=1;
-	for(auto it:ma) cout<<it.first<<" ";
+	int n;cin>>n; vector<pi> a(n); input(a); vi ans(n,01);
+	for(int i=0;i<n;i++){
+		for(int j=i+1;j<n;j++){
+			if((a[i].first-a[j].first)*(a[i].second-a[j].second) >=0 ){
+				ans[i]+=1;
+				ans[j]+=1;
+			}
+		} 	
+	}
+	display(ans);
 }
 int main()
 {

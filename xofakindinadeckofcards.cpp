@@ -8,6 +8,7 @@
 #include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -23,16 +24,31 @@
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
 #define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1];}
-#define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<" "; cout<<endl;}
+#define display(a) {for(auto i1:a) cout<<i1<<" "; cout<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+bool hasGroupsSizeX(vector<int>& deck) {
+        map<int,int> ma;int mx = INT_MAX; set<int> s; 
+        for(int i:deck) ma[i]+=1;
+        for(pi it:ma) mx = min(mx,it.second);
+        for(pi it:ma)
+        	s.insert(__gcd(it.second,mx));
+		for(int x:s){
+			if(x<=1) continue;
+			bool flag=1;
+			for(pi it:ma){
+				if(it.second%x) flag=0;
+				if(!flag) break;
+			}
+			if(flag) return 1;
+		}
+        return 0;
+}
 void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	map<int,int> ma;
-	for(int i:a) ma[i]+=1;
-	for(auto it:ma) cout<<it.first<<" ";
+	int n;cin>>n; vi a(n); input(a);
+	cout<<hasGroupsSizeX(a);
 }
 int main()
 {

@@ -1,3 +1,11 @@
+
+// Problem : D. Rescue Nibel!
+// Contest : Codeforces - Codeforces Round #672 (Div. 2)
+// URL : https://codeforces.com/contest/1420/problem/D
+// Memory Limit : 256 MB
+// Time Limit : 2000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -7,7 +15,8 @@
  */
 #include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
-#define mod (ll)(1e9+7)
+#define mod (ll)(998244353)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -28,11 +37,26 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+ll dp[SIZE];
+ll work(int i, ll start, ll end, vector<pi> &a, ll k){
+	if(k==0) return 1;
+	if(i==a.size()) return 0;
+	ll ans = work(i+1,start,end,a,k);
+	if(a[i].first <= end || a[i].second >= start) {
+		start = max(start,a[i].first);
+		end = min(end,a[i].second);
+		if(start<=end)
+		ans = va(ans + work(i+1,start,end,a,k-1));
+		else return 0;
+	}
+	return dp[i] = ans;
+}
 void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	map<int,int> ma;
-	for(int i:a) ma[i]+=1;
-	for(auto it:ma) cout<<it.first<<" ";
+	ll n,k;cin>>n>>k; 
+	vector<pi> a(n);  
+	for(ll i=0;i<n;i++)cin>>a[i].first>>a[i].second;
+	memset(dp,-1,sizeof(dp));sort(a);
+	cout<<work(0,0,INF,a,k)<<endl;
 }
 int main()
 {

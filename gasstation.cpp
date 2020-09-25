@@ -8,6 +8,7 @@
 #include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -28,11 +29,23 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+	int n=gas.size(),g;
+        for(int i=0;i<n;i++){
+        	g = gas[i]; int j=i,cnt=0;
+        	while(g>=cost[i]){
+        		g-= cost[i]; 
+        		i = (i+1)%n;
+        		g+= gas[i];
+        		cnt+=1;
+        		if(cnt==n) return j;
+        	}
+			i=j;
+        }
+        return -1;
+}
 void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	map<int,int> ma;
-	for(int i:a) ma[i]+=1;
-	for(auto it:ma) cout<<it.first<<" ";
+	
 }
 int main()
 {

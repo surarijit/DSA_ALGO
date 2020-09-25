@@ -8,6 +8,7 @@
 #include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -28,11 +29,21 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	map<int,int> ma;
-	for(int i:a) ma[i]+=1;
-	for(auto it:ma) cout<<it.first<<" ";
+#define val(a,b) (prefix[a]-(b?prefix[b-1]:b))
+int solve(int n, vi &a){
+	int cnt=0; vi prefix(n,0);
+	for(int i=0;i<n;i++){
+		prefix[i] = a[i];
+		if(i) prefix[i]+=prefix[i-1];
+	}
+	int tsum = prefix[n-1];
+	if(tsum%3)return 0;
+	for(int i=01;i<n;i++){
+		for(int j=i;val(i-1,0)==tsum/3 && j+1<n;j++){
+			if(val(i-1,0)==val(j,i) && val(j,i)== val(n-1,j+1))cnt+=1;
+		}
+	}
+	return cnt;
 }
 int main()
 {
@@ -41,7 +52,8 @@ int main()
     int t=1;
     //cin>>t;
     while(t--){
-    	solve();
+int n;cin>>n; vi a(n); input(a);
+    	cout<<solve(n,a);
     }
     return 0;
 }

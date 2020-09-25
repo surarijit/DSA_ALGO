@@ -6,8 +6,8 @@
 	IIT ISM 
  */
 #include<bits/stdc++.h>
-#define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -28,11 +28,21 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+
+int maxScore(vector<int>& a, int k) {
+		int n=a.size(),x=n-k,start=0,s=0; 
+		for(int i=0;i<x;i++)s+= a[i];
+		int sum=s,minsum=s;
+		for(int i=x;i<n;i++){
+			sum+=a[i]; s+=a[i];
+			s-=a[start++];
+			minsum = min(minsum,s);
+		}
+		return sum-minsum;
+}
 void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	map<int,int> ma;
-	for(int i:a) ma[i]+=1;
-	for(auto it:ma) cout<<it.first<<" ";
+	int n;cin>>n; vi a(n); input(a); 
+	int k;cin>>k; cout<<maxScore(a,k);
 }
 int main()
 {

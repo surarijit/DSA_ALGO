@@ -8,6 +8,7 @@
 #include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -20,7 +21,6 @@
 #define pb push_back
 #define pi pair<int,int>
 #define pqq priority_queue
-#define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
 #define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1];}
 #define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<" "; cout<<endl;}
@@ -28,11 +28,27 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+int bs(int start, int end, vi &a,int x){
+	for(int i=end;i>=start;i--){
+		if(a[i]>x) return i;
+	}
+}
+void nextPermutation(vector<int>& a) {
+        int n=a.size(),i=a.size()-1;
+        while(i>0){
+        	if(a[i]>a[i-1]) {
+        		break;
+        	}
+        	i-=1;
+        }
+        if(i==0){ reverse(a); return ;}
+        int j=i-1, x = bs(j+1,n-1,a,a[j]);
+        swap(a[j],a[x]);
+        sort(a.begin()+j+1,a.end());
+    }
 void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	map<int,int> ma;
-	for(int i:a) ma[i]+=1;
-	for(auto it:ma) cout<<it.first<<" ";
+	int n;cin>>n; vi a(n); input(a);
+	nextPermutation(a);display(a);
 }
 int main()
 {

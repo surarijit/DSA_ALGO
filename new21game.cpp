@@ -8,6 +8,7 @@
 #include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -28,11 +29,28 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+vector<double> dp;
+double help(int j,int &w, int &n, int &k){
+	if(j>=k){
+		if(j<=n) return 1.0;
+		return 0.0;
+	} 
+	double ans=0.0;
+	if(dp[j]!=-1) return dp[j];
+	for(int i=1;i<=w;i++){
+		ans += help(j+i,w,n,k);
+	}
+	return dp[j]  = ans*(double)(1.0/w);
+	
+}
+double new21Game(int N, int K, int W) {
+		dp = vector<double> (K+1,-1.0);
+       return help(0,W,N,K);
+       
+}
 void solve(){
-	int n; cin>>n; vi a(n); input(a);
-	map<int,int> ma;
-	for(int i:a) ma[i]+=1;
-	for(auto it:ma) cout<<it.first<<" ";
+	int n,k,w;cin>>n>>k>>w;
+	cout<<new21Game(n,k,w);
 }
 int main()
 {
