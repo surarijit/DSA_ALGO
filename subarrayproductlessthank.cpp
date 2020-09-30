@@ -1,11 +1,3 @@
-
-// Problem : Minimizing Path Cost
-// Contest : HackerEarth - Algorithms - Graphs - Shortest Path Algorithms
-// URL : https://www.hackerearth.com/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/algorithm/minimizing-path-cost/description/
-// Memory Limit : 256 MB
-// Time Limit : 5000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -36,39 +28,22 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define ll long long int
 #define ull unsigned ll
-#define edge(a,b,c) adj[ma[a]].pb({c,ma[b]});
 using namespace std;
-vector<pi>adj[SIZE];map<string,int> ma;
-int work(int start,int end){
-	pqq<pi,vector<pi>,greater<pi>> q;
-	vi visited(SIZE,0);
-	q.push({0,start});
-	while(!q.empty()){
-		int u = q.top().second, w = q.top().first; q.pop();
-		if(visited[u]) continue;
-		visited[u] = 1;
-		if(u==end) return w;
-		for(pi i:adj[u]){
-			int v = i.second;
-			q.push({i.first+w,v});
-		}
-	}
-	return -1;
+int numSubarrayProductLessThanK(vector<int>& a, int k) {
+        int start=0,n=a.size(),cnt=0; long long p=1;;
+        for(int i=0;i<n;i++){
+        		p = p*a[i];
+        		while(start<i && p>=k) {
+        			p=p/a[start++];
+        		}
+        		if(p<k) cnt+= (i-start+1);
+        }
+        return cnt;
 }
 void solve(){
-	int n,m,w;cin>>n>>m; string s,u,v;
-	for(int i=1;i<=n;i++) {
-		cin>>s;ma[s]=i;
-	}
-	while(m--){
-		cin>>u>>v>>w;
-		edge(u,v,w); edge(v,u,w);
-	}
-	int test;cin>>test;
-	while(test--){
-		cin>>u>>v;
-		cout<<work(ma[u],ma[v])<<endl;
-	}
+	int n;cin>>n; vi a(n); input(a);
+	int k;cin>>k;
+	cout<<numSubarrayProductLessThanK(a,  k) ;
 }
 int main()
 {

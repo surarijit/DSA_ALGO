@@ -1,9 +1,9 @@
 
-// Problem : Minimizing Path Cost
-// Contest : HackerEarth - Algorithms - Graphs - Shortest Path Algorithms
-// URL : https://www.hackerearth.com/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/algorithm/minimizing-path-cost/description/
+// Problem : Watermelon
+// Contest : CodeChef - September Lunchtime 2020 Division 2
+// URL : https://www.codechef.com/LTIME88B/problems/WATMELON
 // Memory Limit : 256 MB
-// Time Limit : 5000 ms
+// Time Limit : 1000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -31,51 +31,31 @@
 #define pqq priority_queue
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
-#define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1];}
+#define input(a) {for(int i1=01;i1<a.size();i1++) cin>>a[i1];}
 #define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<" "; cout<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define ll long long int
 #define ull unsigned ll
-#define edge(a,b,c) adj[ma[a]].pb({c,ma[b]});
 using namespace std;
-vector<pi>adj[SIZE];map<string,int> ma;
-int work(int start,int end){
-	pqq<pi,vector<pi>,greater<pi>> q;
-	vi visited(SIZE,0);
-	q.push({0,start});
-	while(!q.empty()){
-		int u = q.top().second, w = q.top().first; q.pop();
-		if(visited[u]) continue;
-		visited[u] = 1;
-		if(u==end) return w;
-		for(pi i:adj[u]){
-			int v = i.second;
-			q.push({i.first+w,v});
-		}
-	}
-	return -1;
-}
+
 void solve(){
-	int n,m,w;cin>>n>>m; string s,u,v;
-	for(int i=1;i<=n;i++) {
-		cin>>s;ma[s]=i;
-	}
-	while(m--){
-		cin>>u>>v>>w;
-		edge(u,v,w); edge(v,u,w);
-	}
-	int test;cin>>test;
-	while(test--){
-		cin>>u>>v;
-		cout<<work(ma[u],ma[v])<<endl;
-	}
+	int n;
+    cin>>n;
+    int sum = 0;
+    int tmp;
+    for (int i = 0; i<n; i++)
+    {
+        cin>>tmp; sum+=tmp;
+    }
+    if (sum>=0) cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
     	solve();
     }

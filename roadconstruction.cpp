@@ -1,9 +1,9 @@
 
-// Problem : Minimizing Path Cost
-// Contest : HackerEarth - Algorithms - Graphs - Shortest Path Algorithms
-// URL : https://www.hackerearth.com/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/algorithm/minimizing-path-cost/description/
+// Problem : B. Road Construction
+// Contest : Codeforces - Codeforces Round #192 (Div. 2)
+// URL : https://codeforces.com/problemset/problem/330/B
 // Memory Limit : 256 MB
-// Time Limit : 5000 ms
+// Time Limit : 2000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -36,38 +36,21 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define ll long long int
 #define ull unsigned ll
-#define edge(a,b,c) adj[ma[a]].pb({c,ma[b]});
 using namespace std;
-vector<pi>adj[SIZE];map<string,int> ma;
-int work(int start,int end){
-	pqq<pi,vector<pi>,greater<pi>> q;
-	vi visited(SIZE,0);
-	q.push({0,start});
-	while(!q.empty()){
-		int u = q.top().second, w = q.top().first; q.pop();
-		if(visited[u]) continue;
-		visited[u] = 1;
-		if(u==end) return w;
-		for(pi i:adj[u]){
-			int v = i.second;
-			q.push({i.first+w,v});
-		}
-	}
-	return -1;
-}
 void solve(){
-	int n,m,w;cin>>n>>m; string s,u,v;
-	for(int i=1;i<=n;i++) {
-		cin>>s;ma[s]=i;
-	}
+	int n,m;cin>>n>>m; bool isthere[n+1] = {0};
 	while(m--){
-		cin>>u>>v>>w;
-		edge(u,v,w); edge(v,u,w);
+		int a,b;cin>>a>>b; isthere[a] = 1; isthere[b]=1;
 	}
-	int test;cin>>test;
-	while(test--){
-		cin>>u>>v;
-		cout<<work(ma[u],ma[v])<<endl;
+	for(int i=1;i<=n;i++){
+		if(isthere[i]==0){
+			cout<<(n-1)<<endl;
+			for(int j=1;j<=n;j++){
+				if(j==i) continue;
+				cout<<j<<" "<<i<<endl;
+			}
+			return;
+		}
 	}
 }
 int main()

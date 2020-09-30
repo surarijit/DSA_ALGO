@@ -1,9 +1,9 @@
 
-// Problem : Minimizing Path Cost
-// Contest : HackerEarth - Algorithms - Graphs - Shortest Path Algorithms
-// URL : https://www.hackerearth.com/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/algorithm/minimizing-path-cost/description/
-// Memory Limit : 256 MB
-// Time Limit : 5000 ms
+// Problem : ATM Queue
+// Contest : Google Coding Competitions - Round F 2020 - Kick Start 2020
+// URL : https://codingcompetitions.withgoogle.com/kickstart/round/000000000019ff48/00000000003f4ed8
+// Memory Limit : 1024 MB
+// Time Limit : 20000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -36,48 +36,32 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define ll long long int
 #define ull unsigned ll
-#define edge(a,b,c) adj[ma[a]].pb({c,ma[b]});
 using namespace std;
-vector<pi>adj[SIZE];map<string,int> ma;
-int work(int start,int end){
-	pqq<pi,vector<pi>,greater<pi>> q;
-	vi visited(SIZE,0);
-	q.push({0,start});
-	while(!q.empty()){
-		int u = q.top().second, w = q.top().first; q.pop();
-		if(visited[u]) continue;
-		visited[u] = 1;
-		if(u==end) return w;
-		for(pi i:adj[u]){
-			int v = i.second;
-			q.push({i.first+w,v});
-		}
+void solve(int cnt){
+	int n, x;
+	cin>>n>>x;
+	cout<<"Case #"<<cnt<<": ";
+	vector<pi> v;
+	for(int i=0;i<n;i++){
+		int y;
+		cin>>y;
+		
+		v.pb({ceil(y*1.0/x), i+1});
 	}
-	return -1;
-}
-void solve(){
-	int n,m,w;cin>>n>>m; string s,u,v;
-	for(int i=1;i<=n;i++) {
-		cin>>s;ma[s]=i;
-	}
-	while(m--){
-		cin>>u>>v>>w;
-		edge(u,v,w); edge(v,u,w);
-	}
-	int test;cin>>test;
-	while(test--){
-		cin>>u>>v;
-		cout<<work(ma[u],ma[v])<<endl;
-	}
+	sort(v);reverse(v);reverse(v);
+	for(pi x:v)
+	  cout<<x.second<<" ";
+	
+	cout<<endl;
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
-    int t=1;
-    //cin>>t;
+    int t=1,cnt=1;
+    cin>>t;
     while(t--){
-    	solve();
+    	solve(cnt);cnt++;
     }
     return 0;
 }

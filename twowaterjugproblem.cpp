@@ -5,12 +5,14 @@
     @comeback
 	IIT ISM 
  */
-#include<algorithm>
-#include<vector>
 #include<iostream>
+#include<vector>
 #include<cstring>
+#include<queue>
+#include<map>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -31,16 +33,35 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-void solve(){
+int solve(){
+	int m,n,d,steps=0;cin>>n>>m>>d;
+	queue<pi> q; q.push({0,0}); 
+	map<pi,bool> visited;
+	while(!q.empty()){
+		int c= q.size();
+		while(c--){
+		 int a = q.front().first, b= q.front().second; q.pop();
+		  if(a==d || b==d) return steps;
+		  if(visited[{a,b}]) continue;
+		  visited[{a,b}] =1;
+		  q.push({m,b}); q.push({a,n});
+		  if(a==m) q.push({0,b});
+		  if(b==n) q.push({a,0});
+		 
+		 q.push({0,max(b+a,n)}); q.push({max(a+b,m),0});
+		}
+		steps+=1;
+	}
+	return -1;
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
-    	solve();
+    	cout<<solve()<<endl;
     }
     return 0;
 }

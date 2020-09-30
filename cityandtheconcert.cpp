@@ -1,11 +1,3 @@
-
-// Problem : Minimizing Path Cost
-// Contest : HackerEarth - Algorithms - Graphs - Shortest Path Algorithms
-// URL : https://www.hackerearth.com/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/algorithm/minimizing-path-cost/description/
-// Memory Limit : 256 MB
-// Time Limit : 5000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -36,39 +28,33 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define ll long long int
 #define ull unsigned ll
-#define edge(a,b,c) adj[ma[a]].pb({c,ma[b]});
+#define edge(a,b,c) adj[a].push_back({b,c})
 using namespace std;
-vector<pi>adj[SIZE];map<string,int> ma;
-int work(int start,int end){
-	pqq<pi,vector<pi>,greater<pi>> q;
-	vi visited(SIZE,0);
-	q.push({0,start});
-	while(!q.empty()){
-		int u = q.top().second, w = q.top().first; q.pop();
-		if(visited[u]) continue;
-		visited[u] = 1;
-		if(u==end) return w;
-		for(pi i:adj[u]){
-			int v = i.second;
-			q.push({i.first+w,v});
-		}
-	}
-	return -1;
+int work(int u, vector<pi> adj[],vi &A, vi &visited){
+    int cost = A[u];
+    visited[u] = 1;
+    for(pi i: adj[u]){
+        if(!visited[i.first])
+       visited[i.first]=1,cost =  min(cost, work(i.first,adj,A,visited)+2*i.second);
+    }
+    return cost;
+}
+vector<int> Solution(vector<int> &A, vector<vector<int> > &B) {
+    int n = A.size(),m=B.size();
+    vector<pi> adj[n]; vi ans(n),visited(n,0);
+    for(vi x:B){
+        x[0]-=1; x[1]-=1;
+        edge(x[0],x[1],x[2]);
+        edge(x[1],x[0],x[2]);
+    }
+    for(int i=0;i<n;i++){
+        vi visited(n,0);
+        ans[i] = work(i,adj,A,visited);
+    }
+    return ans;
 }
 void solve(){
-	int n,m,w;cin>>n>>m; string s,u,v;
-	for(int i=1;i<=n;i++) {
-		cin>>s;ma[s]=i;
-	}
-	while(m--){
-		cin>>u>>v>>w;
-		edge(u,v,w); edge(v,u,w);
-	}
-	int test;cin>>test;
-	while(test--){
-		cin>>u>>v;
-		cout<<work(ma[u],ma[v])<<endl;
-	}
+	int n; 
 }
 int main()
 {
@@ -81,3 +67,4 @@ int main()
     }
     return 0;
 }
+

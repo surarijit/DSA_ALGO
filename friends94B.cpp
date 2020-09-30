@@ -1,9 +1,9 @@
 
-// Problem : Minimizing Path Cost
-// Contest : HackerEarth - Algorithms - Graphs - Shortest Path Algorithms
-// URL : https://www.hackerearth.com/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/algorithm/minimizing-path-cost/description/
+// Problem : B. Friends
+// Contest : Codeforces - Codeforces Beta Round #76 (Div. 2 Only)
+// URL : https://codeforces.com/problemset/problem/94/B
 // Memory Limit : 256 MB
-// Time Limit : 5000 ms
+// Time Limit : 1000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -36,39 +36,22 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define ll long long int
 #define ull unsigned ll
-#define edge(a,b,c) adj[ma[a]].pb({c,ma[b]});
 using namespace std;
-vector<pi>adj[SIZE];map<string,int> ma;
-int work(int start,int end){
-	pqq<pi,vector<pi>,greater<pi>> q;
-	vi visited(SIZE,0);
-	q.push({0,start});
-	while(!q.empty()){
-		int u = q.top().second, w = q.top().first; q.pop();
-		if(visited[u]) continue;
-		visited[u] = 1;
-		if(u==end) return w;
-		for(pi i:adj[u]){
-			int v = i.second;
-			q.push({i.first+w,v});
+bool solve(){
+	int m,cnt1=0,cnt2=0, adj[6][6] = {{0}};cin>>m;
+	while(m--){
+		int u,v;cin>>u>>v;
+		adj[u][v] = adj[v][u] = 1;
+	}
+	for(int i=1;i<=5;i++){
+		for(int j=i+1;j<=5;j++){
+			for(int k=j+1;k<=5;k++){
+				if(adj[i][j] && adj[j][k] && adj[k][i]) return 1;
+				if(!adj[i][j] && !adj[j][k] && !adj[k][i]) return 1;
+			}
 		}
 	}
-	return -1;
-}
-void solve(){
-	int n,m,w;cin>>n>>m; string s,u,v;
-	for(int i=1;i<=n;i++) {
-		cin>>s;ma[s]=i;
-	}
-	while(m--){
-		cin>>u>>v>>w;
-		edge(u,v,w); edge(v,u,w);
-	}
-	int test;cin>>test;
-	while(test--){
-		cin>>u>>v;
-		cout<<work(ma[u],ma[v])<<endl;
-	}
+	return (cnt1==3 || cnt2==3) ;
 }
 int main()
 {
@@ -77,7 +60,7 @@ int main()
     int t=1;
     //cin>>t;
     while(t--){
-    	solve();
+    	cout<<(solve()?"WIN":"FAIL");
     }
     return 0;
 }

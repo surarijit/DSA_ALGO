@@ -1,11 +1,3 @@
-
-// Problem : Minimizing Path Cost
-// Contest : HackerEarth - Algorithms - Graphs - Shortest Path Algorithms
-// URL : https://www.hackerearth.com/practice/algorithms/graphs/shortest-path-algorithms/practice-problems/algorithm/minimizing-path-cost/description/
-// Memory Limit : 256 MB
-// Time Limit : 5000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -36,39 +28,19 @@
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define ll long long int
 #define ull unsigned ll
-#define edge(a,b,c) adj[ma[a]].pb({c,ma[b]});
 using namespace std;
-vector<pi>adj[SIZE];map<string,int> ma;
-int work(int start,int end){
-	pqq<pi,vector<pi>,greater<pi>> q;
-	vi visited(SIZE,0);
-	q.push({0,start});
-	while(!q.empty()){
-		int u = q.top().second, w = q.top().first; q.pop();
-		if(visited[u]) continue;
-		visited[u] = 1;
-		if(u==end) return w;
-		for(pi i:adj[u]){
-			int v = i.second;
-			q.push({i.first+w,v});
-		}
-	}
-	return -1;
-}
+ void rotate(vector<vector<int>>& matrix) {
+        int n=matrix.size();vector<vector<int>> a=matrix;
+        for(int j=0;j<n;j++){
+            for(int i=n-1;i>=0;i--) a[n-1-i][j] =(matrix[i][j]);
+        }
+        matrix =a;
+    }
 void solve(){
-	int n,m,w;cin>>n>>m; string s,u,v;
-	for(int i=1;i<=n;i++) {
-		cin>>s;ma[s]=i;
-	}
-	while(m--){
-		cin>>u>>v>>w;
-		edge(u,v,w); edge(v,u,w);
-	}
-	int test;cin>>test;
-	while(test--){
-		cin>>u>>v;
-		cout<<work(ma[u],ma[v])<<endl;
-	}
+	int n; cin>>n; vector<vi> a(n,vi (n));
+	for(int i=0;i<n;i++) input(a[i]);
+	rotate(a);
+	for(int i=0;i<n;i++) display(a[i]);
 }
 int main()
 {
