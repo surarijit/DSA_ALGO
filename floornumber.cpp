@@ -1,3 +1,11 @@
+
+// Problem : A. Floor Number
+// Contest : Codeforces - Codeforces Round #674 (Div. 3)
+// URL : https://codeforces.com/contest/1426/problem/A
+// Memory Limit : 256 MB
+// Time Limit : 1000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -5,8 +13,7 @@
     @comeback
 	IIT ISM 
  */
-#include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
 #define va(x) ((x)%mod)
@@ -30,25 +37,21 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
- void rotate(vector<vector<int>>& matrix) {
-        int n=matrix.size();vector<vector<int>> a=matrix;
-        for(int j=0;j<n;j++){
-            for(int i=n-1;i>=0;i--) matrix[j][n-1-i] = matrix[i][j];
-        }
-        matrix =a;
-    }
 void solve(){
-	int n; cin>>n; vector<vi> a(n,vi (n));
-	for(int i=0;i<n;i++) input(a[i]);
-	rotate(a);//cout<<endl;
-	for(int i=0;i<n;i++) display(a[i]);
+	int n,x;
+	cin>>n>>x;
+	if(n<=2) {cout<<1<<endl;return;}
+	n-=2;
+	int ans = 1+n/x;
+	if(n%x) ans+=1;
+	cout<<ans<<endl;
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
     	solve();
     }

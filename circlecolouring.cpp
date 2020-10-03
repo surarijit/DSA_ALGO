@@ -1,3 +1,11 @@
+
+// Problem : A. Circle Coloring
+// Contest : Codeforces - Grakn Forces 2020
+// URL : https://codeforces.com/contest/1408/problem/0
+// Memory Limit : 256 MB
+// Time Limit : 1000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -5,8 +13,7 @@
     @comeback
 	IIT ISM 
  */
-#include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
 #define va(x) ((x)%mod)
@@ -30,25 +37,36 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
- void rotate(vector<vector<int>>& matrix) {
-        int n=matrix.size();vector<vector<int>> a=matrix;
-        for(int j=0;j<n;j++){
-            for(int i=n-1;i>=0;i--) matrix[j][n-1-i] = matrix[i][j];
-        }
-        matrix =a;
-    }
+bool work(int i, int &n ,vi &a, vi &b, vi &c, vi &p){
+	if(i==n) {
+		if(p[n-1]==p[0]) return 0;
+		return 1;
+	}
+	if(i==0 || a[i]!=p[i-1]){
+		p[i] = a[i];
+		if(work(i+1,n,a,b,c,p)) return 1;
+	} 
+	if(i==0|| b[i]!=p[i-1]){
+		p[i] = b[i];
+		if(work(i+1,n,a,b,c,p)) return 1;
+	}
+	if(i==0 || c[i]!=p[i-1]){
+		p[i] = c[i];
+		if(work(i+1,n,a,b,c,p)) return 1;
+	}
+	return 0;
+}
 void solve(){
-	int n; cin>>n; vector<vi> a(n,vi (n));
-	for(int i=0;i<n;i++) input(a[i]);
-	rotate(a);//cout<<endl;
-	for(int i=0;i<n;i++) display(a[i]);
+	int n;cin>>n; vi a(n),b(n),c(n),p(n); input(a); input(b); input(c);
+	work(0,n,a,b,c,p);
+	display(p);
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
     	solve();
     }

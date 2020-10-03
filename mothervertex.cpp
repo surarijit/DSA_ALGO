@@ -5,14 +5,12 @@
     @comeback
 	IIT ISM 
  */
-#include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
 #define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
-#define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
 #define abs(a) ((a)>0?(a):-(a))
 #define sc(a) scanf("%d\n",&a);
@@ -30,25 +28,48 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
- void rotate(vector<vector<int>>& matrix) {
-        int n=matrix.size();vector<vector<int>> a=matrix;
-        for(int j=0;j<n;j++){
-            for(int i=n-1;i>=0;i--) matrix[j][n-1-i] = matrix[i][j];
+
+int work(int u, vector<int> g[], vector<int> &visited, vector<int> &dp){
+    visited[u]=1;
+	int ans =0;
+	if(dp[u]!=-1) return dp[u];
+    for(int v:g[u]){
+        if(visited[v]==0){
+            visited[v] = 1;
+            ans += (dp[v]==-1?work(v,g,visited,dp):dp[v]);
         }
-        matrix =a;
     }
+    return dp[u]= ans+1;
+}
+int findMother(int V, vector<int> g[]) 
+{ 
+    // Your code here
+    vector<int> dp(V,-1);	
+    for(int i=0;i<V;i++){
+    	if(dp[i]!=-1)continue;
+        vector<int> visited(V,0);
+        if(work(i,g,visited,dp)==V) return i;
+    }
+    display(dp);
+    return -1;
+    
+} 	
 void solve(){
-	int n; cin>>n; vector<vi> a(n,vi (n));
-	for(int i=0;i<n;i++) input(a[i]);
-	rotate(a);//cout<<endl;
-	for(int i=0;i<n;i++) display(a[i]);
+	int n,m;cin>>n>>m;
+	vi adj[n+1]; 
+	while(m--){
+		int u,v;cin>>u>>v;
+		adj[u].pb(v);
+	}
+	cout<<findMother(n,adj)<<endl;
+	
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
     	solve();
     }

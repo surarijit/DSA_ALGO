@@ -30,17 +30,37 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
- void rotate(vector<vector<int>>& matrix) {
-        int n=matrix.size();vector<vector<int>> a=matrix;
-        for(int j=0;j<n;j++){
-            for(int i=n-1;i>=0;i--) matrix[j][n-1-i] = matrix[i][j];
+void setZeroes(vector<vector<int> > &a) {
+    int n=a.size(),m=a[0].size();
+    for(int i=01;i<n;i++){
+        for(int j=01;j<m;j++){
+            if(a[i][j]==0){
+                a[i][0] = a[i][0]==0?0:-1;
+                a[0][j] = a[0][j]==0?0:-2;
+            }
         }
-        matrix =a;
     }
+    
+   for(int i=01;i<n;i++){
+   		for(int j=1;j<m;j++){
+   			if(a[i][0]==-1 || a[i][0]==0 || a[0][j] ==-2 || a[0][j]==0 ) a[i][j]=0;
+   		}
+   }
+   
+   
+   bool flag1=1,flag2=1;
+   for(int i=0;i<n && flag1;i++) if(a[i][0]==0) flag1=0;
+   for(int j=0;j<m && flag2;j++) if(a[0][j]==0) flag2=0;
+   for(int i=0;i<n && !flag1;i++) a[i][0]=0;
+   for(int j=0;j<m && !flag2;j++) a[0][j]=0;
+   for(int i=0;i<n && flag1;i++) if(a[i][0]<0) a[i][0]=0;
+   for(int j=0;j<m && flag2;j++) if(a[0][j]<0) a[0][j]=0;
+}
 void solve(){
-	int n; cin>>n; vector<vi> a(n,vi (n));
+	int n,m;cin>>n>>m;
+	vector<vi> a(n,vi (m));
 	for(int i=0;i<n;i++) input(a[i]);
-	rotate(a);//cout<<endl;
+	setZeroes(a);
 	for(int i=0;i<n;i++) display(a[i]);
 }
 int main()

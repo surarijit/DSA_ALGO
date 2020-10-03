@@ -1,3 +1,11 @@
+
+// Problem : C - Connect Cities
+// Contest : AtCoder - ACL Beginner Contest
+// URL : https://atcoder.jp/contests/abl/tasks/abl_c
+// Memory Limit : 1024 MB
+// Time Limit : 2000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -5,8 +13,7 @@
     @comeback
 	IIT ISM 
  */
-#include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
 #define va(x) ((x)%mod)
@@ -30,18 +37,32 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
- void rotate(vector<vector<int>>& matrix) {
-        int n=matrix.size();vector<vector<int>> a=matrix;
-        for(int j=0;j<n;j++){
-            for(int i=n-1;i>=0;i--) matrix[j][n-1-i] = matrix[i][j];
-        }
-        matrix =a;
-    }
+int parent[SIZE], siz[SIZE];
+void initial(int n=SIZE-1){
+	for(int i=0;i<=n;i++){
+		parent[i]=i,siz[i]=1;
+	}
+}
+int findroot(int x){
+	return parent[x]==x? x: parent[x]=findroot(parent[x]);
+}
+void make_union(int a,int b){
+	a = findroot(a), b=findroot(b);
+	if(siz[a]<siz[b]) swap(a,b);
+	parent[b]=a;
+	siz[a]+=siz[b];
+}
 void solve(){
-	int n; cin>>n; vector<vi> a(n,vi (n));
-	for(int i=0;i<n;i++) input(a[i]);
-	rotate(a);//cout<<endl;
-	for(int i=0;i<n;i++) display(a[i]);
+	ll n,m;cin>>n>>m; initial(n);
+	while(m--){
+		int u,v; cin>>u>>v;
+		make_union(u,v);
+	}
+	set<int> s;
+	for(int i=1;i<=n;i++){
+		s.insert(findroot(i));
+	}
+	cout<<s.size()-1<<endl;
 }
 int main()
 {

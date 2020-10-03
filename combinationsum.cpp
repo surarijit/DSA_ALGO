@@ -5,8 +5,7 @@
     @comeback
 	IIT ISM 
  */
-#include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
 #define va(x) ((x)%mod)
@@ -30,18 +29,23 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
- void rotate(vector<vector<int>>& matrix) {
-        int n=matrix.size();vector<vector<int>> a=matrix;
-        for(int j=0;j<n;j++){
-            for(int i=n-1;i>=0;i--) matrix[j][n-1-i] = matrix[i][j];
-        }
-        matrix =a;
+vector<vector<int>> ans;
+    void work(int i, int target, vector<int> &a, vector<int> v){
+        if(i==a.size() and target==0 && !v.empty()) {ans.pb(v); return;}
+        if(target<0 || i>=a.size())return;
+        work(i+1,target,a,v);
+        v.pb(a[i]); work(i,target-a[i],a,v);
+    }
+    vector<vector<int>> combinationSum(vector<int>& a, int target) {
+        sort(a); ans.clear();
+        vector<int> v;
+        work(0,target,a,v);
+        return ans;
     }
 void solve(){
-	int n; cin>>n; vector<vi> a(n,vi (n));
-	for(int i=0;i<n;i++) input(a[i]);
-	rotate(a);//cout<<endl;
-	for(int i=0;i<n;i++) display(a[i]);
+	int n,target;cin>>n>>target; vi a(n); input(a);
+	vector<vi> ans = combinationSum(a,target);
+	for(vi x:ans) display(x);
 }
 int main()
 {

@@ -1,3 +1,11 @@
+
+// Problem : D - Flat Subsequence
+// Contest : AtCoder - ACL Beginner Contest
+// URL : https://atcoder.jp/contests/abl/tasks/abl_d
+// Memory Limit : 1024 MB
+// Time Limit : 2000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -5,12 +13,11 @@
     @comeback
 	IIT ISM 
  */
-#include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
 #define va(x) ((x)%mod)
-#define vi vector<int>
+#define vi vector<ll>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
@@ -30,18 +37,17 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
- void rotate(vector<vector<int>>& matrix) {
-        int n=matrix.size();vector<vector<int>> a=matrix;
-        for(int j=0;j<n;j++){
-            for(int i=n-1;i>=0;i--) matrix[j][n-1-i] = matrix[i][j];
-        }
-        matrix =a;
-    }
+ll work(int i, vi &a, ll &k, ll last){
+	if(i==a.size()) return 0;
+	ll ans =0;
+	if(abs(a[i] - last) <= k) ans =  work(i+1,a,k,a[i])+1;
+	ans = max(ans,work(i+1,a,k,last));
+	return ans;
+}
 void solve(){
-	int n; cin>>n; vector<vi> a(n,vi (n));
-	for(int i=0;i<n;i++) input(a[i]);
-	rotate(a);//cout<<endl;
-	for(int i=0;i<n;i++) display(a[i]);
+	ll n,k;
+	cin>>n>>k; vi a(n); input(a);
+	cout<<work(0,a,k,0);
 }
 int main()
 {

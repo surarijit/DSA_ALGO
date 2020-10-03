@@ -1,3 +1,11 @@
+
+// Problem : D. Searchlights
+// Contest : Codeforces - Grakn Forces 2020
+// URL : https://codeforces.com/contest/1408/problem/D
+// Memory Limit : 256 MB
+// Time Limit : 1000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -7,6 +15,7 @@
  */
 #include<iostream>
 #include<vector>
+#include<iomanip>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
 #define va(x) ((x)%mod)
@@ -30,18 +39,31 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
- void rotate(vector<vector<int>>& matrix) {
-        int n=matrix.size();vector<vector<int>> a=matrix;
-        for(int j=0;j<n;j++){
-            for(int i=n-1;i>=0;i--) matrix[j][n-1-i] = matrix[i][j];
-        }
-        matrix =a;
-    }
+ll ans= INF;
+void work(int i, vector<vi> &a, ll cx, ll cy, ll &bx, ll &by){
+	if(i==a.size()){
+		ans = min(ans,cy+cx);
+		return;
+	}
+	a[i][0]+= cx; a[i][1]+=cy;
+	ll c = max(0,bx+1-a[i][0]);
+	work(i+1,a,cx+c,cy,bx,by);
+	c = max(0,by+1-a[i][1]); 
+	work(i+1,a,cx,cy+c,bx,by);
+}
 void solve(){
-	int n; cin>>n; vector<vi> a(n,vi (n));
-	for(int i=0;i<n;i++) input(a[i]);
-	rotate(a);//cout<<endl;
-	for(int i=0;i<n;i++) display(a[i]);
+	int n,m;cin>>n>>m; 
+	vector<vi> a(n,vi (2)); 
+	ll cx=0,cy=0;
+	for(int i=0;i<n;i++)input(a[i]);
+	while(m--){
+		int x,y;cin>>x>>y;
+		cx = max(cx,x);
+		cy = max(cy,y);
+	}
+	work(0,a,0,0,cx,cy);
+	cout<<ans;
+	
 }
 int main()
 {

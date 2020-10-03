@@ -5,8 +5,7 @@
     @comeback
 	IIT ISM 
  */
-#include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
 #define va(x) ((x)%mod)
@@ -30,25 +29,30 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
- void rotate(vector<vector<int>>& matrix) {
-        int n=matrix.size();vector<vector<int>> a=matrix;
-        for(int j=0;j<n;j++){
-            for(int i=n-1;i>=0;i--) matrix[j][n-1-i] = matrix[i][j];
-        }
-        matrix =a;
-    }
+int countpaths(int u, int &v, vi adj[], vi &visited){
+	if(u==v) return 1;
+	if(visited[u]) return 0;
+	visited[u]=1;
+	int ans=0;	
+	for(int x:adj[u]) if(!visited[x]) ans+= countpaths(x,v,adj,visited),visited[x]=0;
+	return ans;
+}
 void solve(){
-	int n; cin>>n; vector<vi> a(n,vi (n));
-	for(int i=0;i<n;i++) input(a[i]);
-	rotate(a);//cout<<endl;
-	for(int i=0;i<n;i++) display(a[i]);
+	int n,m;cin>>n>>m;
+	vi adj[n],visited(n,0);
+	while(m--){
+		int u,v;cin>>u>>v; 
+		adj[u].pb(v);
+	}
+	int src,dst;cin>>src>>dst;
+	cout<<countpaths(src,dst, adj,visited)<<endl;
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
     	solve();
     }

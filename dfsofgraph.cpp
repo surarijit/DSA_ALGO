@@ -22,15 +22,18 @@ THEY HATE US BECAUSE THEY AIN'T US
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 using namespace std;
 typedef long long ll;
-void work(vector<int> &v, vector<int> g[], int N){
-    v.pb(N);
-    for(int i=0;i<g[N].size();i++){
-        work(v,g,g[N][i]);
-    }
+void work(vector<int> &v, vector<int> g[],int u, vector<int> &visited){
+	if(visited[u]) return;;
+	visited[u]=1;
+	v.pb(u);
+	for(int v1:g[u]){
+		if(visited[v1])continue;
+		work(v,g,v1,visited);
+	}
 }
 vector<int> dfs(vector<int> g[],int N){
-    vector<int> v;
-    work(v,g,N);
+    vector<int> v,visited(N,0);
+    work(v,g,0,visited);
     return v;
 }
 void solve(){
@@ -40,9 +43,9 @@ void solve(){
     int u,v;
     for(int i=0;i<E;i++){
         cin>>u>>v;
-        g[u].pb(v);
+        g[u].pb(v);g[v].pb(u);
     }
-    display(dfs(g,0));
+    display(dfs(g,N));
 }
 int main()
 {
