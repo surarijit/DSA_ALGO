@@ -5,9 +5,14 @@
     @comeback
 	IIT ISM 
  */
-#include<bits/stdc++.h>
+#include<iostream>
+#include<vector>
+#include<set>
+#include<algorithm>
+#include<map>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -28,11 +33,19 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+int findPairs(vi &nums, int k) {
+  //  set<int> s(all(nums)); vi a(all(s)); 
+  	vi a(all(nums)); sort(a); set<pair<int,int>> v;
+    map<int,int> ma;int ans=0;
+    for(int i=0;i<a.size();i++) {
+    	if(ma[a[i]-k]) v.insert({a[i],a[i]-k});
+    	ma[a[i]] = i+1;
+    }
+    return v.size();
+ }
 void solve(){
-	string s = "Welcome to Arijit Sur";
-	cout<<*remove(all(s),' ');
- 	//s.erase(remove(all(s),' '),s.end());
-	cout<<s;
+	int n;cin>>n; vi a(n); input(a); int k;cin>>k;
+	cout<<findPairs(a,k);
 }
 int main()
 {

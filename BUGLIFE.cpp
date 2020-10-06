@@ -1,3 +1,11 @@
+
+// Problem : A Bug’s Life
+// Contest : SPOJ - Classical
+// URL : https://www.spoj.com/problems/BUGLIFE/
+// Memory Limit : 1536 MB
+// Time Limit : 5000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -5,9 +13,12 @@
     @comeback
 	IIT ISM 
  */
-#include<bits/stdc++.h>
+#include<iostream>
+#include<vector>
+#include<queue>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -28,20 +39,40 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-void solve(){
-	string s = "Welcome to Arijit Sur";
-	cout<<*remove(all(s),' ');
- 	//s.erase(remove(all(s),' '),s.end());
-	cout<<s;
+bool solve(){
+ 	ll n,m;cin>>n>>m;
+ 	vi adj[n+1],color(n+1,-1);;
+ 	while(m--){
+ 		ll u,v; cin>>u>>v;
+ 		adj[u].pb(v); adj[v].pb(u);
+ 	}
+ 	queue<ll> q; 
+ 	for(ll i=1;i<=n;i++){
+ 		if(color[i]==-1){
+ 			q.push(i); color[i]=0;
+ 			while(!q.empty()){
+ 				int u=q.front(); q.pop();
+ 				for(int v:adj[u]){
+ 					if(color[v]==-1) color[v] = 1-color[u], q.push(v);
+ 					else if(color[v]==color[u]) return 0;
+ 				}
+ 			}
+ 		}
+ 	}
+ 	return 1;
+ 	
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    //cin>>t;
+    cin>>t;int cnt=1;
     while(t--){
-    	solve();
+    	cout<<"Scenario #"<<cnt++<<":\n";
+    	if(solve())cout<<"No suspicious bugs found!";
+    	else cout<<"Suspicious bugs found!";
+    	cout<<endl;
     }
     return 0;
 }

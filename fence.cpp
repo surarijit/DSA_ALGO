@@ -1,3 +1,11 @@
+
+// Problem : A. Fence
+// Contest : Codeforces - Codeforces Round #675 (Div. 2)
+// URL : https://codeforces.com/contest/1422/problem/A
+// Memory Limit : 256 MB
+// Time Limit : 1000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -8,6 +16,7 @@
 #include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -29,17 +38,14 @@
 #define ull unsigned ll
 using namespace std;
 void solve(){
-	string s = "Welcome to Arijit Sur";
-	cout<<*remove(all(s),' ');
- 	//s.erase(remove(all(s),' '),s.end());
-	cout<<s;
+vi a(3); input(a);sort(a);cout<<a[2]<<endl;
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
     	solve();
     }

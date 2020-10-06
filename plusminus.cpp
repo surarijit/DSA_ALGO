@@ -1,3 +1,10 @@
+
+// Problem : A - Plus Minus
+// Contest : AtCoder - AtCoder Regular Contest 104
+// URL : https://atcoder.jp/contests/arc104/tasks/arc104_a
+// Memory Limit : 1024 MB
+// Time Limit : 2000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -8,6 +15,7 @@
 #include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -29,10 +37,7 @@
 #define ull unsigned ll
 using namespace std;
 void solve(){
-	string s = "Welcome to Arijit Sur";
-	cout<<*remove(all(s),' ');
- 	//s.erase(remove(all(s),' '),s.end());
-	cout<<s;
+	int a,b;cin>>a>>b;cout<<(a+b)/2<<" "<<(a-b)/2;
 }
 int main()
 {

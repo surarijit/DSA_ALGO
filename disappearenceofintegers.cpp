@@ -5,9 +5,11 @@
     @comeback
 	IIT ISM 
  */
-#include<bits/stdc++.h>
+#include<iostream>
+#include<vector>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -28,11 +30,28 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+void help(vi &a, vector<pi> &query){
+	int n=a.size();
+	for(pi gh:query){
+		int t = gh.first, m=gh.second;
+		t = t%(2*n);
+		if(t<n){
+			if(t+m-1<n) cout<<a[t+m-1];
+			else cout<<-1;
+		}
+		else{
+			t-=n;
+			if(m<=t) cout<<a[m-1];
+			else cout<<-1;
+		}
+		cout<<endl;
+	}
+}
 void solve(){
-	string s = "Welcome to Arijit Sur";
-	cout<<*remove(all(s),' ');
- 	//s.erase(remove(all(s),' '),s.end());
-	cout<<s;
+	int n;cin>>n; vi a(n); input(a);
+	int q;cin>>q; vector<pi> query;
+	while(q--){int u,v;cin>>u>>v; query.pb({u,v});}
+	help(a,query);
 }
 int main()
 {

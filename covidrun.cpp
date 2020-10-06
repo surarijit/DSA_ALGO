@@ -1,3 +1,11 @@
+
+// Problem : Covid Run
+// Contest : CodeChef - October Challenge 2020 Division 2
+// URL : https://www.codechef.com/OCT20B/problems/CVDRUN
+// Memory Limit : 256 MB
+// Time Limit : 1000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -5,9 +13,11 @@
     @comeback
 	IIT ISM 
  */
-#include<bits/stdc++.h>
+#include<iostream>
+#include<map>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -28,20 +38,24 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-void solve(){
-	string s = "Welcome to Arijit Sur";
-	cout<<*remove(all(s),' ');
- 	//s.erase(remove(all(s),' '),s.end());
-	cout<<s;
+bool solve(){
+	ll n,k,x,y; cin>>n>>k>>x>>y;
+	map<ll,bool> a;
+	while(x!=y){
+		if(a[x]) return 0;
+		a[x]=1;
+		x = (x+k)%n;
+	}
+	return 1;
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
-    	solve();
+    	cout<<(solve()?"YES":"NO")<<endl;
     }
     return 0;
 }

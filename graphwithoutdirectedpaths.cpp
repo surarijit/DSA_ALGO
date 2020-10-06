@@ -1,3 +1,11 @@
+
+// Problem : F. Graph Without Long Directed Paths
+// Contest : Codeforces - Codeforces Round #550 (Div. 3)
+// URL : https://codeforces.com/contest/1144/problem/F
+// Memory Limit : 256 MB
+// Time Limit : 2000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -5,9 +13,12 @@
     @comeback
 	IIT ISM 
  */
-#include<bits/stdc++.h>
+#include<iostream>
+#include<vector>
+#include<queue>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -29,10 +40,35 @@
 #define ull unsigned ll
 using namespace std;
 void solve(){
-	string s = "Welcome to Arijit Sur";
-	cout<<*remove(all(s),' ');
- 	//s.erase(remove(all(s),' '),s.end());
-	cout<<s;
+	int n,m;cin>>n>>m; 
+	vector<pi>edges;
+	vi adj[n+1],color(n+1,-1);	
+	for(int i=0;i<m;i++){
+		int u,v;cin>>u>>v; 
+		edges.pb({u,v});
+		adj[u].pb(v); adj[v].pb(u);
+	}
+	queue<ll> q; 
+ 	for(ll i=1;i<=n;i++){
+ 		if(color[i]==-1){
+ 			q.push(i); color[i]=0;
+ 			while(!q.empty()){
+ 				int u=q.front(); q.pop();
+ 				for(int v:adj[u]){
+ 					if(color[v]==-1) color[v] = 1^color[u], q.push(v);
+ 					else if(color[v]==color[u]){
+ 						cout<<"NO";return;
+ 					}
+ 				}
+ 			}
+ 		}
+ 	}
+ 	cout<<"YES\n";
+ 	for(pi x:edges){
+ 		int u=x.first,v=x.second;
+ 		if(color[v]) cout<<"1";
+ 		else cout<<"0";
+ 	}
 }
 int main()
 {
@@ -41,7 +77,7 @@ int main()
     int t=1;
     //cin>>t;
     while(t--){
-    	solve();
+    	solve();cout<<endl;
     }
     return 0;
 }

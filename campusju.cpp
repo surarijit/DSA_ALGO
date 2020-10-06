@@ -5,9 +5,13 @@
     @comeback
 	IIT ISM 
  */
-#include<bits/stdc++.h>
+#include<iostream>
+#include<climits>
+#include<vector>
+#include<algorithm>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
+#define va(x) ((x)%mod)
 #define vi vector<int>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
@@ -28,11 +32,39 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+
+#define check(i,j) ((i>=0 && j>=0 && i<n && j<n)?1:0)
+int ans=INT_MAX,n;
+int calc(vector<vi> a){
+	int cnt=0;
+	for(int i=0;i<n;i++){
+		for(int j=0;j<n;j++){
+			if(a[i][j]!=-1) continue;
+			cnt+=1;
+			if(check(i+1,j) and a[i+1][j]==1) a[i+1][j]=0;
+			if(check(i-1,j) and a[i-1][j]==1) a[i-1][j] = 0;
+			if(check(i,j-1) and a[i][j-1]==1) a[i][j-1]=0;
+			if(check(i,j+1) and a[i][j+1]==1) a[i][j+1]=0;
+		}
+	}
+	for(int i=0;i<n;i++) if(maxelem(a[i])==1) return INT_MAX;
+	return cnt;
+}
+void help(int x,int y, vector<vi> &a){
+	int i=x,j=y, g= a[i][j];
+     x += 1;  
+     if(x==n) {x=0,y+=1;}
+     if(y==n) {ans = min(ans,calc(a));return;}
+     help(x,y,a);
+     a[i][j]=-1;help(x,y,a);
+     a[i][j]=g;	
+}
+
 void solve(){
-	string s = "Welcome to Arijit Sur";
-	cout<<*remove(all(s),' ');
- 	//s.erase(remove(all(s),' '),s.end());
-	cout<<s;
+	cin>>n; vector<vi> a(n, vi (n,0));
+	for(int i=0;i<n;i++)input(a[i]);
+	help(0,0,a);
+	cout<<ans<<endl;
 }
 int main()
 {

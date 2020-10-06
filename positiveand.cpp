@@ -5,10 +5,12 @@
     @comeback
 	IIT ISM 
  */
-#include<bits/stdc++.h>
+#include<iostream>
+#include<vector>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
-#define vi vector<int>
+#define va(x) ((x)%mod)
+#define vi vector<ll>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
@@ -28,18 +30,35 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+bool check(vi &a){
+	for(int i=1;i<a.size();i++){
+		int x = a[i]&a[i-1];
+		if(!x) {
+			return 1;
+		}
+	}
+	return 0;
+}
 void solve(){
-	string s = "Welcome to Arijit Sur";
-	cout<<*remove(all(s),' ');
- 	//s.erase(remove(all(s),' '),s.end());
-	cout<<s;
+	int n;cin>>n;
+	if(n==0 || __builtin_popcount(n)==1) {cout<<-1<<endl; return ;}
+	vi a(n,0);
+	for(int i=0;i<n;i++) a[i]=i+1;
+	a[0]=2; a[1]=3; a[2]=1;
+	for(int i=3;i+1<n;i++){
+		int x = a[i]&a[i-1];
+		if((x)==0) swap(a[i],a[i+1]),i+=1;
+	}
+	if(check(a)) cout<<-1<<endl;
+	else
+	display(a);
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
     	solve();
     }
