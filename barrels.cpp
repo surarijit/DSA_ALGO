@@ -1,18 +1,23 @@
+
+// Problem : B. Barrels
+// Contest : Codeforces - Educational Codeforces Round 96 (Rated for Div. 2)
+// URL : https://codeforces.com/contest/1430/problem/B
+// Memory Limit : 256 MB
+// Time Limit : 2000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
 	@surcode
-    
     @comeback
 	IIT ISM 
  */
-#include<iostream>
-#include<vector>
-#include<algorithm>
+#include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
 #define va(x) ((x)%mod)
-#define vi vector<int>
+#define vi vector<ll>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
@@ -32,19 +37,16 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-int work(vi &s){
-    int i=0,j=s.size()-1,ans=0;
-    while(i<j){   
-        while(i<j && s[i]==1) i+=1;
-        while(j>i && s[j]==0) j-=1;
-        if(i==j) break;
-        ans+=1;i+=1; j-=1;
-    }
-    return ans;
-}
 void solve(){
-	int n;cin>>n; vi a(n); input(a); vi b(all(a)); reverse(b);
-	cout<<min(work(b),work(a))<<endl;
+	int n,k;
+	cin>>n>>k;
+	vi a(n); input(a);
+	sort(a); 
+	int i = n-2;;
+	for(int i=n-2, j=0; i>=0&&j<k; i--, j++){
+		a[n-1]+=a[i];
+	}
+	cout<<a[n-1]<<endl;
 }
 int main()
 {

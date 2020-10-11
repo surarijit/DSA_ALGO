@@ -2,13 +2,10 @@
 	ARIJIT SUR 
 	@duke_knight
 	@surcode
-    
     @comeback
 	IIT ISM 
  */
 #include<iostream>
-#include<vector>
-#include<algorithm>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
 #define va(x) ((x)%mod)
@@ -32,26 +29,58 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-int work(vi &s){
-    int i=0,j=s.size()-1,ans=0;
-    while(i<j){   
-        while(i<j && s[i]==1) i+=1;
-        while(j>i && s[j]==0) j-=1;
-        if(i==j) break;
-        ans+=1;i+=1; j-=1;
-    }
-    return ans;
+ll tree[SIZE],a[SIZE];
+void build(int node,int start,int end){
+	if(start==end){
+		tree[node] = a[start]; 
+		return;
+	}
+	int mid = (start+end)/2;
+	build(node*2,start,mid); build(node*2+1,mid+1,end);
+	tree[node] = tree[node*2]+tree[node*2+1];
+}
+void update(int node, int start,int end, int idx,ll val){
+	if(start==end){
+		tree[node] = a[idx] = val;
+		return;
+	}
+	int mid = (start+end)/2;
+	if(idx>=start and idx<=mid)
+	update(node*2,start,mid,idx,val);
+	else
+	update(node*2+1,mid+1,end,idx,val);
+	tree[node] = tree[node*2]+tree[node*2+1];
+}
+ll query(int node, int start,int end, int l, int r){
+	if(r<start or l>end) return 0;
+	if(start>=l and end<=r) return tree[node];
+	int mid = (start+end)/2;
+	return query(node*2,start,mid,l,r)+ query(node*2+1,mid+1,end,l,r);
 }
 void solve(){
-	int n;cin>>n; vi a(n); input(a); vi b(all(a)); reverse(b);
-	cout<<min(work(b),work(a))<<endl;
+	int n,q;
+	cin>>n>>q;
+	for(int i=01;i<=n;i++) cin>>a[i];
+	build(1,1,n);
+	while(q--){
+		int ch;cin>>ch;
+		if(ch==1){
+			int i; ll v;cin>>i>>v;i+=1;
+			update(1,1,n,i,v);
+		}
+		else{
+			int l,r;cin>>l>>r;l+=1;
+			cout<<query(1,1,n,l,r)<<endl;
+		}
+	}
+	
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
     	solve();
     }

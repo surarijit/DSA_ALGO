@@ -1,14 +1,22 @@
+
+// Problem : A. Knight Tournament
+// Contest : Codeforces - Codeforces Round #207 (Div. 1)
+// URL : https://codeforces.com/problemset/problem/356/A?fbclid=IwAR3jtc437PLUDRmhfxNFnIiVS2o22mX0SGuGsrYsDb3I3BV-Vz7UvI7EzRI
+// Memory Limit : 256 MB
+// Time Limit : 3000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
 	@surcode
-    
     @comeback
 	IIT ISM 
  */
 #include<iostream>
-#include<vector>
+#include<set>
 #include<algorithm>
+#include<vector>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
 #define va(x) ((x)%mod)
@@ -20,7 +28,7 @@
 #define sc(a) scanf("%d\n",&a);
 #define all(a) a.begin(),a.end()
 #define maxelem(a) *max_element(all(a))
-#define minelem(a) *min_element(all(a))
+#define minelem(a) *min_ele    ment(all(a))
 #define pb push_back
 #define pi pair<int,int>
 #define pqq priority_queue
@@ -32,26 +40,33 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-int work(vi &s){
-    int i=0,j=s.size()-1,ans=0;
-    while(i<j){   
-        while(i<j && s[i]==1) i+=1;
-        while(j>i && s[j]==0) j-=1;
-        if(i==j) break;
-        ans+=1;i+=1; j-=1;
-    }
-    return ans;
-}
 void solve(){
-	int n;cin>>n; vi a(n); input(a); vi b(all(a)); reverse(b);
-	cout<<min(work(b),work(a))<<endl;
+	ll n,m;cin>>n>>m;
+	vi parent(n+1,0),v;
+	set<int> s;
+	for(int i=1;i<=n;i++) parent[i]=i,s.insert(i);
+		while(m--){
+		int l,r,x;cin>>l>>r>>x;
+		v.clear();
+		set<int>::iterator g = s.lower_bound(l);
+		while(g!=s.end()){
+			int i = *g;
+			if(i>r) break;
+			if(i!=x){parent[i] = x; v.pb(i);}
+			g++;
+		}
+		
+		for(int u:v) s.erase(u);
+	}
+	for(int i=1;i<=n;i++)
+		cout<<(parent[i]==i?0:parent[i])<<" ";
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
     	solve();
     }
