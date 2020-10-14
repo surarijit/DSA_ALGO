@@ -1,9 +1,9 @@
 
-// Problem : B. Chess Cheater
-// Contest : Codeforces - Codeforces Global Round 11
-// URL : https://codeforces.com/contest/1427/problem/B
+// Problem : D. Eternal Victory
+// Contest : Codeforces - Codeforces Beta Round #57 (Div. 2)
+// URL : https://codeforces.com/problemset/problem/61/D
 // Memory Limit : 256 MB
-// Time Limit : 1000 ms
+// Time Limit : 2000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -27,7 +27,9 @@
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
 #define pb push_back
-#define pi pair<int,int>
+#define pi pair<ll,ll>
+#define F first
+#define S second
 #define pqq priority_queue
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
@@ -37,31 +39,40 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+#define front top
+#define me(a,b,c) adj[a].pb({c,b})
+ll longest(ll &n, vector<pi> adj[]){
+	pqq<pi,vector<pi>,greater<pi> > q;
+	vi visited(n+1,0);
+	q.push({0,1});
+	int path =0;
+	while(!q.empty()){
+		int w = q.front().F, u = q.front().S; q.pop();
+		if(visited[u]) continue;
+		visited[u]=1;
+		path = w;
+		for(pi x:adj[u]){
+			if(visited[x.S]) continue;
+			q.push({x.F+w,x.S});
+		}
+	}
+	return path;
+}
 void solve(){
-	int n,k,K;cin>>n>>k;K=k;
-	string s;cin>>s;
-	pqq <int,vi,greater<int>> q;
-	int i=0,wins=0;
-	while(i<n){
-		while(i<n and s[i]=='W'){wins++;i++;}
-		int loss=0;
-		while(i<n and s[i]=='L') {loss+=1; i++;}
-		if(loss) q.push(loss);
+	ll n,sum=0,w;cin>>n;
+	vector<pi> adj[n+1];
+	for(ll i=1;i<n;i++){
+		ll u,v; cin>>u>>v>>w; me(u,v,w), me(v,u,w);
+		sum+= 2*w;
 	}
-	if(k+wins>=n) {cout<<2*n-1<<endl;return;}
-	while(!q.empty() and k>=q.top()){
-		cout<<q.top()<<endl;
-		 k-=q.top();
-		q.pop();
-	}
-	cout<<2*(wins+K)- (q.size()+1)<<endl;
+	cout<<sum-longest(n,adj);
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
     	solve();
     }

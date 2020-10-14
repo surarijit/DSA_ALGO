@@ -1,9 +1,9 @@
 
-// Problem : B. Chess Cheater
-// Contest : Codeforces - Codeforces Global Round 11
-// URL : https://codeforces.com/contest/1427/problem/B
+// Problem : B. Mahmoud and Ehab and the bipartiteness
+// Contest : Codeforces - Codeforces Round #435 (Div. 2)
+// URL : https://codeforces.com/problemset/problem/862/B
 // Memory Limit : 256 MB
-// Time Limit : 1000 ms
+// Time Limit : 2000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -17,7 +17,7 @@
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
 #define va(x) ((x)%mod)
-#define vi vector<int>
+#define vi vector<ll>
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
@@ -37,33 +37,37 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-void solve(){
-	int n,k,K;cin>>n>>k;K=k;
-	string s;cin>>s;
-	pqq <int,vi,greater<int>> q;
-	int i=0,wins=0;
-	while(i<n){
-		while(i<n and s[i]=='W'){wins++;i++;}
-		int loss=0;
-		while(i<n and s[i]=='L') {loss+=1; i++;}
-		if(loss) q.push(loss);
+ll	 solve(){
+	ll n,red=0,blue=0; cin>>n; vi adj[n+1], color(n+1,-1);
+	for(ll i=1;i<n;i++){
+		ll u,v;cin>>u>>v; adj[u].pb(v); adj[v].pb(u);
 	}
-	if(k+wins>=n) {cout<<2*n-1<<endl;return;}
-	while(!q.empty() and k>=q.top()){
-		cout<<q.top()<<endl;
-		 k-=q.top();
-		q.pop();
+	queue<ll> q;
+	q.push(1); color[1] = 0;
+	while(!q.empty()){
+		ll u = q.front(); q.pop();
+		for(ll v:adj[u]){
+			if(color[v]==-1){
+				color[v]=1-color[u];
+				q.push(v); continue;
+			}
+			 if(color[v]==color[u])return 0;
+		}
 	}
-	cout<<2*(wins+K)- (q.size()+1)<<endl;
+	for(ll i=1;i<=n;i++){
+		if(color[i]==1) red+=1;
+		else if(color[i]==0)blue += 1;
+	}
+	return red*blue-(n-1);
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
-    	solve();
+    	cout<<solve();
     }
     return 0;
 }

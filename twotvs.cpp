@@ -1,9 +1,9 @@
 
-// Problem : B. Chess Cheater
-// Contest : Codeforces - Codeforces Global Round 11
-// URL : https://codeforces.com/contest/1427/problem/B
+// Problem : C. Two TVs
+// Contest : Codeforces - Educational Codeforces Round 27
+// URL : https://codeforces.com/problemset/problem/845/C
 // Memory Limit : 256 MB
-// Time Limit : 1000 ms
+// Time Limit : 2000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -27,43 +27,40 @@
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
 #define pb push_back
-#define pi pair<int,int>
+#define pi pair<ll,ll>
 #define pqq priority_queue
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
 #define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1];}
 #define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<" "; cout<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-#define ll long long int
+#define ll long long 
 #define ull unsigned ll
+#define F first
+#define S second
 using namespace std;
-void solve(){
-	int n,k,K;cin>>n>>k;K=k;
-	string s;cin>>s;
-	pqq <int,vi,greater<int>> q;
-	int i=0,wins=0;
-	while(i<n){
-		while(i<n and s[i]=='W'){wins++;i++;}
-		int loss=0;
-		while(i<n and s[i]=='L') {loss+=1; i++;}
-		if(loss) q.push(loss);
+bool solve(){
+	int n;cin>>n;int sum=0;
+	vector<pi> v;
+	for(int i=0;i<n;i++){
+		int l,r;cin>>l>>r;
+		v.pb({l,1}); v.pb({r+1,-1});
 	}
-	if(k+wins>=n) {cout<<2*n-1<<endl;return;}
-	while(!q.empty() and k>=q.top()){
-		cout<<q.top()<<endl;
-		 k-=q.top();
-		q.pop();
+	sort(v);
+	for(int i=0;i<v.size();i++){
+		sum += v[i].S;
+		if(sum>2) return 0;
 	}
-	cout<<2*(wins+K)- (q.size()+1)<<endl;
+	return 1;
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
-    	solve();
+    	cout<<(solve()?"YES":"NO");
     }
     return 0;
 }

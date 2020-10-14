@@ -1,9 +1,9 @@
 
-// Problem : B. Chess Cheater
-// Contest : Codeforces - Codeforces Global Round 11
-// URL : https://codeforces.com/contest/1427/problem/B
+// Problem : C1. Party
+// Contest : Codeforces - ABBYY Cup 2.0 - Easy
+// URL : https://codeforces.com/problemset/problem/177/C1
 // Memory Limit : 256 MB
-// Time Limit : 1000 ms
+// Time Limit : 2000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -13,7 +13,8 @@
     @comeback
 	IIT ISM 
  */
-#include<bits/stdc++.h>
+#include<iostream>
+#include<vector>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
 #define va(x) ((x)%mod)
@@ -26,42 +27,64 @@
 #define all(a) a.begin(),a.end()
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
+#define reset(a,n,val) a.clear(),a.resize(n,val)
 #define pb push_back
 #define pi pair<int,int>
+#define F first
+#define S second
 #define pqq priority_queue
 #define sort(a) sort(all(a))
-#define reverse(a) reverse(all(a))
+#define REV(a) reverse(all(a))
 #define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1];}
 #define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<" "; cout<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+vi parent,s;
+int findroot(int x){
+	if(x==parent[x]) return x;
+	return parent[x] = findroot(parent[x]);
+}
+void initial(int n){
+	for(int i = 0;i<n;i++){
+		parent[i] = i;
+		s[i] = 1;
+	}
+}
+void make_union(int a,int b){
+	 a = findroot(a);
+    b = findroot(b);
+    if (a != b) {
+        if (s[a] < s[b])
+            swap(a, b);
+        parent[b] = a;
+        s[a] += s[b];
+    }
+}
+
 void solve(){
-	int n,k,K;cin>>n>>k;K=k;
-	string s;cin>>s;
-	pqq <int,vi,greater<int>> q;
-	int i=0,wins=0;
-	while(i<n){
-		while(i<n and s[i]=='W'){wins++;i++;}
-		int loss=0;
-		while(i<n and s[i]=='L') {loss+=1; i++;}
-		if(loss) q.push(loss);
+	int n,k,m,ans=0; cin>>n>>k; vector<bool> eligible(n+1,1);
+	reset(parent,n+1,0); reset(s,n+1,1);
+	initial(n+1);
+	while(k--){int u,v;cin>>u>>v; make_union(u,v);}
+	cin>>m;
+	while(m--){int u,v; cin>>u>>v;
+	if(findroot(u)==findroot(v)){
+		eligible[parent[u]] = 0;
+	}}
+	for(int i=1;i<=n;i++){
+		ans = eligible[findroot(i)]?max(ans,s[parent[i]]):ans;
 	}
-	if(k+wins>=n) {cout<<2*n-1<<endl;return;}
-	while(!q.empty() and k>=q.top()){
-		cout<<q.top()<<endl;
-		 k-=q.top();
-		q.pop();
-	}
-	cout<<2*(wins+K)- (q.size()+1)<<endl;
+	cout<<ans;
+	
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
     	solve();
     }

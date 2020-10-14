@@ -1,9 +1,9 @@
 
-// Problem : B. Chess Cheater
-// Contest : Codeforces - Codeforces Global Round 11
-// URL : https://codeforces.com/contest/1427/problem/B
+// Problem : A. Linova and Kingdom
+// Contest : Codeforces - Codeforces Round #635 (Div. 1)
+// URL : https://codeforces.com/problemset/problem/1336/A
 // Memory Limit : 256 MB
-// Time Limit : 1000 ms
+// Time Limit : 2000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -28,6 +28,9 @@
 #define minelem(a) *min_element(all(a))
 #define pb push_back
 #define pi pair<int,int>
+#define reset(a,n,val) a.clear(),a.resize(n,val)
+#define F first
+#define S second
 #define pqq priority_queue
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
@@ -38,30 +41,33 @@
 #define ull unsigned ll
 using namespace std;
 void solve(){
-	int n,k,K;cin>>n>>k;K=k;
-	string s;cin>>s;
-	pqq <int,vi,greater<int>> q;
-	int i=0,wins=0;
-	while(i<n){
-		while(i<n and s[i]=='W'){wins++;i++;}
-		int loss=0;
-		while(i<n and s[i]=='L') {loss+=1; i++;}
-		if(loss) q.push(loss);
+	int n,k;cin>>n>>k;
+	vi adj[n+1],dist(n,-1);
+	for(int i=1;i<n;i++){ int u,v;cin>>u>>v; adj[u].pb(v), adj[v].pb(u);}
+	queue<int> q; q.push(1); int steps = 0,ans=steps;
+	while(!q.empty()){
+		int c = q.size();
+		while(c--){
+			int u = q.front(); q.pop();
+			dist[u-1] = steps;
+			for(int v:adj[u]){
+				if(dist[v-1]==-1) q.push(v);
+			}
+		}
+		steps+=1;
 	}
-	if(k+wins>=n) {cout<<2*n-1<<endl;return;}
-	while(!q.empty() and k>=q.top()){
-		cout<<q.top()<<endl;
-		 k-=q.top();
-		q.pop();
-	}
-	cout<<2*(wins+K)- (q.size()+1)<<endl;
+	
+	sort(dist); reverse(dist);
+	
+	for(int i=0;i<k;i++) ans+= dist[i];
+	cout<<ans;
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
     	solve();
     }

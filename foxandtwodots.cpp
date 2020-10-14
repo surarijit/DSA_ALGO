@@ -1,9 +1,9 @@
 
-// Problem : B. Chess Cheater
-// Contest : Codeforces - Codeforces Global Round 11
-// URL : https://codeforces.com/contest/1427/problem/B
+// Problem : B. Fox And Two Dots
+// Contest : Codeforces - Codeforces Round #290 (Div. 2)
+// URL : https://codeforces.com/problemset/problem/510/B
 // Memory Limit : 256 MB
-// Time Limit : 1000 ms
+// Time Limit : 2000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -37,33 +37,39 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-void solve(){
-	int n,k,K;cin>>n>>k;K=k;
-	string s;cin>>s;
-	pqq <int,vi,greater<int>> q;
-	int i=0,wins=0;
-	while(i<n){
-		while(i<n and s[i]=='W'){wins++;i++;}
-		int loss=0;
-		while(i<n and s[i]=='L') {loss+=1; i++;}
-		if(loss) q.push(loss);
+#define check(i,j) ((i>=0 and j>=0 and i<n and j<m )?1:0)
+int n,m;
+bool work(int x, int y, vector<string> &s, int steps, vector<vi> &visited, int &a, int &b){
+	if(x==a and b==y and visited[a][b]) return steps>=4;
+	if(!check(x,y) or visited[x][y] or s[x][y]!=s[a][b]) return 0;
+	visited[x][y] = 1;
+	for(int i=-1;i<=1;i++){
+		for(int j=-1;j<=1;j++){
+			if(abs(i) != abs(j) and work(x+i,y+j,s,steps+1,visited,a,b)) return 1;
+		}
 	}
-	if(k+wins>=n) {cout<<2*n-1<<endl;return;}
-	while(!q.empty() and k>=q.top()){
-		cout<<q.top()<<endl;
-		 k-=q.top();
-		q.pop();
-	}
-	cout<<2*(wins+K)- (q.size()+1)<<endl;
+	visited[x][y]=0;
+	return 0;
+}
+bool solve(){
+	cin>>n>>m;
+	vector<string> s(n); input(s);
+	for(int i=0;i<n;i++)
+		for(int j=0;j<m;j++){
+			vector<vi> visited(n, vi (m,0));
+			if(work(i,j,s,0,visited,i,j)) return 1;
+		}
+	
+	return 0;
 }
 int main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
-    	solve();
+    	cout<<(solve()?"Yes\n":"No\n");
     }
     return 0;
 }

@@ -1,9 +1,9 @@
 
-// Problem : B. Chess Cheater
-// Contest : Codeforces - Codeforces Global Round 11
-// URL : https://codeforces.com/contest/1427/problem/B
+// Problem : C. Perfect Keyboard
+// Contest : Codeforces - Educational Codeforces Round 82 (Rated for Div. 2)
+// URL : https://codeforces.com/problemset/problem/1303/C
 // Memory Limit : 256 MB
-// Time Limit : 1000 ms
+// Time Limit : 2000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -13,11 +13,13 @@
     @comeback
 	IIT ISM 
  */
-#include<bits/stdc++.h>
-#define SIZE (ll)(1e6)
+#include<iostream>
+#include<algorithm>
+#define SIZE (ll)(1e2)
 #define mod (ll)(1e9+7)
 #define va(x) ((x)%mod)
 #define vi vector<int>
+#define reset(a,n,val) a.clear(),a.resize(n,val)
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
@@ -28,6 +30,8 @@
 #define minelem(a) *min_element(all(a))
 #define pb push_back
 #define pi pair<int,int>
+#define F first
+#define S second
 #define pqq priority_queue
 #define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
@@ -37,24 +41,28 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+#define ispresent(a,x) find(all(a),x)!=a.end()
 void solve(){
-	int n,k,K;cin>>n>>k;K=k;
-	string s;cin>>s;
-	pqq <int,vi,greater<int>> q;
-	int i=0,wins=0;
-	while(i<n){
-		while(i<n and s[i]=='W'){wins++;i++;}
-		int loss=0;
-		while(i<n and s[i]=='L') {loss+=1; i++;}
-		if(loss) q.push(loss);
+	string s,ans="";cin>>s;
+	ans += s[0];int ptr = 0;
+	for(int i=1;i<s.size();i++){
+		if(ptr-1>=0 and ans[ptr-1]==s[i]) ptr-=1;
+		else if(ptr+1<ans.size() and ans[ptr+1]==s[i]) ptr+=1;
+		else if(ispresent(ans,s[i])) {cout<<"NO\n"; return;}
+		else if(ptr==0) {ans = s[i]+ans;}
+		else if(ptr==ans.size()-1) {ans+=s[i]; ptr+=1;}
 	}
-	if(k+wins>=n) {cout<<2*n-1<<endl;return;}
-	while(!q.empty() and k>=q.top()){
-		cout<<q.top()<<endl;
-		 k-=q.top();
-		q.pop();
+	ptr = find(all(ans),s[0])-ans.begin(); 
+	for(int i=1;i<s.size();i++){
+		if(ptr-1>=0 and ans[ptr-1]==s[i]) ptr-=1;
+		else if(ptr+1<ans.size() and ans[ptr+1] == s[i]) ptr+=1;
+		else {cout<<"NO\n"; return;}
 	}
-	cout<<2*(wins+K)- (q.size()+1)<<endl;
+	for(char i='a'; i<='z';i++)
+		if(!(ispresent(ans,i))) 
+		ans += i;
+	cout<<"YES\n"<<ans<<endl; return;
+	
 }
 int main()
 {
