@@ -5,8 +5,9 @@
     @comeback
 	IIT ISM 
  */
+#include<stdio.h>
+#include<string.h>
 #include<iostream>
-#include<vector>
 #include<algorithm>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
@@ -26,42 +27,27 @@
 #define F first
 #define S second
 #define pqq priority_queue
+#define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
 #define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1];}
-#define display(a) {for(pi x:a) cout<<x.F<<" "<<x.S<<endl;}
+#define display(a) {for(int i1:a) cout<<i1<<" "; cout<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-bool static compare(pi a, pi b){
-	if(a.F==b.F){
-		return a.S>b.S;
+char *reverse_skip(char *s){
+	int n= strlen(s),i=0,j=n-1;
+	while(i<j){
+		while(i<j and !(s[i]>='a' and s[i]<='z')) i+=1;
+		while(i<j and !(s[j]>='a' and s[j]<='z')) j-=1;
+		swap(s[i],s[j]);i+=1;j-=1;
 	}
-	return a.F<b.F;
-}
-int minTaps(int n, vector<int>& ranges) {
-        vector<pi> a,v;
-        for(int i=0;i<ranges.size();i++){
-        	int left = max(i-ranges[i],0), right = min(i+ranges[i],n);
-        	a.pb({left,right});
-        }
-        sort(all(a),compare);
-        //display(a);cout<<endl;
-        int prevEnd=0,maxEnd=0,i=0,cnt=0;
-        while(i<n and prevEnd<n){
-        	while(i<n and a[i].F<= prevEnd){
-        		maxEnd = max(maxEnd, a[i].S);
-        		i+=1;
-        	}
-        	if(prevEnd == maxEnd) return -1;
-        	cnt+=1;
-        	prevEnd=maxEnd;
-        }
-        return cnt;
+	return s;
+	
 }
 void solve(){
-	int n;cin>>n; vi ranges(n+1); input(ranges);
-	cout<<minTaps(n,ranges);
+	char *s;cin>>s;
+	cout<<reverse_skip(s);
 }
 int32_t main()
 {

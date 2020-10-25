@@ -1,3 +1,11 @@
+
+// Problem : A. Reorder
+// Contest : Codeforces - Codeforces Round #678 (Div. 2)
+// URL : https://codeforces.com/contest/1436/problem/A
+// Memory Limit : 256 MB
+// Time Limit : 1000 ms
+// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
+
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -5,9 +13,7 @@
     @comeback
 	IIT ISM 
  */
-#include<iostream>
-#include<vector>
-#include<algorithm>
+#include<bits/stdc++.h>
 #define SIZE (ll)(1e6)
 #define mod (ll)(1e9+7)
 #define va(x) ((x)%mod)
@@ -26,49 +32,27 @@
 #define F first
 #define S second
 #define pqq priority_queue
+#define sort(a) sort(all(a))
 #define reverse(a) reverse(all(a))
 #define input(a) {for(int i1=0;i1<a.size();i1++) cin>>a[i1];}
-#define display(a) {for(pi x:a) cout<<x.F<<" "<<x.S<<endl;}
+#define display(a) {for(int i1=0;i1<a.size();i1++) cout<<a[i1]<<" "; cout<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-bool static compare(pi a, pi b){
-	if(a.F==b.F){
-		return a.S>b.S;
-	}
-	return a.F<b.F;
-}
-int minTaps(int n, vector<int>& ranges) {
-        vector<pi> a,v;
-        for(int i=0;i<ranges.size();i++){
-        	int left = max(i-ranges[i],0), right = min(i+ranges[i],n);
-        	a.pb({left,right});
-        }
-        sort(all(a),compare);
-        //display(a);cout<<endl;
-        int prevEnd=0,maxEnd=0,i=0,cnt=0;
-        while(i<n and prevEnd<n){
-        	while(i<n and a[i].F<= prevEnd){
-        		maxEnd = max(maxEnd, a[i].S);
-        		i+=1;
-        	}
-        	if(prevEnd == maxEnd) return -1;
-        	cnt+=1;
-        	prevEnd=maxEnd;
-        }
-        return cnt;
-}
 void solve(){
-	int n;cin>>n; vi ranges(n+1); input(ranges);
-	cout<<minTaps(n,ranges);
+	int m,n,sum=0;cin>>n>>m; vi a(n); input(a);
+	for(int i:a) sum+=i;
+	if(sum==m) cout<<"YES";
+	else cout<<"NO";
+	cout<<endl;
 }
 int32_t main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    //cin>>t;
+    cin>>t;
     while(t--){
     	solve();
     }
