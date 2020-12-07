@@ -1,9 +1,9 @@
 
-// Problem : A. Kids Seating
-// Contest : Codeforces - Codeforces Round #681 (Div. 2, based on VK Cup 2019-2020 - Final)
-// URL : https://codeforces.com/contest/1443/problem/A
+// Problem : C. Engineer Artem
+// Contest : Codeforces - Codeforces Round #682 (Div. 2)
+// URL : https://codeforces.com/contest/1438/problem/C
 // Memory Limit : 256 MB
-// Time Limit : 2000 ms
+// Time Limit : 1000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -18,11 +18,13 @@
 #define mod (ll)(1e9+7)
 #define va(x) ((x)%mod)
 #define vi vector<int>
+#define v2i(a,n,m) vector<vi> a(n,vi (m,0));
 #define rep(i,aa1,bb1) for(int i=aa1;i<bb1;i++)
 #define INF 0x3f3f3f3f
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
 #define abs(a) ((a)>0?(a):-(a))
+#define sc(a) scanf("%d\n",&a);
 #define all(a) a.begin(),a.end()
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
@@ -40,13 +42,14 @@
 #define ull unsigned ll
 using namespace std;
 void solve(){
-	int n;cin>>n;
-	int x = 4*n;
-	while(n--){
-		cout<<x<<" ";
-		x-=2;
+	int n,m;cin>>n>>m; v2i(a,n,m);
+	rep(i,0,n) input(a[i]);
+	rep(i,0,n){
+		rep(j,0,m){
+			if((i+j)%2 != a[i][j]%2) a[i][j]+=1;
+		}
 	}
-	cout<<endl;
+	rep(i,0,n) display(a[i]);
 }
 int32_t main()
 {

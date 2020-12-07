@@ -1,11 +1,3 @@
-
-// Problem : A. Kids Seating
-// Contest : Codeforces - Codeforces Round #681 (Div. 2, based on VK Cup 2019-2020 - Final)
-// URL : https://codeforces.com/contest/1443/problem/A
-// Memory Limit : 256 MB
-// Time Limit : 2000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -39,21 +31,68 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-void solve(){
-	int n;cin>>n;
-	int x = 4*n;
-	while(n--){
-		cout<<x<<" ";
-		x-=2;
+
+#define 
+#define hasleftchild(x) ((x*2+1 < size)?1:0)
+#define hasrightchild(x) ((x*2+2< size)?1:0)
+#define hasparent(x) (x>0)
+int size=0;
+int item[SIZE];
+int top(){
+	if(size>0) return item[size-1];
+	return -1;
+}
+
+void swap(int x, int y){
+	int temp  = item[x];
+	item[x] = item[y];
+	item[y] = temp;
+}
+
+void heapifyDown(){
+	int index = 0;
+	while(hasleftchild(index)){
+		int smallerchildindex = leftchildindex(index);
+		if(hasrightchild(index) and item[rightchildindex(index)] < item[smallerchildindex])
+		smallerchildindex =  rightchildindex(index);
+		if(item[index] < item[smallerchildindex]) break;
+		swap(index, smallerchildindex);
+		index = smallerchildindex;
 	}
-	cout<<endl;
+}
+
+void heapifyUp(){
+	int index  = size-1;
+	while(hasparent(index) and item[parentindex(index)] > item[index]){
+		swap(index,parentindex(index));
+		index = parentindex[index];		
+	}
+}
+
+void pop(){
+	if(size==0)return;
+	item[0] = item[size-1];
+	size--;
+	heapifyDown();
+}
+
+void push(int x){
+	item[size] = x;
+	size++;
+	heapifyUP();
+}
+
+
+
+
+void solve(){
 }
 int32_t main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
     	solve();
     }

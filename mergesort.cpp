@@ -1,11 +1,3 @@
-
-// Problem : A. Kids Seating
-// Contest : Codeforces - Codeforces Round #681 (Div. 2, based on VK Cup 2019-2020 - Final)
-// URL : https://codeforces.com/contest/1443/problem/A
-// Memory Limit : 256 MB
-// Time Limit : 2000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -39,21 +31,37 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-void solve(){
-	int n;cin>>n;
-	int x = 4*n;
-	while(n--){
-		cout<<x<<" ";
-		x-=2;
+void merge(vi &a, vi &b, vi &c){
+	int n = a.size(), n1 = b.size(), n2 = c.size(),i=0,j=0,k=0;
+	while(i<n1 and j<n2){
+		int mini = min(b[i], c[j]);
+		if(mini == b[i]) a[k++]  = b[i++];
+		else a[k++]  =  c[j++];
 	}
-	cout<<endl;
+	while(i<n1) a[k++]  =b[i++];
+	while(j<n2) a[k++]  =c[j++];
+	
+}
+void mergesort(vi &a){
+	int n = a.size(), mid = n/2;
+	if(n==1)return;
+	vi b(a.begin(),a.begin()+mid);
+	vi c(a.begin()+mid, a.end());
+	mergesort(b);
+	mergesort(c);
+	merge(a,b,c);
+}
+void solve(){
+	int n ;cin>>n; vi a(n); input(a);
+	mergesort(a);
+	display(a);
 }
 int32_t main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
     	solve();
     }

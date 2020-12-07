@@ -1,9 +1,9 @@
 
-// Problem : A. Kids Seating
-// Contest : Codeforces - Codeforces Round #681 (Div. 2, based on VK Cup 2019-2020 - Final)
-// URL : https://codeforces.com/contest/1443/problem/A
+// Problem : A. Avoid Trygub
+// Contest : Codeforces - Codeforces Global Round 12
+// URL : https://codeforces.com/contest/1450/problem/A
 // Memory Limit : 256 MB
-// Time Limit : 2000 ms
+// Time Limit : 1000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -27,7 +27,7 @@
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
 #define pb push_back
-#define pi pair<int,int>
+#define pi pair<int,char>
 #define F first
 #define S second
 #define pqq priority_queue
@@ -39,22 +39,31 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+map<char,int> ma;
 void solve(){
 	int n;cin>>n;
-	int x = 4*n;
-	while(n--){
-		cout<<x<<" ";
-		x-=2;
+	string s;cin>>s;
+	vector<pi> a;
+	string word = "trygub";
+	rep(i,0,word.size()) ma[word[i]]  = i+1;
+	rep(i,0,n){
+		a.pb({ma[s[i]], s[i]});
 	}
-	cout<<endl;
+	sort(a); reverse(a);
+	string ans ="";
+	rep(i,0,a.size()) ans+= a[i].S;
+	cout<<ans<<endl;
 }
 int32_t main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
+    string word = "trygub";
+	rep(i,0,word.size()) ma[word[i]]  = i+1;
     cin>>t;
     while(t--){
+    	
     	solve();
     }
     return 0;

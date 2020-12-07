@@ -1,11 +1,3 @@
-
-// Problem : A. Kids Seating
-// Contest : Codeforces - Codeforces Round #681 (Div. 2, based on VK Cup 2019-2020 - Final)
-// URL : https://codeforces.com/contest/1443/problem/A
-// Memory Limit : 256 MB
-// Time Limit : 2000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -23,6 +15,7 @@
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
 #define abs(a) ((a)>0?(a):-(a))
+#define sc(a) scanf("%d\n",&a);
 #define all(a) a.begin(),a.end()
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
@@ -39,21 +32,49 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+string minRemoveToMakeValid(string str) {
+      int l = str.size(),open=0,close=0;  
+      stack<char> s;
+      for(char ch:str){
+      	if(ch=='('){
+      		open+=1;
+      		s.push('(');
+      	}
+      	else if(ch==')'){
+      		if(open>close){
+      			close+=1;
+      			s.push(ch);
+      		}
+      	}
+      	else s.push(ch);
+      }
+      string ans="";open=close=0;
+      while(!s.empty()){
+      	char ch = s.top(); s.pop();
+      	if(ch==')') {
+      		close+=1;
+      		ans= ch+ans;
+      	}
+      	else if(ch=='('){
+      		if(open<close) {
+      			open+=1;
+      			ans=ch+ans;
+      		}
+      	}
+      	else ans=ch+ans;
+      }
+      return ans;
+}
 void solve(){
-	int n;cin>>n;
-	int x = 4*n;
-	while(n--){
-		cout<<x<<" ";
-		x-=2;
-	}
-	cout<<endl;
+	string s;cin>>s;
+	cout<<minRemoveToMakeValid(s);
 }
 int32_t main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
     	solve();
     }

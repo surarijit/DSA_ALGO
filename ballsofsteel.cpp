@@ -1,9 +1,9 @@
 
-// Problem : A. Kids Seating
-// Contest : Codeforces - Codeforces Round #681 (Div. 2, based on VK Cup 2019-2020 - Final)
-// URL : https://codeforces.com/contest/1443/problem/A
+// Problem : B. Balls of Steel
+// Contest : Codeforces - Codeforces Global Round 12
+// URL : https://codeforces.com/contest/1450/problem/B
 // Memory Limit : 256 MB
-// Time Limit : 2000 ms
+// Time Limit : 1000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -39,14 +39,18 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-void solve(){
-	int n;cin>>n;
-	int x = 4*n;
-	while(n--){
-		cout<<x<<" ";
-		x-=2;
+#define dis(i,j) abs(a[i].F-a[j].F) + abs(a[i].S - a[j].S)
+int solve(){
+	int n,k;cin>>n>>k;
+	vector<pi> a(n);
+	rep(i,0,n) cin>>a[i].F>>a[i].S;
+	rep(i,0,n){
+		rep(j,i+1,n){
+			if(dis(i,j) <= k) continue;
+			return -1;
+		}
 	}
-	cout<<endl;
+	return 1;
 }
 int32_t main()
 {
@@ -55,7 +59,7 @@ int32_t main()
     int t=1;
     cin>>t;
     while(t--){
-    	solve();
+    	cout<<solve()<<endl;
     }
     return 0;
 }

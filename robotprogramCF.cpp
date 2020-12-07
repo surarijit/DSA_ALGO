@@ -1,7 +1,7 @@
 
-// Problem : A. Kids Seating
-// Contest : Codeforces - Codeforces Round #681 (Div. 2, based on VK Cup 2019-2020 - Final)
-// URL : https://codeforces.com/contest/1443/problem/A
+// Problem : A. Robot Program
+// Contest : Codeforces - Educational Codeforces Round 98 (Rated for Div. 2)
+// URL : https://codeforces.com/contest/1452/problem/A
 // Memory Limit : 256 MB
 // Time Limit : 2000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
@@ -40,13 +40,10 @@
 #define ull unsigned ll
 using namespace std;
 void solve(){
-	int n;cin>>n;
-	int x = 4*n;
-	while(n--){
-		cout<<x<<" ";
-		x-=2;
-	}
-	cout<<endl;
+	int x,y;cin>>x>>y;
+	x = abs(x); y = abs(y);
+	int ans = x+y, c = max(abs(x-y)-1,0);
+	cout<<ans+c<<endl;return;
 }
 int32_t main()
 {

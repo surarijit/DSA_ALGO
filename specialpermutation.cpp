@@ -1,9 +1,9 @@
 
-// Problem : A. Kids Seating
-// Contest : Codeforces - Codeforces Round #681 (Div. 2, based on VK Cup 2019-2020 - Final)
-// URL : https://codeforces.com/contest/1443/problem/A
+// Problem : A. Special Permutation
+// Contest : Codeforces - Codeforces Round #686 (Div. 3)
+// URL : https://codeforces.com/contest/1454/problem/A
 // Memory Limit : 256 MB
-// Time Limit : 2000 ms
+// Time Limit : 1000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -41,12 +41,10 @@
 using namespace std;
 void solve(){
 	int n;cin>>n;
-	int x = 4*n;
-	while(n--){
-		cout<<x<<" ";
-		x-=2;
-	}
-	cout<<endl;
+ 	rep(i,1,n+1){
+ 		cout<<i%n+1<<" ";
+ 	}
+ 	cout<<endl;
 }
 int32_t main()
 {

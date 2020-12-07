@@ -1,11 +1,3 @@
-
-// Problem : A. Kids Seating
-// Contest : Codeforces - Codeforces Round #681 (Div. 2, based on VK Cup 2019-2020 - Final)
-// URL : https://codeforces.com/contest/1443/problem/A
-// Memory Limit : 256 MB
-// Time Limit : 2000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -39,21 +31,28 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
+bool canPlaceFlowers(vector<int>& a, int n) {
+        int m = a.size(); vector<int> dp(m,0);
+        dp[0] =( a[0]==0);
+        if(m>1)
+        dp[1] = max(dp[0], (a[1]==0 and !a[0]));
+        for(int i=2;i<m;i++){
+            dp[i] = max(dp[i-1],(dp[i-2] + (a[i]==0)));
+        }
+        display(dp);
+        return (dp[m-1] >= n);
+    }
 void solve(){
-	int n;cin>>n;
-	int x = 4*n;
-	while(n--){
-		cout<<x<<" ";
-		x-=2;
-	}
-	cout<<endl;
+	int n;cin>>n; vi a(n); input(a);
+	int x;cin>>x;
+	cout<<canPlaceFlowers(a,x);
 }
 int32_t main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
     	solve();
     }

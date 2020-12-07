@@ -1,9 +1,9 @@
 
-// Problem : A. Kids Seating
-// Contest : Codeforces - Codeforces Round #681 (Div. 2, based on VK Cup 2019-2020 - Final)
-// URL : https://codeforces.com/contest/1443/problem/A
+// Problem : B. Unique Bid Auction
+// Contest : Codeforces - Codeforces Round #686 (Div. 3)
+// URL : https://codeforces.com/contest/1454/problem/B
 // Memory Limit : 256 MB
-// Time Limit : 2000 ms
+// Time Limit : 1000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -39,14 +39,19 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-void solve(){
-	int n;cin>>n;
-	int x = 4*n;
-	while(n--){
-		cout<<x<<" ";
-		x-=2;
+int solve(){
+	int n; cin>>n; vi a(n); input(a);
+	map<int,int> ma;int h=-1;
+	rep(i,0,n) ma[a[i]]+=1;
+	for(pi x: ma){
+		if(x.S == 1) {
+			h=x.F; break;
+		}
 	}
-	cout<<endl;
+	rep(i,0,n){
+		if(a[i]==h) return i+1;
+	}
+	return -1;
 }
 int32_t main()
 {
@@ -55,7 +60,7 @@ int32_t main()
     int t=1;
     cin>>t;
     while(t--){
-    	solve();
+    	cout<<solve();cout<<endl;
     }
     return 0;
 }

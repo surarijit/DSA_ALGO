@@ -1,9 +1,9 @@
 
-// Problem : A. Kids Seating
-// Contest : Codeforces - Codeforces Round #681 (Div. 2, based on VK Cup 2019-2020 - Final)
-// URL : https://codeforces.com/contest/1443/problem/A
+// Problem : A. Specific Tastes of Andre
+// Contest : Codeforces - Codeforces Round #682 (Div. 2)
+// URL : https://codeforces.com/contest/1438/problem/A
 // Memory Limit : 256 MB
-// Time Limit : 2000 ms
+// Time Limit : 1000 ms
 // Powered by CP Editor (https://github.com/cpeditor/cpeditor)
 
 /*
@@ -23,6 +23,7 @@
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
 #define abs(a) ((a)>0?(a):-(a))
+#define sc(a) scanf("%d\n",&a);
 #define all(a) a.begin(),a.end()
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
@@ -41,11 +42,7 @@
 using namespace std;
 void solve(){
 	int n;cin>>n;
-	int x = 4*n;
-	while(n--){
-		cout<<x<<" ";
-		x-=2;
-	}
+	rep(i,1,n+1)cout<<1<<" ";
 	cout<<endl;
 }
 int32_t main()

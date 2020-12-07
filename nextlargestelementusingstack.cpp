@@ -1,11 +1,3 @@
-
-// Problem : A. Kids Seating
-// Contest : Codeforces - Codeforces Round #681 (Div. 2, based on VK Cup 2019-2020 - Final)
-// URL : https://codeforces.com/contest/1443/problem/A
-// Memory Limit : 256 MB
-// Time Limit : 2000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -39,21 +31,30 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-void solve(){
-	int n;cin>>n;
-	int x = 4*n;
-	while(n--){
-		cout<<x<<" ";
-		x-=2;
+vi nextgreater(vi &a){
+	int n=a.size();
+	vi v(n,-1);
+	stack<int> s;
+	rep(i,0,n){
+		while(!s.empty() and a[i]>a[s.top()]){
+			v[s.top()] = a[i];
+			s.pop();
+		}
+		s.push(i);
 	}
-	cout<<endl;
+	return v;
+}
+void solve(){
+	int n;cin>>n; vi a(n); input(a);display(a);
+	vi ans = nextgreater(a);
+	display(ans);
 }
 int32_t main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
     	solve();
     }

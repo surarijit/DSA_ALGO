@@ -1,11 +1,3 @@
-
-// Problem : A. Kids Seating
-// Contest : Codeforces - Codeforces Round #681 (Div. 2, based on VK Cup 2019-2020 - Final)
-// URL : https://codeforces.com/contest/1443/problem/A
-// Memory Limit : 256 MB
-// Time Limit : 2000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -14,8 +6,6 @@
 	IIT ISM 
  */
 #include<bits/stdc++.h>
-#define SIZE (ll)(1e6)
-#define mod (ll)(1e9+7)
 #define va(x) ((x)%mod)
 #define vi vector<int>
 #define rep(i,aa1,bb1) for(int i=aa1;i<bb1;i++)
@@ -36,24 +26,45 @@
 #define input(a) {rep(i1,0,a.size()) cin>>a[i1];}
 #define display(a) {rep(i1,0,a.size())cout<<a[i1]<<" "; cout<<endl;}
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL);
-#define ll long long int
 #define ull unsigned ll
 using namespace std;
+#define ll long long int
+#define edge(x,y) adj[x].pb(y),adj[y].pb(x);
+#define mod (ll)(1e9+7)
+#define SIZE 5050
+v adj[10];
+ll dp[SIZE][20];
+void pre(){
+	edge(0,4); edge(0,6);
+	edge(1,6); edge(1,8); 
+	edge(2,7); edge(2,9);
+	edge(3,8); edge(3,4);
+	edge(4,9); 
+	edge(6,7);	memset(dp,-1,sizeof(dp));
+}
+ll work(int i, int n){
+	if(n==0) return 1;
+	if(dp[n][i]!=-1) return dp[n][i]%mod;
+	ll ans=0;
+	for(int v:adj[i]) ans = (ans%mod+ work(v,n-1)%mod)%mod;
+	return dp[n][i] = ans;
+}
+ int knightDialer(int n) {
+        pre(); 
+        ll ans=0;
+        rep(i,0,10)  ans= (ans%mod+ work(i,n-1)%mod)%mod;
+        return (int)ans;
+    }
 void solve(){
 	int n;cin>>n;
-	int x = 4*n;
-	while(n--){
-		cout<<x<<" ";
-		x-=2;
-	}
-	cout<<endl;
+	cout<<knightDialer(n);
 }
 int32_t main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
     	solve();
     }

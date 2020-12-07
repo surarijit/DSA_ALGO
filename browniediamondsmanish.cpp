@@ -1,11 +1,3 @@
-
-// Problem : A. Kids Seating
-// Contest : Codeforces - Codeforces Round #681 (Div. 2, based on VK Cup 2019-2020 - Final)
-// URL : https://codeforces.com/contest/1443/problem/A
-// Memory Limit : 256 MB
-// Time Limit : 2000 ms
-// Powered by CP Editor (https://github.com/cpeditor/cpeditor)
-
 /*
 	ARIJIT SUR 
 	@duke_knight
@@ -23,6 +15,7 @@
 #define max(a,b) (a>b?a:b)
 #define min(a,b) (a<b?a:b)
 #define abs(a) ((a)>0?(a):-(a))
+#define sc(a) scanf("%d\n",&a);
 #define all(a) a.begin(),a.end()
 #define maxelem(a) *max_element(all(a))
 #define minelem(a) *min_element(all(a))
@@ -39,21 +32,30 @@
 #define ll long long int
 #define ull unsigned ll
 using namespace std;
-void solve(){
-	int n;cin>>n;
-	int x = 4*n;
-	while(n--){
-		cout<<x<<" ";
-		x-=2;
+#define calc(n) (n*(n-1)*(n-2)/6)
+void solve(){int n;cin>>n;
+	vector<string> a(n); input(a);
+	map<char,int> ma;
+	for(string s:a){
+		map<char,bool> vis;
+		for(char x:s){
+			if(vis[x]) continue;
+			vis[x]=1;
+			ma[x]+=1;
+		}
 	}
-	cout<<endl;
+	int sum =0;
+	for(pi x:ma){
+		sum += calc(x.S);
+	}
+	cout<<sum;
 }
 int32_t main()
 {
     IOS
     //freopen("input.txt", "r", stdin);freopen("output.txt", "w", stdout);
     int t=1;
-    cin>>t;
+    //cin>>t;
     while(t--){
     	solve();
     }
